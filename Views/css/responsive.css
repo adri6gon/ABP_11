@@ -1,0 +1,58 @@
+/**
+Funcion del archivo: Archivo con los diferentes estilos para ajustar la web al tamaño de la pagina.
+Autor: j0z5zs 
+Fecha: 23/12/17
+**/
+
+@media only screen and (max-width: 1500px) {
+   section{
+		width:57%;
+   }
+   #logo{
+	width:35%;
+	}
+
+@media only screen and (max-width: 1300px) {
+   
+   #logo{
+	width:38%;
+	}
+	.content #libros{
+		width:75%;
+	}
+	.tablas{
+		width:65%;
+	}
+	nav{
+		width:20%;
+		margin-left:5%;
+   }
+}
+@media only screen and (max-width: 1050px) {
+   section{
+		width:50%;
+		margin-right:5%;
+   }
+   nav{
+		width:22%;
+		margin-left:5%;
+   }
+}
+@media only screen and (max-width: 800px) {
+  h1{
+	  text-transform:uppercase; 
+	  color:#ffffff;
+	  font-size:24px;
+	  text-decoration:none;
+	  font-weight:15px;
+	  
+  }
+  section{
+		width:58%;
+		margin-right:5%;
+   }
+  #logo{
+	width:50%;
+	}
+}
+
