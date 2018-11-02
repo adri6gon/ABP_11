@@ -8,7 +8,7 @@ Fecha: 23/12/17
 function ConnectDB()
 {
 	//Nueva conexion 
-    $mysqli = new mysqli("", 'root', 'iu' , 'IUET32017');
+    $mysqli = new mysqli("", 'root', '' , 'ABP_11');
     	//Si tiene un error lo mostramos
 	if ($mysqli->connect_errno) {
 		include '../View/MESSAGE_View.php';

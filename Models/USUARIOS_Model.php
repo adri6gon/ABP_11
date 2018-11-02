@@ -1,59 +1,25 @@
-<!--
-Funcion del archivo: Archivo que contiene la clase de Modelo de datos con todas las funciones necesarias de ADD,SEARCH,EDIT,etc...
-Autor: bl4vix
-Fecha: 12/11/17
--->
 <?php
 
 //Clase : USUARIOS_Modelo
 class USUARIOS_Model {
-
 	var $login;
     var $password;
-	var $DNI;
+	var $rol;
 	var $nombre;
     var $apellidos;
-	var $email;
-	var $direccion;
-	var $telefono;
 	var $mysqli;
 	
 //Constructor de la clase
-function __construct($login,$password,$DNI,$email,$nombre,$apellidos,$telefono,$direccion){
+function __construct($login,$password,$rol,$nombre,$apellidos){
 	$this->login = $login;
 	$this->password = $password;
-	$this->DNI = $DNI;
+	$this->rol = $rol;
 	$this->nombre = $nombre;
 	$this->apellidos = $apellidos;
-	$this->email = $email;
-	$this->direccion = $direccion;
-	$this->telefono = $telefono;
 	include_once 'Access_DB.php';
 	$this->mysqli = ConnectDB();
 }
-/*function subidaFoto(){
-	$nombrearchivo = $this->login.'-'.$_FILES["fotopersonal"]["name"];
-	$FileType = pathinfo($_FILES["fotopersonal"]["name"],PATHINFO_EXTENSION);
-	$directorio = '../Files'."/";
-	$ruta = $directorio.basename($nombrearchivo);
-	//Comprobacion de tipo de archivo
-		if($FileType != "png" && $FileType != "jpg" && $FileType != "gif" && $FileType != "") {
-			return "Solamente se pueden subir archivos con extension png, jpg o gif.";
-			return false;
-		}else {//Comprobacion del tamaño
-			if ($_FILES["fotopersonal"]['size'] > 5000000) {
-				return "Tu archivo pesa demasiado.";
-				return false;
-			}else{
-				if(move_uploaded_file($_FILES['fotopersonal']['tmp_name'],$ruta)){
-					return "Foto subida correctamente.";
-				}
-				else{
-					return false;
-				}
-			}
-		}
-}*/
+
 //Metodo ADD
 //Inserta en la tabla  de la bd  los valores
 // de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
@@ -73,15 +39,12 @@ function ADD()
 		else { // si la ejecución de la query no da error
 			if ($result->num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
 				//construimos la sentencia sql de inserción en la bd
-				$sql = "INSERT INTO `USUARIO`(`login`, `password`, `DNI`, `Nombre`, `Apellidos`, `Correo`, `Direccion`, `Telefono`) 
+				$sql = "INSERT INTO `USUARIO`(`login`, `password`, `rol`, `nombre`, `apellidos`) 
 				VALUES ('$this->login',
 						'$this->password',
-						'$this->DNI',
+						'$this->rol',
 						'$this->nombre',
-						'$this->apellidos',
-						'$this->email',
-						'$this->direccion',
-						'$this->telefono')";
+						'$this->apellidos')";
 				if (!$this->mysqli->query($sql)) { // si da error en la ejecución del insert devolvemos mensaje
 					return 'Error en la inserción';
 				}
@@ -107,7 +70,7 @@ function __destruct()
 }
 //Funcion SHOWALL
 function _SHOWALL(){
-	$sql = "SELECT `login`, `password`, `DNI`, `Nombre`, `Apellidos`, `Correo`, `Direccion`, `Telefono` FROM USUARIO";
+	$sql = "SELECT `login`, `password`, `rol`, `nombre`, `apellidos` FROM USUARIO";
 	$result = $this->mysqli->query($sql);  
 	if($result ->num_rows >0){
 		$j = 0;
@@ -124,39 +87,17 @@ function _SHOWALL(){
 
 //funcion SEARCH: hace una búsqueda en la tabla con
 //los datos proporcionados. Si van vacios devuelve todos
-function SEARCH($idGrupo){
-	if(!empty($this) && $idGrupo==null){
-		$sql = "SELECT `login`, `password`, `DNI`, `Nombre`, `Apellidos`, `Correo`, `Direccion`, `Telefono` FROM USUARIO WHERE(
+function SEARCH(){
+	if(!empty($this)){
+		$sql = "SELECT `login`, `password`, `rol`, `nombre`, `apellidos` FROM USUARIO WHERE(
 					(login LIKE '%$this->login%') &&
     				(password LIKE '%$this->password%') &&
-    				(DNI LIKE '%$this->DNI%') &&
-    				(Nombre LIKE '%$this->nombre%') &&
-					(Apellidos LIKE '%$this->apellidos%') &&
-					(Correo LIKE '%$this->email%') &&
-					(Direccion LIKE '%$this->direccion%')&&
-					(Telefono LIKE '%$this->telefono%'))";
-	}else{
-		if($idGrupo!=null && empty($this)){
-			$sql = "SELECT * FROM USUARIO WHERE USUARIO.login = (SELECT login FROM USU_GRUPO WHERE idGrupo='$idGrupo')";
-		}else{
-			if($idGrupo==null && empty($this)){
-				$sql = "SELECT * FROM USUARIO";
-			}else{
-				//Que no este vacio el usuario ni el grupo
-				$sql = "SELECT U.* FROM `USUARIO` U, `USU_GRUPO` UG WHERE U.login = UG.login && UG.idGrupo = '$idGrupo' && (U.login LIKE '%$this->login%') &&
-    				(U.password LIKE '%$this->password%') &&
-    				(U.DNI LIKE '%$this->DNI%') &&
-    				(U.Nombre LIKE '%$this->nombre%') &&
-					(U.Apellidos LIKE '%$this->apellidos%') &&
-					(U.Correo LIKE '%$this->email%') &&
-					(U.Direccion LIKE '%$this->direccion%')&&
-					(U.Telefono LIKE '%$this->telefono%')";
-			}
-		}
-	}
-	
+    				(rol LIKE '%$this->rol%') &&
+    				(nombre LIKE '%$this->nombre%') &&
+					(apellidos LIKE '%$this->apellidos%'))";
+	}	
     	$result = $this->mysqli->query($sql);  
-   // var_dump($result);
+  // var_dump($result);
 		//exit();
 	if($result->num_rows>0){
 		//
@@ -185,31 +126,13 @@ function _DELETE(){
 			return 'Error en el borrado.';
 		}
 		else{ 
-			if($this->deletegrupos()){
-				return 'Borrado realizado con exito.';
-			}
-			else{
-				return 'Error no borrado en USU_GRUPO';
-			}
+			return 'Borrado realizado con exito.';
 			}
 	}
 }
-//Funcion que borra una imagen del servidor
-/*function DEL_IMG(){
-	$sql = "SELECT fotopersonal FROM USUARIO WHERE login = '".$this->login."'";
-	$result = $this->mysqli->query($sql);
-	if ($result->num_rows == 0){
-		return " Error en el borrado de la imagen.";
-	}else{
-		$tupla = mysqli_fetch_assoc($result);
-		unlink($tupla['fotopersonal']);
-		return " Imagen borrada correctamente del servidor.";
-	}
-}*/
-
 // funcion RellenaDatos: recupera todos los atributos de una tupla a partir de su clave
 function RellenaDatos(){
-    $sql = "SELECT `login`, `password`, `DNI`, `Nombre`, `Apellidos`, `Correo`, `Direccion`, `Telefono` from USUARIO where login = '$this->login'";
+    $sql = "SELECT `login`, `password`, `rol`, `nombre`, `apellidos` from USUARIO where login = '$this->login'";
 	$result = $this->mysqli->query($sql);  
 	if($result ->num_rows >0){
 		$tupla = mysqli_fetch_assoc($result);		  
@@ -235,13 +158,9 @@ function EDIT()
 		$sql = "UPDATE USUARIO SET 
 					login = '$this->login',
 					password = '$this->password',
-					DNI = '$this->DNI',
-					Nombre = '$this->nombre',
-					Apellidos = '$this->apellidos',
-					Correo = '$this->email',
-					Direccion = '$this->direccion',
-					Telefono = '$this->telefono'
-					
+					rol = '$this->rol',
+					nombre = '$this->nombre',
+					apellidos = '$this->apellidos'					
 				WHERE ( login = '$this->login'
 				)";
 		// si hay un problema con la query se envia un mensaje de error en la modificacion
@@ -250,22 +169,6 @@ function EDIT()
 		}
 		else{ 
 			return 'Modificado correctamente.';
-		
-		// si no hay problemas con la modificación se indica que se ha modificado
-				//Si el usuario no ha subido una foto no se modifica 
-			/*if($this->fotopersonal=="../Files/".$this->login."-"){
-					return 'Modificado correctamente';
-		    }	
-			else{//Si la subio llamamos a la funcion de subida al servidor y modificamos el valor de la foto en la BD
-				if($this->subidaFoto()){
-					$sql2 = "UPDATE USUARIO SET fotopersonal = '$this->fotopersonal' WHERE ( login = '$this->login')";
-					$resultado2 = $this->mysqli->query($sql2);
-					return $resultado2;
-				}else{
-					return "Foto no subida.";
-				}
-			}*/
-			
 			
 		}
     }
@@ -273,77 +176,7 @@ function EDIT()
     	return 'No existe en la base de datos';
 } // fin del metodo EDIT
 
-function deletegrupos(){
-	$sql = "DELETE FROM `USU_GRUPO` WHERE (login = '$this->login')";
-		if(!$this->mysqli->query($sql)){
-			return false;
-		}
-		else{
-			return true;
-			}
-}
 
-
-//Funcion de asignar un grupo a un USUARIO
-function asigGrupo($IdGrupo){
-	$sql = "SELECT *
-			FROM USU_GRUPO
-			WHERE (
-				(login = '$this->login') 
-			)"; 
-	
-	$resultado = $this->mysqli->query($sql);
-	$band = true;
-	while($row = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-		if ($row['IdGrupo'] == $IdGrupo){
-			return "Ya esta asignado a ese grupo";
-			$band = false;
-		}	
-	} //Si $band==true entonces no tiene ese grupo asignado
-	if($band){
-		$sqlInser = "INSERT INTO USU_GRUPO(login, IdGrupo) VALUES ('$this->login','$IdGrupo')";	
-	
-		if (!$this->mysqli->query($sqlInser)) { // si da error en la ejecución del insert devolvemos mensaje
-				return 'Error en la inserción';
-		}
-		else{ //si no da error en la insercion devolvemos mensaje de exito
-			return 'Asignacion realizada con éxito'; //operacion de insertado correcta
-		}
-	}
-}
-//Funcion que devuelve los grupos a los que esta asignado un usuario
-function gruposAsig(){
-	$sql = "SELECT IdGrupo from USU_GRUPO where login = '$this->login'";
-	$result = $this->mysqli->query($sql);  
-	$j = 0;
-	while($tupla = mysqli_fetch_row($result)){
-			$tuplas[$j] = $tupla[0];
-			$j++;
-	}
-	if($tuplas == null){
-		return false;
-	}
-	else{
-		return $tuplas;
-	}
-}
-//Funcion que devuelve todos los grupos en los que se puede meter un USUARIO
-function grupos(){
-	$sql = "SELECT IdGrupo, NombreGrupo from GRUPO";
-	$result = $this->mysqli->query($sql);  
-	if($result ->num_rows >0){
-		$j = 0;
-		while($tupla = mysqli_fetch_assoc($result)){
-		   $tuplas[$j] = $tupla;
-		   $j++;		
-		}
-		return $tuplas;
-	}
-	else{
-		return  false;
-	}
-	
-}
 // funcion login: realiza la comprobación de si existe el usuario en la bd y despues si la pass
 // es correcta para ese usuario. Si es asi devuelve true, en cualquier otro caso devuelve el 
 // error correspondiente
@@ -368,7 +201,7 @@ function login(){
 	}
 }//fin login
 function comprobarAdmin(){
-	$sql = "SELECT G.NombreGrupo FROM GRUPO G, USU_GRUPO UG WHERE UG.IdGrupo = G.IdGrupo && UG.login = '$this->login'";
+	$sql = "SELECT rol FROM USUARIO WHERE rol='admin' AND login = '$this->login'";
 	$resultado = $this->mysqli->query($sql);
 	$j = 0;
 	while($tupla = mysqli_fetch_row($result)){
@@ -382,20 +215,19 @@ function comprobarAdmin(){
 		return $tuplas;
 	}
 }
-function getPermisos(){
-	$sql ="SELECT DISTINCT A.NombreAccion, F.NombreFuncionalidad FROM USU_GRUPO UG, PERMISO P, FUNCIONALIDAD F, ACCION A  WHERE UG.login='$this->login' && UG.IdGrupo= P.IdGrupo && P.IdFuncionalidad=F.IdFuncionalidad && P.IdAccion = A.IdAccion";
-	$result = $this->mysqli->query($sql);  
-	$j = 0;
-	while($tupla = mysqli_fetch_row($result)){
-			$tuplas[$j] = $tupla;
-			$j++;
-	}
-	if($tuplas == null){
-		return false;
+function getRol(){
+	$sql = "SELECT rol
+			FROM USUARIO
+			WHERE (
+				(login = '$this->login') 
+			)";
+	$resultado = $this->mysqli->query($sql);
+	if ($resultado->num_rows == 0){
+		return 'El login no existe';
 	}
 	else{
-		return $tuplas;
-	}
+		return $resultado;
+	}		
 }
 
 }//fin Modelo

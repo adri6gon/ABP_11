@@ -6,7 +6,7 @@ Fecha: 23/12/17
 <?php
 include_once '../Models/USUARIOS_Model.php';
 //Funcion que devuelve un boolean segun tenga el permiso el usuario o no
-function comprobarPermisos($accion,$funcionalidad){
+/*function comprobarPermisos($accion,$funcionalidad){
 	//Array de permisos del usuario
 	$permisos = $_SESSION['PERMISOS'];
 	//Partimos de que no lo tiene
@@ -19,5 +19,9 @@ function comprobarPermisos($accion,$funcionalidad){
 		}
 	}	
 	return $band;
+}*/
+function comprobarRol($rol){
+	
+	return true;
 }
 ?>

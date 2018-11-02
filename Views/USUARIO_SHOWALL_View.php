@@ -19,7 +19,7 @@ class USUARIO_SHOWALL {
 		
 ?>
 <div style="overflow-x:auto;">
-				<h2><?php if(!$this->search){ echo $strings['Tabla ShowAll'];}else{echo $strings['Tabla Busqueda'];} ?>:</h2>
+				<h2><?php if(!$this->search){ echo 'Tabla ShowAll';}else{echo 'Tabla Busqueda';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
 							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
 					</div>
@@ -27,9 +27,9 @@ class USUARIO_SHOWALL {
 						<tr>
 						<?php
 						for($i=0; $i<count($this->lista);$i++){
-								echo "<th>".$strings[$this->lista[$i]]."</th>";			
+								echo "<th>".$this->lista[$i]."</th>";			
 						}
-						echo "<th>".$strings["Acciones"]."</th></tr>";
+						echo "<th>Acciones</th></tr>";
 							?>
 						
 						
@@ -40,11 +40,8 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 							for($j=0;$j<count($this->datos);$j++){
 								echo "<tr>";
 								for($i=0; $i<count($this->lista);$i++){
-									if(($this->lista)[$i]!='Ruta'){
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
-									}else{
-										echo "<td><a href='".$this->datos[$j][($this->lista)[$i]]."' target='_blank'>".$this->datos[$j][($this->lista)[$i]]."</a></td>";									
-									}
+									
 								}
 								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/editar.png"></a>&nbsp <a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a><a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
 								

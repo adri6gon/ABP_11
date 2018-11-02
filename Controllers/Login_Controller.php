@@ -15,7 +15,7 @@ if(!isset($_REQUEST['login']) && !(isset($_REQUEST['password']))){
 else{
 	include '../Models/USUARIOS_Model.php';
 	//Creamos un objeto de la clase USUARIOS_Model con los datos pasados
-	$usuario = new USUARIOS_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','','','','');
+	$usuario = new USUARIOS_Model($_REQUEST['login'],$_REQUEST['password'],'','','','');
 	//Guardamos la respuesta del login
 	$respuesta = $usuario->login();
 	//Si es true creamos la sesion de ese usuario
@@ -23,7 +23,7 @@ else{
 		//Variable login de la sesion corresponde con el login pasado por el usuario
 		$_SESSION['login'] = $_REQUEST['login'];
 		//Guardamos los permisos del usuario en un array de la sesion
-		$_SESSION['PERMISOS'] = $usuario->getPermisos();
+		$_SESSION['PERMISOS'] = $usuario->getRol();
 		header('Location:../index.php');
 	}//No es correcto el login
 	else{

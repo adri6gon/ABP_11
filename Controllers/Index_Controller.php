@@ -15,7 +15,7 @@ if (!IsAuthenticated()){
 }
 include '../Functions/ACL.php';
 //Si tiene permisos de usuarios lo redirgimos al showall
-if(comprobarPermisos('SHOWALL','USUARIOS')){
+if(comprobarRol('USUARIOS')){
 	header('Location:./USUARIOS_Controller.php');
 }//Si no lo dirigimos a la vista de inicio
 else{

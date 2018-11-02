@@ -14,7 +14,7 @@ class INDEX_View {
 	function render(){
 		include 'Header.php';
 		
-		echo '<h2>'.$strings['Bienvenido'].'</h2>';
+		echo '<h2>Bienvenido</h2>';
 						
 	include 'Footer.php';
 	}

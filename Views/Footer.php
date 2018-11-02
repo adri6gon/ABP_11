@@ -6,7 +6,7 @@ Fecha: 23/12/17
 		</section>
 	</div>
 		<footer id="pie">
-			<p>GRUPOIU | <?php echo date("d-M-Y", mktime()); ?></p>
+			<p>Padel | <?php echo date("d-M-Y", mktime()); ?></p>
 		</footer>
 	</body>
 </html>
