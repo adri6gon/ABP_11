@@ -21,7 +21,15 @@ Fecha: 23/11/17
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('TRABAJOS')){
 						echo '<li><a href="./TRABAJOS_Controller.php">TRABAJOS</a></li>';
-					}					
+					}
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('CAMPEONATOS')){
+						echo '<li><a href="./CAMPEONATOS_Controller.php">CAMPEONATOS</a></li>';
+					}	
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('CATEGORIAS')){
+						echo '<li><a href="./CATEGORIAS_Controller.php">CATEGORIAS</a></li>';
+					}				
 					
 				?>		
 				</ul>
