@@ -16,6 +16,7 @@ class PISTA_SHOWALL {
 <div style="overflow-x:auto;">
 				<h2>Pistas disponibles:</h2>
 	<?php		
+		echo "<h2>".$this->datos[0]['fecha']."</h2>";
 	echo '<a href="'.$_SERVER['PHP_SELF'].'?action=PREVDAY&fecha='.$this->datos[0]['fecha'].'">Anterior</a>&nbsp';
 	 echo '<a href="'.$_SERVER['PHP_SELF'].'?action=NEXTDAY&fecha='.$this->datos[0]['fecha'].'">Siguiente</a>';
 		?>
