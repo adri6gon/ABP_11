@@ -2,6 +2,7 @@
 Funcion del archivo: Vista que genera el menu lateral cuando un usuario esta logeado en la web
 Autor: j0z5zs
 Fecha: 23/11/17
+GONZA MARIQUITA
 -->
 	<!--Navegador PROVISIONAL-->
 		<div class="cuerpo">
