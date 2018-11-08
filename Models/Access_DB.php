@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Funcion que accede a la base de datos con el metodo mysqli
-Autor: Adrian
-Fecha: 23/12/17
--->
 <?php
 //Funcion para conectar con la base de datos
 function ConnectDB()

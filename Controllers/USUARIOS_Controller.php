@@ -26,11 +26,6 @@ function get_data_form(){
 	$nombreuser = $_REQUEST['nombre'];
 	$apellidosuser = $_REQUEST['apellidos'];
 	
-	/* if($_FILES){
-		$fotopersonal = '../Files/'.$_REQUEST['login'].'-'.$_FILES['fotopersonal']['name'];
-	}else{
-		$fotopersonal = $_REQUEST['fotopersonal'];
-	} */
 	$action = $_REQUEST['action'];
 	
 	$USUARIOS = new USUARIOS_Model(
@@ -44,7 +39,7 @@ function get_data_form(){
 	return $USUARIOS;
 }
 $lista = array('login', 'password','rol', 'nombre', 'apellidos');
-$funcionalidad = "USUARIOS";
+//$funcionalidad = "USUARIOS";
 $alerta = "No tiene permisos para esta acción.";
 
 //var_dump($_REQUEST['action']);
@@ -56,7 +51,7 @@ if (!isset($_REQUEST['action'])){
 	Switch ($_REQUEST['action']){
 		case 'ADD':
 		//Comprobamos que tiene los permisos necesarios para realizar esta accion
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$usuario = new USUARIOS_Model('','','','','');
@@ -82,7 +77,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'DELETE':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if (!$_POST){
                     //Si viene vacio
                     //Nuevo modelo vacio
@@ -107,7 +102,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vaci0
 					$usuario = new USUARIOS_Model($_REQUEST['login'],'','','','');
@@ -135,7 +130,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SEARCH':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$usuario = new USUARIOS_Model('','','','','');
@@ -158,7 +153,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(/*comprobarPermisos($_REQUEST['action'],$funcionalidad)*/comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
                 //nuevo modelo de usuarios
 				$USUARIOS = new USUARIOS_Model($_REQUEST['login'], '', '', '','');
                 //Recoge los datos de usuarios
@@ -170,8 +165,8 @@ if (!isset($_REQUEST['action'])){
 			}
 				break;
 		default: //Default entra el showall
-        //Si no teine permisos
-			if(comprobarRol($_REQUEST['action'])){
+        //Si no tiene permisos
+			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$USUARIOS = new USUARIOS_Model('','', '', '', '');

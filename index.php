@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Pagina de inicio de la web, que redirige a controladores segun la sesion.
-Autor: Adrian Gonzalez
-Fecha: 23/12/17
--->
 <?php
 //entrada a la aplicacion
 
