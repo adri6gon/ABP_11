@@ -226,7 +226,7 @@ function getRol(){
 		return 'El login no existe';
 	}
 	else{
-		return $resultado;
+		return mysqli_fetch_row($resultado);
 	}		
 }
 

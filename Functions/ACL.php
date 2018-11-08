@@ -21,7 +21,16 @@ include_once '../Models/USUARIOS_Model.php';
 	return $band;
 }*/
 function comprobarRol($rol){
-	
-	return true;
+	$usuario = new USUARIOS_Model($_SESSION['login'],'','','','');
+	$rolBD = $usuario->getRol();
+	if($rolBD[0] == 'admin'){
+		return true;
+	}else{
+		if($rol == $rolBD[0]){
+			return true;
+		}else{
+			return false;
+		}
+	}	
 }
 ?>
