@@ -47,7 +47,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 								}
 								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a>';
 								if($this->datos[$j]["promo"] == 0 ) {
-									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=PROMOCIONAR&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/promocionar.png" heigth=10px></a></td></tr>';
+									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=PROMOCIONAR&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/promocionar.png" width=30px></a></td></tr>';
 								} else {
 									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=DESPROMOCIONAR&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/despromocionar.png" heigth=10px></a></td></tr>';
 								}
