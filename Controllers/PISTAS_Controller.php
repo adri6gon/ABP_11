@@ -106,7 +106,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(/*comprobarPermisos($_REQUEST['action'],$funcionalidad)*/comprobarRol($_REQUEST['action'])){
+			if(/*comprobarPermisos($_REQUEST['action'],$funcionalidad)*/comprobarRol('deportista'){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', '', '','');
                 //Recoge los datos de PISTAS
@@ -119,7 +119,7 @@ if (!isset($_REQUEST['action'])){
 				break;
 		case 'PREVDAY':
 		//Si no teine permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])-86400);
@@ -143,7 +143,7 @@ if (!isset($_REQUEST['action'])){
 		break;
 		case 'NEXTDAY':
 		//Si no teine permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])+86400);
@@ -177,7 +177,7 @@ if (!isset($_REQUEST['action'])){
 			}
 		break;
 		case 'RESERVAS':
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model('', '', '', '','');
                	//Ejecutamos la reserva
@@ -189,7 +189,7 @@ if (!isset($_REQUEST['action'])){
 			}
 		break;
 		case 'DEL_RESERVA':
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
                	//Ejecutamos el borrado de la reserva
@@ -201,7 +201,7 @@ if (!isset($_REQUEST['action'])){
 		break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$PISTAS = new PISTAS_Model('','', '', '', '2018-10-10');
