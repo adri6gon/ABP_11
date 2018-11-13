@@ -1,6 +1,6 @@
 <?php
 
-class USUARIO_SHOWCURRENT {
+class NOTICIAS_SHOWCURRENT {
 
 	function __construct($array,$volver,$lista){
 		$this->datos = $array;
@@ -28,7 +28,7 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 					<?php	
 							for($j=0;$j<count($this->lista);$j++){
 								echo "<tr>";
-								if(($this->lista)[$j]!='Ruta'){
+								if(($this->lista)[$j]!='enlace'){
 									echo "<th>".($this->lista)[$j]."</th><td>".$this->datos[($this->lista)[$j]]."</td>";
 								}else{									
 									echo "<th>".($this->lista)[$j]."</th><td><a href='".$this->datos[($this->lista)[$j]]."' target='_blank'>".$this->datos[($this->lista)[$j]]."</a></td>";

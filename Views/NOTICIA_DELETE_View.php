@@ -1,13 +1,6 @@
-<!--
-Funcion del archivo: Vista que genera la tabla en detallede una tupla con la opcion de borrado de la misma.
-Autor: j0z5zs
-Fecha: 23/12/17
--->
- 
-
 <?php
 
-class USUARIO_DELETEView {
+class NOTICIAS_DELETEView {
 
 	function __construct($array,$volver,$lista,$lista2,$arg){
 		$this->datos = $array;
@@ -32,7 +25,7 @@ class USUARIO_DELETEView {
 					<?php
 							for($j=0;$j<count($this->lista);$j++){
 								echo "<tr>";
-								if(($this->lista)[$j]!='Ruta'){
+								if(($this->lista)[$j]!='enlace'){
 									echo "<th>".($this->lista)[$j]."</th><td>".$this->datos[($this->lista)[$j]]."</td>";
 								}else{									
 									echo "<th>".($this->lista)[$j]."</th><td><a href='".$this->datos[($this->lista)[$j]]."' target='_blank'>".$this->datos[($this->lista)[$j]]."</a></td>";

@@ -1,5 +1,5 @@
 <?php
-class USUARIO_SHOWALL {
+class NOTICIAS_SHOWALL {
 
 	function __construct($search,$lista,$array,$volver){
 		$this->search = $search;
