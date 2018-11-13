@@ -1,8 +1,4 @@
-<!--
-Funcion del archivo: Vista que genera tablas de X tuplas de la BD( genera la tabla con el numero de tuplas que le pasemos),puede mostrar todas las tuplas o las de un filtrado con el SEARCH
-Autor: j0z5zs
-Fecha: 23/12/17
--->
+
 <?php
 class USUARIO_SHOWALL {
 

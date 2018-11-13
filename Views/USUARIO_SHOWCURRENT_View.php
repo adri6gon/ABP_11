@@ -5,9 +5,7 @@ class USUARIO_SHOWCURRENT {
 	function __construct($array,$volver,$lista){
 		$this->datos = $array;
 		$this->volver = $volver;
-		$this->lista = $lista;
-		//$this->lista2 = $lista2;
-		//$this->arg = $arg;		
+		$this->lista = $lista;	
 		$this->render();
 	}
 

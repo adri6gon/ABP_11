@@ -1,8 +1,4 @@
-<!--
-Funcion del archivo: Archivo que contiene la vista del busqueda de un usuario
-Autor: j0z5zs
-Fecha: 23/12/17
--->
+
 <?php
 
 class SEARCH_USUARIO {

@@ -21,7 +21,10 @@ Fecha: 23/11/17
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('TRABAJOS')){
 						echo '<li><a href="./TRABAJOS_Controller.php">TRABAJOS</a></li>';
-					}					
+					}
+					if(comprobarRol('PAREJA')){
+						echo '<li><a href="./PAREJA_Controller.php">PAREJA</a></li>';
+					}						
 					
 				?>		
 				</ul>
