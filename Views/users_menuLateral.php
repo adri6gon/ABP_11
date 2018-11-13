@@ -29,6 +29,13 @@
 					if(comprobarRol('admin')){
 						echo '<li><a href="./CATEGORIAS_Controller.php">CATEGORIAS</a></li>';
 					}	
+					// if(comprobarRol('admin')){
+					// 	echo '<li><a href="./TRABAJOS_Controller.php">TRABAJOS</a></li>';
+					// }	
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('admin')){
+						echo '<li><a href="./PARTIDOS_Controller.php">PARTIDOS</a></li>';
+					}		
 					
 				?>		
 				</ul>
