@@ -206,17 +206,18 @@ CREATE TABLE `PARTIDO` (
   `idPartido` int(10) NOT NULL,
   `Usuariologin` varchar(10) NOT NULL,
   `fecha` date NOT NULL,
-  `hora` time NOT NULL
+  `hora` time NOT NULL,
+  `promo` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `PARTIDO`
 --
 
-INSERT INTO `PARTIDO` (`idPartido`, `Usuariologin`, `fecha`, `hora`) VALUES
-(1, 'adri', '2018-10-11', '13:30:00'),
-(2, 'adri', '2018-10-11', '17:00:00'),
-(3, 'adri', '2018-10-11', '19:00:00');
+INSERT INTO `PARTIDO` (`idPartido`, `Usuariologin`, `fecha`, `hora`, `promo`) VALUES
+(1, 'adri', '2018-10-11', '13:30:00', 0),
+(2, 'adri', '2018-10-11', '17:00:00', 0),
+(3, 'adri', '2018-10-11', '19:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,7 @@ INSERT INTO `PARTIDO` (`idPartido`, `Usuariologin`, `fecha`, `hora`) VALUES
 
 CREATE TABLE `PISTA` (
   `idPista` int(10) NOT NULL,
-  `restriccion` tinyint(1) DEFAULT NULL,
+  `restriccion` tinyint(1) DEFAULT 0,
   `nombre` varchar(30) NOT NULL,
   `hora` time NOT NULL,
   `fecha` date NOT NULL
