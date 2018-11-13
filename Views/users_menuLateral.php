@@ -14,8 +14,6 @@
 						echo '<li><a href="./NOTICIAS_Controller.php">NOTICIAS</a></li>';
 					}
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
-						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('admin')){
@@ -36,7 +34,9 @@
 					if(comprobarRol('admin')){
 						echo '<li><a href="./PARTIDOS_Controller.php">PARTIDOS</a></li>';
 					}		
-					
+					if(comprobarRol('PAREJA')){
+						echo '<li><a href="./PAREJA_Controller.php">PAREJA</a></li>';
+					}								
 				?>		
 				</ul>
 			</nav>
