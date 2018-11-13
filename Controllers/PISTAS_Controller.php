@@ -106,7 +106,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(/*comprobarPermisos($_REQUEST['action'],$funcionalidad)*/comprobarRol('deportista'){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', '', '','');
                 //Recoge los datos de PISTAS

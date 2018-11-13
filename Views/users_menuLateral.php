@@ -14,11 +14,11 @@
 						echo '<li><a href="./NOTICIAS_Controller.php">NOTICIAS</a></li>';
 					}
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
+					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
+					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php?action=RESERVAS">RESERVAS</a></li>';
 					}	
 					
