@@ -11,7 +11,7 @@
 					}
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('admin')){
-						echo '<li><a href="./GRUPOS_Controller.php">GRUPOS</a></li>';
+						echo '<li><a href="./NOTICIAS_Controller.php">NOTICIAS</a></li>';
 					}
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('admin')){

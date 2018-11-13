@@ -208,7 +208,13 @@ footer{
 	color: #FFFFFF;
 	font-size:16px;
 }
-
+/***************NOTICIA**********************************/
+.noticias{
+	margin-top:80px;
+}
+.noticia{
+	min-height:300px;
+}
 
 
 
