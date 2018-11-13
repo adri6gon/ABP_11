@@ -20,7 +20,7 @@ include '../Functions/ACL.php';
 
 function get_data_form(){
 
-	$idNoticia = $_REQUEST['idNoticia']||"";
+	$idNoticia = $_REQUEST['idNoticia'];
 	$imageURL = $_REQUEST['imageURL'];
 	$enlace = $_REQUEST['enlace'];
 	$texto = $_REQUEST['texto'];
