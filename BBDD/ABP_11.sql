@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-11-2018 a las 15:44:59
+-- Tiempo de generación: 06-11-2018 a las 21:22:58
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -206,17 +206,18 @@ CREATE TABLE `PARTIDO` (
   `idPartido` int(10) NOT NULL,
   `Usuariologin` varchar(10) NOT NULL,
   `fecha` date NOT NULL,
-  `hora` time NOT NULL
+  `hora` time NOT NULL,
+  `promo` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `PARTIDO`
 --
 
-INSERT INTO `PARTIDO` (`idPartido`, `Usuariologin`, `fecha`, `hora`) VALUES
-(1, 'adri', '2018-10-11', '13:30:00'),
-(2, 'adri', '2018-10-11', '17:00:00'),
-(3, 'adri', '2018-10-11', '19:00:00');
+INSERT INTO `PARTIDO` (`idPartido`, `Usuariologin`, `fecha`, `hora`, `promo`) VALUES
+(1, 'adri', '2018-10-11', '13:30:00', 0),
+(2, 'adri', '2018-10-11', '17:00:00', 0),
+(3, 'adri', '2018-10-11', '19:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,7 @@ INSERT INTO `PARTIDO` (`idPartido`, `Usuariologin`, `fecha`, `hora`) VALUES
 
 CREATE TABLE `PISTA` (
   `idPista` int(10) NOT NULL,
-  `restriccion` varchar(255) DEFAULT NULL,
+  `restriccion` tinyint(1) DEFAULT 0,
   `nombre` varchar(30) NOT NULL,
   `hora` time NOT NULL,
   `fecha` date NOT NULL
@@ -237,17 +238,35 @@ CREATE TABLE `PISTA` (
 --
 
 INSERT INTO `PISTA` (`idPista`, `restriccion`, `nombre`, `hora`, `fecha`) VALUES
-(1, '', 'Court1', '09:00:00', '2018-10-10'),
-(2, '', 'Court1', '10:30:00', '2018-10-10'),
-(3, '', 'Court1', '12:00:00', '2018-10-10'),
-(4, '', 'Court1', '13:30:00', '2018-10-10'),
-(5, '', 'Court1', '17:00:00', '2018-10-10'),
-(6, '', 'Court1', '18:30:00', '2018-10-10'),
-(7, '', 'Court1', '20:00:00', '2018-10-10'),
-(8, '', 'Court2', '09:00:00', '2018-10-10'),
-(9, '', 'Court2', '10:30:00', '2018-10-10'),
-(10, '', 'Court2', '12:00:00', '2018-10-10'),
-(11, '', 'Court2', '13:30:00', '2018-10-10');
+(0, 0, 'Court2', '17:00:00', '2018-10-10'),
+(1, 1, 'Court1', '09:00:00', '2018-10-10'),
+(2, 1, 'Court1', '10:30:00', '2018-10-10'),
+(3, 0, 'Court1', '12:00:00', '2018-10-10'),
+(4, 0, 'Court1', '13:30:00', '2018-10-10'),
+(5, 0, 'Court1', '17:00:00', '2018-10-10'),
+(6, 0, 'Court1', '18:30:00', '2018-10-10'),
+(7, 0, 'Court1', '20:00:00', '2018-10-10'),
+(8, 0, 'Court2', '09:00:00', '2018-10-10'),
+(9, 1, 'Court2', '10:30:00', '2018-10-10'),
+(10, 0, 'Court2', '12:00:00', '2018-10-10'),
+(11, 0, 'Court2', '13:30:00', '2018-10-10'),
+(12, 0, 'Court2', '20:00:00', '2018-10-10'),
+(13, 0, 'Court2', '18:30:00', '2018-10-10'),
+(14, 0, 'Court3', '09:00:00', '2018-10-10'),
+(15, 0, 'Court3', '10:30:00', '2018-10-10'),
+(16, 1, 'Court3', '12:00:00', '2018-10-10'),
+(17, 0, 'Court3', '13:30:00', '2018-10-10'),
+(18, 0, 'Court3', '17:00:00', '2018-10-10'),
+(19, 0, 'Court3', '18:30:00', '2018-10-10'),
+(20, 0, 'Court3', '20:00:00', '2018-10-10'),
+(21, 0, 'Court4', '09:00:00', '2018-10-10'),
+(22, 0, 'Court4', '10:30:00', '2018-10-10'),
+(23, 0, 'Court4', '12:00:00', '2018-10-10'),
+(24, 0, 'Court4', '13:30:00', '2018-10-10'),
+(25, 0, 'Court4', '17:00:00', '2018-10-10'),
+(26, 0, 'Court4', '18:30:00', '2018-10-10'),
+(27, 0, 'Court4', '20:00:00', '2018-10-10'),
+(28, 0, 'Court4', '20:00:00', '2018-10-11');
 
 -- --------------------------------------------------------
 
@@ -310,7 +329,9 @@ CREATE TABLE `PISTA_USUARIO` (
 
 INSERT INTO `PISTA_USUARIO` (`PistaidPista`, `Usuariologin`, `Pistanombre`) VALUES
 (1, 'noe', 'Court1'),
-(2, 'noe', 'Court1');
+(2, 'noe', 'Court1'),
+(9, 'adri', 'Court2'),
+(16, 'adri', 'Court3');
 
 -- --------------------------------------------------------
 

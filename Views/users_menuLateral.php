@@ -21,7 +21,11 @@ Fecha: 23/11/17
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('TRABAJOS')){
 						echo '<li><a href="./TRABAJOS_Controller.php">TRABAJOS</a></li>';
-					}					
+					}	
+										//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('PARTIDOS')){
+						echo '<li><a href="./PARTIDOS_Controller.php">PARTIDOS</a></li>';
+					}				
 					
 				?>		
 				</ul>
