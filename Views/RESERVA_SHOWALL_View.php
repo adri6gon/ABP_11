@@ -13,7 +13,7 @@ class RESERVA_SHOWALL {
 		
 ?>
 <div style="overflow-x:auto;">
-				<h2>Tus reservas:</h2>
+				<h2>Reservas:</h2>
 					<table class="tablas separador">
 						<tr>
 						<?php

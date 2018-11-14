@@ -335,6 +335,25 @@ INSERT INTO `PISTA_USUARIO` (`PistaidPista`, `Usuariologin`, `Pistanombre`) VALU
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `NOTICIA`
+--
+
+CREATE TABLE `NOTICIA` (
+  `idNoticia` int(11) NOT NULL,
+  `imageURL` varchar(50) DEFAULT NULL,
+  `enlace` varchar(50) DEFAULT NULL,
+  `texto` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `NOTICIA`
+--
+
+INSERT INTO `NOTICIA` (`idNoticia`, `imageURL`, `enlace`, `texto`) VALUES
+(1, '../Views/images/biblio.png', 'https://www.youtube.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida, justo tincidunt tristique bibendum, enim purus lacinia augue, et molestie diam erat at orci. Duis lacinia et neque vel euismod. Etiam odio urna, lacinia a orci quis, blandit imperdiet mauris. Phasellus tristique elementum nunc vitae feugiat. Duis sit amet ante porttitor neque tempus sagittis. Donec leo tortor, mollis vel semper eget, rutrum a nisl. Nunc sodales finibus molestie.'),
+(4, 'wewew', 'youtube.com', 'wwewewew');
+------------------------------------------------------------
+--
 -- Estructura de tabla para la tabla `USUARIO`
 --
 

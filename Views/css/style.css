@@ -1,9 +1,3 @@
-/**
-Funcion del archivo: Archivo con los diferentes estilos visuales de la pagina we.
-Autor: j0z5zs
-Fecha: 23/12/17
-**/
-
 *{
 	margin:0px;
 	padding:0px;
@@ -213,7 +207,12 @@ footer{
 	margin-top:80px;
 }
 .noticia{
-	min-height:300px;
+	text-align:center;
+	margin-left:20%;
+	min-height:200px;
+	max-width: 1200px;
+	background-color:#FFFFFF;
+	margin-top:15px;
 }
 
 

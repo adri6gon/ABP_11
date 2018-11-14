@@ -166,26 +166,43 @@ if (!isset($_REQUEST['action'])){
 			//Cambio de dia en el SHOWALL de PISTAS
 		break;
 		case 'RESERVE':
-			if(comprobarRol('deportista')){
-                //nuevo modelo de PISTAS
-				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
-               	//Ejecutamos la reserva
-				$reserva = $PISTAS->RESERVE($_SESSION['login']);
-				new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php');
-			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+			if(comprobarRol('admin')){
+				//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
+					//Ejecutamos la reserva
+					$reserva = $PISTAS->RESERVE($_REQUEST['login']);
+					new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php');
+			}else{
+				if(comprobarRol('deportista')){
+					//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
+					//Ejecutamos la reserva
+					$reserva = $PISTAS->RESERVE($_SESSION['login']);
+					new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php');
+				}else{//Si no tiene permisos
+					new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+				}
 			}
 		break;
 		case 'RESERVAS':
-			if(comprobarRol('deportista')){
-                //nuevo modelo de PISTAS
-				$PISTAS = new PISTAS_Model('', '', '', '','');
-               	//Ejecutamos la reserva
-				$lista = array('nombre','fecha','hora');
-				$reserva = $PISTAS->YOUR_RESERVES($_SESSION['login']);
-				new RESERVA_SHOWALL($reserva,$lista,'../Controllers/PISTAS_Controller.php');
-			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+		if(comprobarRol('admin')){
+				//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model('', '', '', '','');
+					//Ejecutamos la reserva
+					$lista = array('nombre','fecha','hora','Usuariologin');
+					$reserva = $PISTAS->ALL_RESERVES();
+					new RESERVA_SHOWALL($reserva,$lista,'../Controllers/PISTAS_Controller.php');
+			}else{
+				if(comprobarRol('deportista')){
+					//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model('', '', '', '','');
+					//Ejecutamos la reserva
+					$lista = array('nombre','fecha','hora');
+					$reserva = $PISTAS->YOUR_RESERVES($_SESSION['login']);
+					new RESERVA_SHOWALL($reserva,$lista,'../Controllers/PISTAS_Controller.php');
+				}else{//Si no tiene permisos
+					new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+				}
 			}
 		break;
 		case 'DEL_RESERVA':
