@@ -214,6 +214,78 @@ function ADD(){
 	
 } 
 
+
+
+
+function _SHOWALLPROMOWITHOUTLOGIN(){
+    $sql = "SELECT PARTIDO.idPartido, PARTIDO.fecha, PARTIDO.hora, PISTA_PARTIDO.Pistanombre  FROM PARTIDO, PISTA_PARTIDO WHERE PARTIDO.idPartido = PISTA_PARTIDO.PartidoidPartido AND PARTIDO.promo = 1;";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
+
+
+
+// function _SHOWALLPROMOWITHLOGIN(){
+//     $login = $_SESSION['login'];
+//     $sql = "SELECT PARTIDO.fecha, PARTIDO.hora, PISTA_PARTIDO.Pistanombre  FROM PARTIDO, PISTA_PARTIDO, USUARIO_PARTIDO WHERE PARTIDO.idPartido = PISTA_PARTIDO.PartidoidPartido AND PARTIDO.promo = 1 AND NOT PARTIDO.idPartido = USUARIO_PARTIDO.idPartido AND USUARIO_PARTIDO.login = '$login' ";
+// 	$result = $this->mysqli->query($sql);  
+// 	if($result ->num_rows >0){
+// 		$j = 0;
+// 		while($tupla = mysqli_fetch_assoc($result)){
+// 		   $tuplas[$j] = $tupla;
+// 		   $j++;		
+// 		}
+// 		return $tuplas;
+// 	}
+// 	else{
+// 		return  false;
+// 	}
+// }
+
+function _COUNTINSCRITOS(){
+    $sql = "SELECT PARTIDO.idPartido as partido, COUNT(USUARIO_PARTIDO.login) AS cont FROM USUARIO_PARTIDO, PARTIDO WHERE PARTIDO.idPartido = USUARIO_PARTIDO.idPartido AND PARTIDO.promo = 1 GROUP BY PARTIDO.idPartido";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
+
+function _SELECTUSER(){
+    $sql = "SELECT PARTIDO.idPartido as partido, USUARIO_PARTIDO.login FROM USUARIO_PARTIDO, PARTIDO WHERE PARTIDO.idPartido = USUARIO_PARTIDO.idPartido AND PARTIDO.promo = 1";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
+
+
+
 // // funcion EDIT()
 // // Se comprueba que la tupla a modificar exista en base al valor de su clave primaria
 // // si existe se modifica

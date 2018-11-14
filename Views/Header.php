@@ -36,7 +36,7 @@ Fecha: 23/12/17
 		<header>
 				<div id="cabecera-izq">
 					<div id="logo">
-						<a href="../Controllers/USUARIOS_Controller.php"><img src="../Views/images/cabecera.png" alt="Padel" title="Padel"/></a>
+						<a href="../Controllers/Index_Controller.php"><img src="../Views/images/cabecera.png" alt="Padel" title="Padel"/></a>
 					</div>
 					<div id="titulo">
 						<h1>
