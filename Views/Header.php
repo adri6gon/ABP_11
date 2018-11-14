@@ -23,9 +23,9 @@ Fecha: 23/12/17
 		<script type="text/javascript" src="../Views/jscript/validaciones.js"></script>
 		<script type="text/javascript" src="../Views/jscript/comprobacion.js"></script>	
 		<script>
-		  $( function() {
-			$( "#fechanac" ).datepicker();
-		  } );
+		 // $( function() {
+		//	$( "#fechanac" ).datepicker();
+		//  } );
 		</script>
 			
 		

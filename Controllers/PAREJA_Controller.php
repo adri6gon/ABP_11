@@ -10,8 +10,10 @@ if (!IsAuthenticated()){
 
 include_once '../Models/PAREJA_Model.php';
 include '../Views/PAREJA_SHOWALL_View.php';
+include '../Views/PAREJA_SHOWALL_USER_View.php';
 include '../Views/PAREJA_SEARCH_View.php';
 include '../Views/PAREJA_ADD_View.php';
+include '../Views/PAREJA_ADD_ADMIN_View.php';
 include '../Views/PAREJA_EDIT_View.php';
 include '../Views/PAREJA_DELETE_View.php';
 include '../Views/PAREJA_SHOWCURRENT_View.php';
@@ -46,6 +48,26 @@ if (!isset($_REQUEST['action'])){
 	Switch ($_REQUEST['action']){
 		case 'ADD':
 		//Comprobamos que tiene los permisos necesarios para realizar esta accion
+			if(comprobarRol('admin')){
+				if(!$_POST){//Si viene vacio
+                    //Nuevo modelo vacio
+					$usuario = new PAREJA_Model('','','');
+                    //Nueva vista
+					$add = new ADD_PAREJA_ADMIN('../Controllers/PAREJA_Controller.php');
+				}else{//Si no viene vacio
+                    //Recoge los datos con getdataform
+					$pareja = get_data_form();
+                    //LLamas al add del modelo
+					$respuesta = $pareja->ADD();				
+					include_once '../Functions/Authentication.php';
+					if(!IsAuthenticated()){//Si no esta autenticado
+						new MESSAGE($respuesta,'../Controllers/Login_Controller.php');
+					}else{//Si esta autenticado
+						new MESSAGE($respuesta,'../Controllers/PAREJA_Controller.php');
+					}
+				
+				}
+			}
 			if(comprobarRol('deportista')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
@@ -69,10 +91,11 @@ if (!isset($_REQUEST['action'])){
 			else{
 				new MESSAGE($alerta,'../index.php');
 			}
+
 			break;
 		case 'DELETE':
         //Si tiene permisos
-			if(comprobarRol('deportista')){
+			if(comprobarRol('admin')){
 				if (!$_POST){
                     //Si viene vacio
                     //Nuevo modelo vacio
@@ -97,12 +120,12 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT':
         //Si tiene permisos
-			if(comprobarRol('deportista')){
+			if(comprobarRol('admin')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vaci0
-					$usuario = new PAREJA_Model($_REQUEST['idpareja'],'','');
+					$pareja = new PAREJA_Model($_REQUEST['idpareja'],'','');
                     //Rellenas los datos con rellenadatos
-					$valores = $usuario->RellenaDatos();
+					$valores = $pareja->RellenaDatos();
 					
 					//En el edit tenemos que poder asignar y desasignar grupos a un user por eso le pasamos 2 arrays:el de grupos que tiene asignados y el de todos los grupos
 					//La vista debe tener despues de los datos del usuario una lista de checkbox para asignar/desasignar grupos
@@ -116,7 +139,7 @@ if (!isset($_REQUEST['action'])){
                     //Haces el edit del modelo
 					$respuesta = $pareja->EDIT();
 					
-					new MESSAGE($respuesta,'./Pareja_Controller.php');
+					new MESSAGE($respuesta,'./PAREJA_Controller.php');
 					
 				}
 			}else{//Si no tiene permisos
@@ -125,7 +148,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SEARCH':
         //Si tiene permisos
-			if(comprobarRol('deportista')){
+			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$usuario = new PAREJA_Model('','','');
