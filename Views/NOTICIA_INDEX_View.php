@@ -16,7 +16,7 @@ class NOTICIA_INDEX_View {
 	<?php
 		for($j=0;$j<count($this->datos);$j++){
 			
-			 echo '<div class="noticia" style="background-color:#FFFFFF; margin-top:15px;">
+			 echo '<div class="noticia">
 			 		<img src="'.$this->datos[$j][($this->lista)[0]].'"><br>';
 			 echo '<a href="'.$this->datos[$j][($this->lista)[1]].'">Enlace<a><br>';	
 			 echo '<p>'.$this->datos[$j][($this->lista)[2]].'</p>';

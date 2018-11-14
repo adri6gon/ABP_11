@@ -13,7 +13,6 @@ if(comprobarRol('admin')){
 else{
 		$NOTICIAS = new NOTICIAS_Model('','', '', '');
 		$datos = $NOTICIAS->_SHOWALL();
-		var_dump($datos);
 	    $lista = array('imageURL','enlace', 'texto');
 		include '../Views/NOTICIA_INDEX_View.php';
 		new NOTICIA_INDEX_VIEW($datos, $lista);

@@ -200,6 +200,22 @@ function YOUR_RESERVES($login)
 		return  false;
 	}
 }
+function ALL_RESERVES()
+{
+	$sql = "SELECT idPista, nombre,fecha,hora, PU.Usuariologin FROM PISTA_USUARIO PU, PISTA P WHERE idPista = PistaidPista ";
+	 $result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
 function DEL_RESERVES($login){
 	$sql = "SELECT * from PISTA_USUARIO where PistaidPista = '".$this->idPista."' AND Pistanombre='".$this->nombre."' AND Usuariologin ='$login'";
 	$result = $this->mysqli->query($sql);

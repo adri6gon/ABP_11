@@ -106,7 +106,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(/*comprobarPermisos($_REQUEST['action'],$funcionalidad)*/comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', '', '','');
                 //Recoge los datos de PISTAS
@@ -119,7 +119,7 @@ if (!isset($_REQUEST['action'])){
 				break;
 		case 'PREVDAY':
 		//Si no teine permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])-86400);
@@ -143,7 +143,7 @@ if (!isset($_REQUEST['action'])){
 		break;
 		case 'NEXTDAY':
 		//Si no teine permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])+86400);
@@ -166,30 +166,47 @@ if (!isset($_REQUEST['action'])){
 			//Cambio de dia en el SHOWALL de PISTAS
 		break;
 		case 'RESERVE':
-			if(comprobarRol('deportista')){
-                //nuevo modelo de PISTAS
-				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
-               	//Ejecutamos la reserva
-				$reserva = $PISTAS->RESERVE($_SESSION['login']);
-				new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php');
-			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+			if(comprobarRol('admin')){
+				//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
+					//Ejecutamos la reserva
+					$reserva = $PISTAS->RESERVE($_REQUEST['login']);
+					new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php');
+			}else{
+				if(comprobarRol('deportista')){
+					//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
+					//Ejecutamos la reserva
+					$reserva = $PISTAS->RESERVE($_SESSION['login']);
+					new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php');
+				}else{//Si no tiene permisos
+					new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+				}
 			}
 		break;
 		case 'RESERVAS':
-			if(comprobarRol('admin')){
-                //nuevo modelo de PISTAS
-				$PISTAS = new PISTAS_Model('', '', '', '','');
-               	//Ejecutamos la reserva
-				$lista = array('nombre','fecha','hora');
-				$reserva = $PISTAS->YOUR_RESERVES($_SESSION['login']);
-				new RESERVA_SHOWALL($reserva,$lista,'../Controllers/PISTAS_Controller.php');
-			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+		if(comprobarRol('admin')){
+				//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model('', '', '', '','');
+					//Ejecutamos la reserva
+					$lista = array('nombre','fecha','hora','Usuariologin');
+					$reserva = $PISTAS->ALL_RESERVES();
+					new RESERVA_SHOWALL($reserva,$lista,'../Controllers/PISTAS_Controller.php');
+			}else{
+				if(comprobarRol('deportista')){
+					//nuevo modelo de PISTAS
+					$PISTAS = new PISTAS_Model('', '', '', '','');
+					//Ejecutamos la reserva
+					$lista = array('nombre','fecha','hora');
+					$reserva = $PISTAS->YOUR_RESERVES($_SESSION['login']);
+					new RESERVA_SHOWALL($reserva,$lista,'../Controllers/PISTAS_Controller.php');
+				}else{//Si no tiene permisos
+					new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
+				}
 			}
 		break;
 		case 'DEL_RESERVA':
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
                	//Ejecutamos el borrado de la reserva
@@ -201,7 +218,7 @@ if (!isset($_REQUEST['action'])){
 		break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$PISTAS = new PISTAS_Model('','', '', '', '2018-10-10');

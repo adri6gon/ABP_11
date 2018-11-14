@@ -61,7 +61,13 @@ Fecha: 23/12/17
 	
 
 <?php
-	}	
+	}else{
+		?>
+					<div class="login">
+						<a href="../Controllers/Login_Controller.php">Login</a>
+					</div>
+<?php
+	}
 ?>
 		</div>	    
 </header>
