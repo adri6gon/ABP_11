@@ -21,7 +21,7 @@ class CAMPEONATO_SHOWALL {
 ?>
 
 <div style="overflow-x:auto;">
-				<h2><?php if(!$this->search){ echo 'Tabla ShowAll';}else{echo 'Tabla Busqueda';} ?>:</h2>
+				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CAMPEONATO';}else{echo 'Tabla Busqueda de CAMPEONATO';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
 							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
 					</div>

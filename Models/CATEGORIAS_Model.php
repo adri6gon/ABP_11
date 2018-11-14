@@ -173,6 +173,23 @@ function SEARCH(){
 	}
 }
 
+function GENERATE_GROUPS(){
+   //	$sql = "SELECT * from CATEGORIA where idCategoria = '".$this->idCategoria."'";
+	//$result = $this->mysqli->query($sql);
+	//if ($result->num_rows == 0){
+		return 'Los grupos de la categoria han sido generados correctamente.';
+	//}
+	//else{
+	//	$sqlBorrar = "DELETE FROM CATEGORIA WHERE idCategoria = '".$this->idCategoria."'";
+	//	if(!$this->mysqli->query($sqlBorrar)){
+	//		return 'Error en el borrado.';
+	//	}
+	//	else{ 
+	//		return 'Borrado realizado con exito.';
+	//		}
+	//}
+}
+
 function login(){
 	$sql = "SELECT *
 			FROM USUARIO

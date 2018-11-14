@@ -37,7 +37,7 @@ class SEARCH_CATEGORIA {
 								<td><input class="form-est" type="text" id="nivel" name="nivel" size="30" maxlength="30" placeholder="Primera" onBlur="comprobarTextoSearch(this,this.size)" ></td>
 							</tr>
 							<tr>
-								<td>Id Campeonato:</td>
+								<td>Campeonato:</td>
 								<td><select class="form-est" id="idCampeonato" name="idCampeonato">
 									<option></option>
 							<?php

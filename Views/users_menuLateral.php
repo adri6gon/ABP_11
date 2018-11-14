@@ -11,25 +11,29 @@ Fecha: 23/11/17
 				<ul>
 				<?php	
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('USUARIOS')){
+					if(comprobarRol('admin')){
 						echo "<li><a href='./USUARIOS_Controller.php'>USUARIOS</a></li>";
 					}
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('GRUPOS')){
-						echo '<li><a href="./GRUPOS_Controller.php">GRUPOS</a></li>';
-					}
-					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('TRABAJOS')){
-						echo '<li><a href="./TRABAJOS_Controller.php">TRABAJOS</a></li>';
-					}
-					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('CAMPEONATOS')){
+					if(comprobarRol('deportista')){
 						echo '<li><a href="./CAMPEONATOS_Controller.php">CAMPEONATOS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('CATEGORIAS')){
+					if(comprobarRol('deportista')){
 						echo '<li><a href="./CATEGORIAS_Controller.php">CATEGORIAS</a></li>';
-					}				
+					}
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./GRUPOS_Controller.php">&nbsp&nbsp&nbsp&nbspGRUPOS</a></li>';
+					}			
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('admin')){
+						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';
+					}	
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('admin')){
+						echo '<li><a href="./PISTAS_Controller.php?action=RESERVAS">RESERVAS</a></li>';
+					}	
 					
 				?>		
 				</ul>
