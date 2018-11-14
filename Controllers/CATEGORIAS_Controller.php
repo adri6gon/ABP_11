@@ -167,6 +167,23 @@ Switch ($_REQUEST['action']){
 				new MESSAGE($alerta,'../index.php');
 			}
 				break;
+		case 'GENERAR':
+			if (!$_POST){
+                    //Si viene vacio
+                    //Nuevo modelo vacio
+					$CATEGORIAS= new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
+					if(isset($_GET['generar'])){//Si recibe orden de borrar
+						//$respuesta1 =$CAMPEONATOS->DEL_IMG();
+                        //Borra con delete del modelo
+						$respuesta = $CATEGORIAS->GENERATE_GROUPS();
+						// mensaje con el volver y delete
+						new MESSAGE($respuesta, '../Controllers/CATEGORIAS_Controller.php');
+					}
+				}
+					else{
+						new MESSAGE($alerta,'../index.php');
+					}
+				break;
 		default: //Default entra el showall
         //Si no teine permisos
 			if(comprobarRol($_REQUEST['action'])){

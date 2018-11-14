@@ -1,3 +1,8 @@
+<!--
+Funcion del archivo: Vista que genera el menu lateral cuando un usuario esta logeado en la web
+Autor: j0z5zs
+Fecha: 23/11/17
+-->
 	<!--Navegador PROVISIONAL-->
 		<div class="cuerpo">
 			<nav class="menu">
@@ -13,32 +18,25 @@
 					if(comprobarRol('admin')){
 						echo '<li><a href="./NOTICIAS_Controller.php">NOTICIAS</a></li>';
 					}
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./CAMPEONATOS_Controller.php">CAMPEONATOS</a></li>';
+					}	
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('deportista')){
+						echo '<li><a href="./CATEGORIAS_Controller.php">CATEGORIAS</a></li>';
+					}
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./GRUPOS_Controller.php">&nbsp&nbsp&nbsp&nbspGRUPOS</a></li>';
+					}			
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('admin')){
 						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php?action=RESERVAS">RESERVAS</a></li>';
 					}	
-					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
-						echo '<li><a href="./CAMPEONATOS_Controller.php">CAMPEONATOS</a></li>';
-					}	
-					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
-						echo '<li><a href="./CATEGORIAS_Controller.php">CATEGORIAS</a></li>';
-					}	
-					// if(comprobarRol('admin')){
-					// 	echo '<li><a href="./TRABAJOS_Controller.php">TRABAJOS</a></li>';
-					// }	
-					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
-						echo '<li><a href="./PARTIDOS_Controller.php">PARTIDOS</a></li>';
-					}		
-					if(comprobarRol('PAREJA')){
-						echo '<li><a href="./PAREJA_Controller.php">PAREJA</a></li>';
-					}								
 				?>		
 				</ul>
 			</nav>

@@ -91,6 +91,7 @@ function _DELETE(){
 	}
 	else{
 		$sqlBorrar = "DELETE FROM CAMPEONATO WHERE idCampeonato = '".$this->idCampeonato."'";
+		var_dump($this->idCampeonato);
 		if(!$this->mysqli->query($sqlBorrar)){
 			return 'Error en el borrado.';
 		}
