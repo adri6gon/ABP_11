@@ -47,8 +47,19 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 									echo "<tr><th>".$this->arg.$num."</th><td>".($this->lista2)[$i]."</td><tr>";
 								}
 							}*/
+							//echo "var_dump($this->datos[3])";
 					?>
+					
 				</table>
+				<table class="tablas"><tr><th>
+				<p>Generar grupos 
+					<?php
+					echo '<a href="'.$_SERVER['PHP_SELF'].'?action=GENERATE&'.($this->lista)[2].'='.$this->datos[($this->lista)[2]].'"><img src="../Views/images/generargrupos.png" width="30" size"30" title="Generar" alt="Generar"></a>';
+					?>
+						
+					</p></th></tr>
+
+			</table>
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 <?php		
 	include 'Footer.php';

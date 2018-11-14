@@ -30,7 +30,7 @@ Fecha: 23/11/17
 						echo '<li><a href="./GRUPOS_Controller.php">&nbsp&nbsp&nbsp&nbspGRUPOS</a></li>';
 					}			
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
+					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace

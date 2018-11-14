@@ -49,7 +49,7 @@ if (!isset($_REQUEST['action'])){
 Switch ($_REQUEST['action']){
 		case 'SEARCH':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$grupo = new GRUPOS_Model('','','','');
@@ -69,12 +69,12 @@ Switch ($_REQUEST['action']){
 					new GRUPO_SHOWALL(true,$lista, $datos, '../Controllers/GRUPOS_Controller.php?action=SEARCH');
 				}
 			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../index.php');
+				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
 			}
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de usuarios
 				$GRUPOS = new GRUPOS_Model($_REQUEST['idGrupo'], '', '', '');
                 //Recoge los datos de usuarios
@@ -82,12 +82,12 @@ Switch ($_REQUEST['action']){
                 //Nueva vista
 				new GRUPO_SHOWCURRENT($valores,'../Controllers/GRUPOS_Controller.php',$lista);
 			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../index.php');
+				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
 			}
 				break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$GRUPOS = new GRUPOS_Model('','', '', '');
@@ -102,7 +102,7 @@ Switch ($_REQUEST['action']){
                 //Nueva vista
 				new GRUPO_SHOWALL(false,$lista, $datos, '../index.php');
 			}else{//Si no tiene permisos
-				new MESSAGE($alerta,'../index.php');
+				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
 			}
 	}
 

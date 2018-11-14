@@ -22,10 +22,6 @@ class ADD_CAMPEONATO {
 					<form name="anadirCampeonato" id="anadirCampeonato" action="./CAMPEONATOS_Controller.php?action=ADD"  method="POST" enctype="multipart/form-data" onsubmit="return encriptar()">
 						 <table>
 							<tr>
-								<td>Id: </td>
-								<td><input class="form-est" type="text" id="idCampeonato" name="idCampeonato" size ="10" maxlength="10" placeholder="1" onBlur="comprobarEntero(this,0,9999999999)" required></td>
-							</tr>
-							<tr>
 								<td>Nombre:</td>
 								<td><input class="form-est" type="text" id="nombre" name="nombre" size="30" maxlength="30" placeholder="Roland Garros" onBlur="comprobarTexto(this,this.size)" required></td>
 							</tr>

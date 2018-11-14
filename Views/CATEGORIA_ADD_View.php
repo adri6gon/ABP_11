@@ -23,10 +23,6 @@ class ADD_CATEGORIA {
 					<form name="anadirCategoria" id="anadirCategoria" action="./CATEGORIAS_Controller.php?action=ADD"  method="POST" enctype="multipart/form-data" onsubmit="return encriptar()">
 						 <table>
 							<tr>
-								<td>Id Categoria: </td>
-								<td><input class="form-est" type="text" id="idCategoria" name="idCategoria" size = "10" maxlength="10" placeholder="1" onBlur="comprobarEntero(this,0,9999999999)" ></td>
-							</tr>
-							<tr>
 								<td>Genero:</td>
 								<td> <input class="form-est" type="radio" name="genero" id="A" value="A" checked="checked" /> A &nbsp;
                         		 <input type="radio" name="genero" id="F" value="F" /> F &nbsp;

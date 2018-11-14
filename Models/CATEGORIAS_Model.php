@@ -64,7 +64,7 @@ function _SHOWALL(){
 function ADD(){
 	//var_dump($this);
 	//exit();
-    if (($this->idCategoria <> '')){ // si el atributo clave de la entidad no esta vacio
+    if (!($this->idCategoria <> '')){ // si el atributo clave de la entidad no esta vacio
 		
 		// construimos el sql para buscar esa clave en la tabla
         $sql = "SELECT * FROM CATEGORIA WHERE (idCategoria = '$this->idCategoria')";
