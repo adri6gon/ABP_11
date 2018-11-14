@@ -50,7 +50,7 @@ if (!isset($_REQUEST['action'])){
 Switch ($_REQUEST['action']){
 		case 'ADD':
 		//Comprobamos que tiene los permisos necesarios para realizar esta accion
-			if(comprobarRol('admin')){
+			if(comprobarRol($_REQUEST['admin'])){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$campeonato = new CAMPEONATOS_Model('','','','');
@@ -77,7 +77,7 @@ Switch ($_REQUEST['action']){
 
 		case 'DELETE':
         //Si tiene permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol($_REQUEST['admin'])){
 				if (!$_POST){
                     //Si viene vacio
                     //Nuevo modelo vacio
@@ -102,7 +102,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'EDIT':
         //Si tiene permisos
-			if(comprobarRol('admin')){
+			if(comprobarRol($_REQUEST['admin'])){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vaci0
 					$campeonato = new CAMPEONATOS_Model($_REQUEST['idCampeonato'],'','','');
@@ -130,7 +130,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'SEARCH':
         //Si tiene permisos
-			if(comprobarRol('deportista')){
+			if(comprobarRol($_REQUEST['deportista'])){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$campeonato = new CAMPEONATOS_Model('','','','');
@@ -153,7 +153,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(comprobarRol('deportista')){
+			if(comprobarRol($_REQUEST['deportista'])){
                 //nuevo modelo de usuarios
 				$CAMPEONATOS = new CAMPEONATOS_Model($_REQUEST['idCampeonato'], '', '', '');
                 //Recoge los datos de usuarios
@@ -166,7 +166,7 @@ Switch ($_REQUEST['action']){
 				break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol('deportista')){
+			if(comprobarRol($_REQUEST['deportista'])){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$CAMPEONATOS = new CAMPEONATOS_Model('','', '', '');
