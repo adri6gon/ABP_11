@@ -13,7 +13,7 @@ if (!IsAuthenticated()){
 }
 //si ha pasado por el login de forma correcta 
 else{
-	header('Location:./Controllers/USUARIOS_Controller.php');
+	header('Location:./Controllers/PISTAS_Controller.php');
     }
 ?>
 
