@@ -133,7 +133,7 @@ function _DELETE(){
 }
 // funcion RellenaDatos: recupera todos los atributos de una tupla a partir de su clave
 function RellenaDatos(){
-    $sql = "SELECT `idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPareja2`, `GrupoIdCategoria` from ENFRENTAMIENTO where idEnfrentamiento = '$this->idEnfrentamiento'";
+    $sql = "SELECT * from ENFRENTAMIENTO where idEnfrentamiento = '$this->idEnfrentamiento'";
 	$result = $this->mysqli->query($sql);  
 	if($result ->num_rows >0){
 		$tupla = mysqli_fetch_assoc($result);		  
@@ -143,8 +143,34 @@ function RellenaDatos(){
 		return  false;
 	}
 }
-
+// funcion EDIT()
+// Se comprueba que la tupla a modificar exista en base al valor de su clave primaria
+// si existe se modifica
+function RESULTADO()
+{
+	var_dump($this->idEnfrentamiento);
+	// se construye la sentencia de busqueda de la tupla en la bd
+    $sql = "SELECT * FROM ENFRENTAMIENTO WHERE (idEnfrentamiento = '$this->idEnfrentamiento')";
+    // se ejecuta la query
+    $result = $this->mysqli->query($sql);
+    // si el numero de filas es igual a uno es que lo encuentra
+    if ($result->num_rows == 1)
+    {	// se construye la sentencia de modificacion en base a los atributos de la clase
+		$sql = "UPDATE `ENFRENTAMIENTO` SET `set1`='$this->set1',`set2`='$this->set2',`set3`='$this->set3' WHERE `idEnfrentamiento`='$this->idEnfrentamiento'";
+		// si hay un problema con la query se envia un mensaje de error en la modificacion
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la inserción'; 
+		}
+		else{ 
+			return 'Insertado correctamente.';
+			
+		}
+    }
+    else // si no se encuentra la tupla se manda el mensaje de que no existe la tupla
+    	return 'No existe en la base de datos';
+}
 
 }//fin Modelo
+
 
 ?> 
