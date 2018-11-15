@@ -101,9 +101,6 @@ function SEARCH(){
 	}
 }
 
-function GENERATE(){
-	
-}
 
 function login(){
 	$sql = "SELECT *

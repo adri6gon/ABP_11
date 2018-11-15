@@ -174,20 +174,189 @@ function SEARCH(){
 }
 
 function GENERATE_GROUPS(){
-   //	$sql = "SELECT * from CATEGORIA where idCategoria = '".$this->idCategoria."'";
-	//$result = $this->mysqli->query($sql);
-	//if ($result->num_rows == 0){
-		return 'Los grupos de la categoria han sido generados correctamente.';
-	//}
-	//else{
-	//	$sqlBorrar = "DELETE FROM CATEGORIA WHERE idCategoria = '".$this->idCategoria."'";
-	//	if(!$this->mysqli->query($sqlBorrar)){
-	//		return 'Error en el borrado.';
-	//	}
-	//	else{ 
-	//		return 'Borrado realizado con exito.';
-	//		}
-	//}
+	
+	 if (($this->idCategoria <> '')){ // si el atributo clave de la entidad no esta vacio
+
+	 	// construimos el sql para buscar esa clave en la tabla
+        $sql = "SELECT ParejaidPareja FROM CATEGORIA_PAREJA WHERE (CategoriaidCategoria = '$this->idCategoria')";
+        $sql2 = "SELECT genero, nivel, idCampeonato FROM CATEGORIA WHERE (idCategoria = '$this->idCategoria')";
+
+         $result2 = $this->mysqli->query($sql2);
+        if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+			return 'No se ha podido conectar con la base de datos'; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+		}else{
+			$aux = 0;
+			$tupla = mysqli_fetch_assoc($result2);
+			while ($fila = mysqli_fetch_row($result)) {
+				$parejas[$aux] = $fila;
+				$aux++;
+			}
+			$nombre = $tupla['nivel'].$tupla['genero'];
+			$band = false;
+			$idCampeonato = $tupla['idCampeonato'];
+			$j = 0;
+
+			$sql4 = "SELECT idGrupo FROM GRUPO WHERE (idCategoria = '$this->idCategoria') AND (idCampeonato = $idCampeonato)";
+			//var_dump($sql4);
+			$result4 = $this->mysqli->query($sql4);
+			if(!$result4->num_rows>0){
+
+			if(($result->num_rows%16)==0){
+				//Calculamos el número de grupos que crearemos
+				for($i = ($result->num_rows/8); $i > 0; $i--){
+
+					$sql3 = "INSERT INTO `GRUPO`(`idGrupo`, `nombre`, `idCategoria`, `idCampeonato`) 
+						VALUES ('',
+							'$nombre $i',
+							'$this->idCategoria',
+							'$idCampeonato')";
+
+					if ($this->mysqli->query($sql3)) { // si da error en la ejecución del insert devolvemos mensaje
+						$band = true;
+					}
+					else{ //si no da error en la insercion devolvemos mensaje de exito
+						$band = false;
+					}
+
+						$idGruop = $this->mysqli->insert_id;
+					for($j; $j < ($result->num_rows/$i); $j++){
+						//INSERT EN GRUPO_PAREJA
+						$pareja = $parejas[$j][0];
+						//echo $idGruop." ".$this->idCategoria." ".$idCampeonato." ".$pareja."\n";
+
+						$sql5 = "INSERT INTO `GRUPO_PAREJA`(`GrupoidGrupo`, `GrupoidCategoria`, `GrupoidCampeonato`, `ParejaidPareja`) 
+						VALUES ('$idGruop',
+							'$this->idCategoria',
+							'$idCampeonato',
+							'$pareja')";
+
+						if ($this->mysqli->query($sql5)) { // si da error en la ejecución del insert devolvemos mensaje
+							$band = true;
+						}
+						else{ //si no da error en la insercion devolvemos mensaje de exito
+							$band = false;
+						}
+					}
+
+				}
+
+
+						if (!$band) { // si da error en la ejecución del insert devolvemos mensaje
+					return 'Error en la inserción';
+				}
+				else{ //si no da error en la insercion devolvemos mensaje de exito
+					return 'Inserción realizada con éxito'; //operacion de insertado correcta
+				}
+
+					
+				}else if(($result->num_rows%20)==0){
+				//Calculamos el número de grupos que crearemos
+				for($i = ($result->num_rows/10); $i > 0; $i--){
+
+					$sql3 = "INSERT INTO `GRUPO`(`idGrupo`, `nombre`, `idCategoria`, `idCampeonato`) 
+						VALUES ('',
+							'$nombre $i',
+							'$this->idCategoria',
+							'$idCampeonato')";
+
+					if ($this->mysqli->query($sql3)) { // si da error en la ejecución del insert devolvemos mensaje
+						$band = true;
+					}
+					else{ //si no da error en la insercion devolvemos mensaje de exito
+						$band = false;
+					}
+
+						$idGruop = $this->mysqli->insert_id;
+					for($j; $j < ($result->num_rows/$i); $j++){
+						//INSERT EN GRUPO_PAREJA
+						//echo $j.("\n");
+						//echo $idGruop;
+						//echo $parejas[$j][0].("\n");
+						$pareja = $parejas[$j][0];
+
+						$sql5 = "INSERT INTO `GRUPO_PAREJA`(`GrupoidGrupo`, `GrupoidCategoria`, `GrupoidCampeonato`, `ParejaidPareja`) 
+						VALUES ('$idGruop',
+							'$this->idCategoria',
+							'$idCampeonato',
+							'$pareja')";
+
+						if ($this->mysqli->query($sql5)) { // si da error en la ejecución del insert devolvemos mensaje
+							$band = true;
+						}
+						else{ //si no da error en la insercion devolvemos mensaje de exito
+							$band = false;
+						}
+					}
+
+				}
+
+
+						if (!$band) { // si da error en la ejecución del insert devolvemos mensaje
+					return 'Error en la inserción';
+				}
+				else{ //si no da error en la insercion devolvemos mensaje de exito
+					return 'Inserción realizada con éxito'; //operacion de insertado correcta
+				}
+
+				}else if(($result->num_rows%24)==0){
+				//Calculamos el número de grupos que crearemos
+				for($i = ($result->num_rows/12); $i > 0; $i--){
+
+					$sql3 = "INSERT INTO `GRUPO`(`idGrupo`, `nombre`, `idCategoria`, `idCampeonato`) 
+						VALUES ('',
+							'$nombre $i',
+							'$this->idCategoria',
+							'$idCampeonato')";
+
+					if ($this->mysqli->query($sql3)) { // si da error en la ejecución del insert devolvemos mensaje
+						$band = true;
+					}
+					else{ //si no da error en la insercion devolvemos mensaje de exito
+						$band = false;
+					}
+
+						$idGruop = $this->mysqli->insert_id;
+					for($j; $j < ($result->num_rows/$i); $j++){
+						//INSERT EN GRUPO_PAREJA
+						$pareja = $parejas[$j][0];
+						//echo $idGruop." ".$this->idCategoria." ".$idCampeonato." ".$pareja."\n";
+
+						$sql5 = "INSERT INTO `GRUPO_PAREJA`(`GrupoidGrupo`, `GrupoidCategoria`, `GrupoidCampeonato`, `ParejaidPareja`) 
+						VALUES ('$idGruop',
+							'$this->idCategoria',
+							'$idCampeonato',
+							'$pareja')";
+
+						if ($this->mysqli->query($sql5)) { // si da error en la ejecución del insert devolvemos mensaje
+							$band = true;
+						}
+						else{ //si no da error en la insercion devolvemos mensaje de exito
+							$band = false;
+						}
+					}
+
+				}
+
+
+						if (!$band) { // si da error en la ejecución del insert devolvemos mensaje
+					return 'Error en la inserción';
+				}
+				else{ //si no da error en la insercion devolvemos mensaje de exito
+					return 'Inserción realizada con éxito'; //operacion de insertado correcta
+				}
+
+
+				} else{
+					return 'El número de parejas no permite la generación de grupos.'; //Número incorrecto de parejas
+			}
+		 }else{
+		 	//var_dump($result4);
+		 	return 'Ya existen grupos para esta Categoria'; // introduzca un valor para la categoria
+		 }
+		}
+	}else{
+		return 'Introduzca una categoria'; // introduzca un valor para la categoria
+	}
 }
 
 function login(){

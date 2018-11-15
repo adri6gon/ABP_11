@@ -168,21 +168,23 @@ Switch ($_REQUEST['action']){
 			}
 				break;
 		case 'GENERAR':
-			if (!$_POST){
-                    //Si viene vacio
-                    //Nuevo modelo vacio
-					$CATEGORIAS= new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
-					if(isset($_GET['generar'])){//Si recibe orden de borrar
-						//$respuesta1 =$CAMPEONATOS->DEL_IMG();
-                        //Borra con delete del modelo
-						$respuesta = $CATEGORIAS->GENERATE_GROUPS();
-						// mensaje con el volver y delete
-						new MESSAGE($respuesta, '../Controllers/CATEGORIAS_Controller.php');
-					}
+				if(comprobarRol('admin')){
+                    	//Recoge los datos con getdataform
+						$CATEGORIAS = new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
+                    	//LLamas al add del modelo
+						$respuesta = $CATEGORIAS->GENERATE_GROUPS();				
+						include_once '../Functions/Authentication.php';
+						if(!IsAuthenticated()){//Si no esta autenticado
+							new MESSAGE($respuesta,'../Controllers/Login_Controller.php');
+						}else{//Si esta autenticado
+							new MESSAGE($respuesta,'../Controllers/CATEGORIAS_Controller.php');
+						}
+
+					
+				}//Si no tiene los permisos mostramos el mensaje de alerta
+				else{
+					new MESSAGE($alerta,'../Controllers/CATEGORIAS_Controller.php');
 				}
-					else{
-						new MESSAGE($alerta,'../Controllers/CATEGORIAS_Controller.php');
-					}
 				break;
 		default: //Default entra el showall
         //Si no teine permisos

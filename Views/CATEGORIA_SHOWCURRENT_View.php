@@ -48,8 +48,16 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 								}
 							}*/
 					?>
-					<th>GENERAR GRUPOS</th><td><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=DELETE&borrar=true&<?php echo ($this->lista)[0];?>=<?php echo $this->datos[($this->lista)[0]];?>" ></a>&nbsp;&nbsp;&nbsp;<img src="../Views/images/generargrupos.png" width="30" height="30" title="Grupos" alt="Grupos"></td>
 				</table>
+
+				<table class="tablas"><tr><th>
+				<p>Generar grupos 
+					<?php
+					echo '<a href="'.$_SERVER['PHP_SELF'].'?action=GENERAR&'.($this->lista)[0].'='.$this->datos[($this->lista)[0]].'"><img src="../Views/images/generargrupos.png" width="30" size"30" title="Generar" alt="Generar"></a>';
+					?>	
+					</p></th></tr>
+			</table>
+
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 <?php		
 	include 'Footer.php';
