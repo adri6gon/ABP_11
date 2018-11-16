@@ -17,7 +17,14 @@ class NOTICIA_INDEX_View {
 	function render(){
 		include 'Header.php';
 ?>
-<section class="noticias" style="margin-top:80px;">
+<section class="noticias" <?php 
+	if(!isset($_SESSION['login'])){
+		echo 'style="margin-top:80px; margin-left:20%;"';	
+	}else{
+		echo 'style="margin-top:80px;"';
+	}
+	
+echo "style='margin-top:80px;'";?>>
 	<?php
 		for($j=0;$j<count($this->datos);$j++){
 			

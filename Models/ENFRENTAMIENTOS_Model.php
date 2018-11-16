@@ -148,7 +148,6 @@ function RellenaDatos(){
 // si existe se modifica
 function RESULTADO()
 {
-	var_dump($this->idEnfrentamiento);
 	// se construye la sentencia de busqueda de la tupla en la bd
     $sql = "SELECT * FROM ENFRENTAMIENTO WHERE (idEnfrentamiento = '$this->idEnfrentamiento')";
     // se ejecuta la query
@@ -168,6 +167,27 @@ function RESULTADO()
     }
     else // si no se encuentra la tupla se manda el mensaje de que no existe la tupla
     	return 'No existe en la base de datos';
+}
+function getResultados(){
+	// se construye la sentencia de busqueda de la tupla en la bd
+    $sql = "SELECT g.idGrupo, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3` 
+	FROM ENFRENTAMIENTO e, PAREJA p1, PAREJA p2, CATEGORIA cat, CAMPEONATO c, GRUPO g 
+	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND GrupoidCategoria = cat.idCategoria AND GrupoidCampeonato = c.idCampeonato AND p1.login1 != p2.login1 AND  p1.login1 != p2.login2 AND p1.login2 != p2.login1 AND p1.login2 != p2.login2 AND e.GrupoidCategoria ='$this->GrupoIdCategoria' AND e.GrupoidCampeonato='$this->GrupoIdCampeonato')";
+    // se ejecuta la query
+    $result = $this->mysqli->query($sql);
+	// var_dump($result);
+		  //exit();
+	  if($result->num_rows>0){
+		  //
+		  $j = 0;
+		  while($tupla = mysqli_fetch_array($result)){
+			 $tuplas[$j] = $tupla;
+			 $j++;		
+		  }
+		  return $tuplas;
+	  }else{
+		  return false;
+	  }
 }
 
 }//fin Modelo
