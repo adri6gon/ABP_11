@@ -12,12 +12,15 @@ class CLASIFICACION_SHOWALL {
 		/**NO MOSTRAR IDEnfrentamiento y mostrar login1 y login2 de las parejas*/
 ?>
 <div style="overflow-x:auto;">
-				<h2><?php  echo 'Tabla ShowAll Enfrentamientos/Grupo:';?>:</h2>
+				<h2><?php  echo 'Tabla ShowAll Enfrentamientos/Grupo:';?></h2>
 					<?php
 						$grupo = null;
 						for($j=0;$j<count($this->datos);$j++){
 							if($grupo != $this->datos[$j][0]){
 								$grupo = $this->datos[$j][0];
+								echo '<h3>Grupo '.$grupo.':</h3>';
+								//Mostrar clasificación de este grupo:
+								
 								echo "<table><tr>";
 								echo '<tr>
 								<th>Login1-P1</th><th>Login2-P1</th><th>Login1-P2</th><th>Login2-P2</th><th>Campeonato</th><th>Grupo</th><th>Categoria</th><th>Set1</th><th>Set2</th><th>Set3</th>
