@@ -6,11 +6,9 @@ class NOTICIA_INDEX_View {
 		//Enlace de vuelta atras
 		$this->datos=$datos;
 		$this->lista = $lista;
-
 		$this->partidos = $partidos;
 		$this->numInscritos = $numInscritos;
 		$this->selectUsers = $selectUsers;
-
 		$this->render();
 	}
 //Funcion que monta la vista
@@ -51,20 +49,25 @@ echo "style='margin-top:80px;'";?>>
 					$insc=false;
 					$cant=0;
 					$participado = false;
-					for($i=0;$i<count($this->numInscritos);$i++){
-						// echo $this->numInscritos[$i]["partido"];
-						// echo $this->partidos[$j]["idPartido"];
-						// 	var_dump(!$flag);
-						if(($this->numInscritos[$i]["partido"] == $this->partidos[$j]["idPartido"])){
-							$insc=true;
-							$cant=$this->numInscritos[$i]["cont"];
-						}
+					if($this->numInscritos != null){
+						for($i=0;$i<count($this->numInscritos);$i++){
+												// echo $this->numInscritos[$i]["partido"];
+												// echo $this->partidos[$j]["idPartido"];
+												// 	var_dump(!$flag);
+												if(($this->numInscritos[$i]["partido"] == $this->partidos[$j]["idPartido"])){
+													$insc=true;
+													$cant=$this->numInscritos[$i]["cont"];
+												}
+											}
 					}
-					for($i=0;$i<count($this->selectUsers);$i++){
-						if($this->selectUsers[$i]["login"] == $_SESSION['login'] && $this->partidos[$j]["idPartido"] == $this->selectUsers[$i]["partido"]){
-							$participado = true;
-						}
+					if($this->selectUsers != null){
+						for($i=0;$i<count($this->selectUsers);$i++){
+												if($this->selectUsers[$i]["login"] == $_SESSION['login'] && $this->partidos[$j]["idPartido"] == $this->selectUsers[$i]["partido"]){
+													$participado = true;
+												}
+											}
 					}
+					
 
 
 					

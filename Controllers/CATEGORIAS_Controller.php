@@ -51,7 +51,7 @@ if (!isset($_REQUEST['action'])){
 Switch ($_REQUEST['action']){
 		case 'ADD':
 		//Comprobamos que tiene los permisos necesarios para realizar esta accion
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$categoria = new CATEGORIAS_Model('','','','');
@@ -79,7 +79,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'DELETE':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if (!$_POST){
                     //Si viene vacio
                     //Nuevo modelo vacio
@@ -104,7 +104,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'EDIT':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vaci0
 					$categoria = new CATEGORIAS_Model($_REQUEST['idCategoria'],'','','');
@@ -132,7 +132,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'SEARCH':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$categoria = new CATEGORIAS_Model('','','','');
@@ -156,7 +156,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'SHOWCURRENT':
         //Si tiene permisos 
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
                 //nuevo modelo de usuarios
 				$CATEGORIAS = new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
                 //Recoge los datos de usuarios
@@ -168,25 +168,27 @@ Switch ($_REQUEST['action']){
 			}
 				break;
 		case 'GENERAR':
-			if (!$_POST){
-                    //Si viene vacio
-                    //Nuevo modelo vacio
-					$CATEGORIAS= new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
-					if(isset($_GET['generar'])){//Si recibe orden de borrar
-						//$respuesta1 =$CAMPEONATOS->DEL_IMG();
-                        //Borra con delete del modelo
-						$respuesta = $CATEGORIAS->GENERATE_GROUPS();
-						// mensaje con el volver y delete
-						new MESSAGE($respuesta, '../Controllers/CATEGORIAS_Controller.php');
-					}
+				if(comprobarRol('admin')){
+					if (!$_POST){
+							//Si viene vacio
+							//Nuevo modelo vacio
+							$CATEGORIAS= new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
+							if(isset($_GET['generar'])){//Si recibe orden de borrar
+								//$respuesta1 =$CAMPEONATOS->DEL_IMG();
+								//Borra con delete del modelo
+								$respuesta = $CATEGORIAS->GENERATE_GROUPS();
+								// mensaje con el volver y delete
+								new MESSAGE($respuesta, '../Controllers/CATEGORIAS_Controller.php');
+							}
+						}
+							else{
+								new MESSAGE($alerta,'../index.php');
+							}
 				}
-					else{
-						new MESSAGE($alerta,'../index.php');
-					}
 				break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$CATEGORIAS = new CATEGORIAS_Model('','', '', '');

@@ -75,11 +75,11 @@ if (!isset($_REQUEST['action'])){
 		for($i = 0;$i<count($datos);$i++){
 			$ganador = ganador($datos[$i]);
 
-			$parejasPuntos[$ganador] +=3;
+			$parejasPuntos[(string)$ganador] +=3;
 			if($datos[$i][11]!=$ganador){
-				$parejasPuntos[$datos[$i][11]] +=1;
+				$parejasPuntos[(string)$datos[$i][11]] +=1;
 			}else{
-				$parejasPuntos[$datos[$i][12]] +=1;
+				$parejasPuntos[(string)$datos[$i][12]] +=1;
 			}
 		}
 		//Array indice: idPareja ->valor:puntos en este grupo(Funcionando)

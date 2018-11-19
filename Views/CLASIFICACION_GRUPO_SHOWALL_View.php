@@ -21,7 +21,7 @@ class CLASIFICACION_GRUPO_SHOWALL {
 							foreach($this->datos as $valor){
 								echo "<tr><th>".$valor['login1'].'-'.$valor['login2']."</th>";
 									if($this->lista[$valor['idPareja']] !=null){
-										echo "<td>".$this->lista[$valor['idPareja']]." puntos</td></tr>";
+										echo "<td>".$this->lista[(string)$valor['idPareja']]." puntos</td></tr>";
 									}else{
 										echo "<td>0</td></tr>";
 									}
