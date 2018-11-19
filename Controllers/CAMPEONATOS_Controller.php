@@ -12,6 +12,7 @@ if (!IsAuthenticated()){
 include_once '../Models/CAMPEONATOS_Model.php';
 //VISTAS CAMPEONATO
 include '../Views/CAMPEONATO_SHOWALL_View.php';
+include '../Views/CAMPEONATO_SHOWALL_USER_View.php';
 include '../Views/CAMPEONATO_SEARCH_View.php';
 include '../Views/CAMPEONATO_ADD_View.php';
 include '../Views/CAMPEONATO_DELETE_View.php';
