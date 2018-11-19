@@ -130,7 +130,7 @@ Switch ($_REQUEST['action']){
 			break;
 		case 'SEARCH':
         //Si tiene permisos
-			if(comprobarRol($_REQUEST['deportista'])){
+			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$campeonato = new CAMPEONATOS_Model('','','','');
@@ -166,7 +166,7 @@ Switch ($_REQUEST['action']){
 				break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol($_REQUEST['deportista'])){
+			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$CAMPEONATOS = new CAMPEONATOS_Model('','', '', '');
@@ -180,9 +180,26 @@ Switch ($_REQUEST['action']){
 				$datos = $CAMPEONATOS->_SHOWALL();
                 //Nueva vista
 				new CAMPEONATO_SHOWALL(false,$lista, $datos, '../index.php');
+			}else{
+			if(comprobarRol('deportista')){
+				if (!$_POST){//Si viene vacio
+                    //Nuevo modelo vacio
+					$CAMPEONATOS = new CAMPEONATOS_Model('','', '', '');
+				}
+				else{//Recoge los datos
+					$CAMPEONATOS = get_data_form();
+				}
+				//var_dump($USUARIOS);
+				//exit();
+                //Llama al showall del modelo
+				$datos = $CAMPEONATOS->_SHOWALL();
+                //Nueva vista
+				new CAMPEONATO_SHOWALL_USER(false,$lista, $datos, '../index.php');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}
+		}
 	}
+	
 
 ?>
