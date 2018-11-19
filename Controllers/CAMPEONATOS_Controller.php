@@ -165,6 +165,19 @@ Switch ($_REQUEST['action']){
 				new MESSAGE($alerta,'../index.php');
 			}
 				break;
+		case 'INSCRIBIRSE':
+        //Si tiene permisos 
+			if(comprobarRol('deportista')){
+                //nuevo modelo de usuarios
+				$CAMPEONATOS = new CAMPEONATOS_Model($_REQUEST['idCampeonato'], '', '', '');
+                //Recoge los datos de usuarios
+				$valores = $CAMPEONATOS->RellenaDatos();
+                //Nueva vista
+				new CAMPEONATO_INSCRIBIRSE($valores,'../Controllers/CAMPEONATOS_Controller.php',$lista);
+			}else{//Si no tiene permisos
+				new MESSAGE($alerta,'../index.php');
+			}
+				break;
 		default: //Default entra el showall
         //Si no teine permisos
 			if(comprobarRol('admin')){

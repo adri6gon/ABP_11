@@ -23,19 +23,19 @@ class CAMPEONATO_EDIT {
 						 <table>
 							<tr>
 								<td>Id: </td>
-								<td><input class="form-est" type="text" id="idCampeonato" name="idCampeonato" maxlength="10" value="<? echo $this->datos['idCampeonato']?>" readonly required></td>
+								<td><input class="form-est" type="text" id="idCampeonato" name="idCampeonato" maxlength="10" value="<?php echo $this->datos['idCampeonato']?>" readonly required></td>
 							</tr>
 							<tr>
 								<td>Nombre:</td>
-								<td><input class="form-est" type="text" id="nombre" name="nombre" size="20" maxlength="30" value="<? echo $this->datos['nombre']?>" onBlur="comprobarTexto(this,this.size)" required></td>
+								<td><input class="form-est" type="text" id="nombre" name="nombre" size="20" maxlength="30" value="<?php echo $this->datos['nombre']?>" onBlur="comprobarTexto(this,this.size)" required></td>
 							</tr>
 							<tr>
 								<td>Fecha inicio Inscripción:</td>
-								<td><input class="form-est" type="date" id="fechaIniInscripcion" name="fechaIniInscripcion" value="<? echo $this->datos['fechaIniInscripcion']?>" required></td>
+								<td><input class="form-est" type="date" id="fechaIniInscripcion" name="fechaIniInscripcion" value="<?php echo $this->datos['fechaIniInscripcion']?>" required></td>
 							</tr>
 							<tr>
 								<td>Fecha fin Inscripción:</td>
-								<td><input class="form-est" type="date" id="fechaFinInscripcion" name="fechaFinInscripcion" value="<? echo $this->datos['fechaFinInscripcion']?>" required></td>
+								<td><input class="form-est" type="date" id="fechaFinInscripcion" name="fechaFinInscripcion" value="<?php echo $this->datos['fechaFinInscripcion']?>" required></td>
 							</tr>							
 							<tr>
 								<td colspan="2" align="center"><input class="form-est" type="submit" id="editar" name="editar" value="Editar"></td>

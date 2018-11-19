@@ -157,6 +157,30 @@ function SEARCH(){
 	}
 }
 
+function INSCRIBIRSE(){
+	if(!empty($this)){
+		$sql = "SELECT `idCampeonato`, `nombre`, `fechaIniInscripcion`, `fechaFinInscripcion` FROM CAMPEONATO WHERE(
+					(idCampeonato LIKE '%$this->idCampeonato%') &&
+    				(nombre LIKE '%$this->nombre%') &&
+    				(fechaIniInscripcion LIKE '%$this->fechaIniInscripcion%') &&
+    				(fechaFinInscripcion LIKE '%$this->fechaFinInscripcion%'))";
+	}	
+    	$result = $this->mysqli->query($sql);  
+  // var_dump($result);
+		//exit();
+	if($result->num_rows>0){
+		//
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}else{
+		return false;
+	}
+}
+
 function login(){
 	$sql = "SELECT *
 			FROM USUARIO
