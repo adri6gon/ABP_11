@@ -44,7 +44,7 @@ class ADD_USUARIO {
 								<td colspan="2" align="center"><input class="form-est" type="submit" id="insertar" name="insertar" value="Insertar" ></td>
 							</tr>
 						 </table>
-						 <p><a href=" $this->volver; ?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
+						 <p><a href="<?php echo $this->volver; ?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 					</form>
 				</div>
 
