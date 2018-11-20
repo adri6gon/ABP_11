@@ -37,6 +37,12 @@ Fecha: 23/11/17
 					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php?action=RESERVAS">RESERVAS</a></li>';
 					}	
+					if(comprobarRol('admin')){
+						echo '<li><a href="./PARTIDOS_Controller.php">PARTIDOS</a></li>';
+					}		
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./PAREJA_Controller.php">PAREJA</a></li>';
+					}								
 				?>		
 				</ul>
 			</nav>

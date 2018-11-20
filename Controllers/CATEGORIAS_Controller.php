@@ -179,7 +179,6 @@ Switch ($_REQUEST['action']){
 						}else{//Si esta autenticado
 							new MESSAGE($respuesta,'../Controllers/CATEGORIAS_Controller.php');
 						}
-
 					
 				}//Si no tiene los permisos mostramos el mensaje de alerta
 				else{

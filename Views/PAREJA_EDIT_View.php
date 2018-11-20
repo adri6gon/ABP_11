@@ -13,7 +13,7 @@ class MODIFY_PAREJA {
 ?>
 <h2 style="color:white;">Modificar pareja:</h2>
 				<div style="overflow-x:auto;color:white;">
-					<form name="editUser" id="editUser" action="./PAREJA_Controller.php?action=EDIT" onChange="validarEditarPareja()" onLoad="validarEditarPareja()" method="POST" enctype="multipart/form-data" onsubmit="return encriptar()">
+					<form name="editUser" id="editUser" action="./PAREJA_Controller.php?action=EDIT" method="POST" enctype="multipart/form-data" >
 						 <table>
 							<tr>
 								<td>ID Pareja: </td>
@@ -21,11 +21,11 @@ class MODIFY_PAREJA {
 							</tr>
 							<tr>
 								<td>Login 1: </td>
-								<td><input class="form-est" type="text" id="login1" name="login1" size="10" maxlength="10" placeholder="Login 1*" value="<?php echo $this->datos['login1']?>" onBlur="comprobarTexto(this,this.size)" required readonly></td>
+								<td><input class="form-est" type="text" id="login1" name="login1" size="10" maxlength="10" placeholder="Login 1*" value="<?php echo $this->datos['login1']?>" onBlur="comprobarTexto(this,this.size)" required ></td>
 							</tr>
 							<tr>
 								<td>Login 2: </td>
-								<td><input class="form-est" type="text" id="login2" name="login2" size="10" maxlength="10" placeholder="Login 2*" value="<?php echo $this->datos['login2']?>" onBlur="comprobarTexto(this,this.size)" required readonly></td>
+								<td><input class="form-est" type="text" id="login2" name="login2" size="10" maxlength="10" placeholder="Login 2*" value="<?php echo $this->datos['login2']?>" onBlur="comprobarTexto(this,this.size)" required ></td>
 							</tr>					
 							<tr>
 								<td colspan="2" align="center"><input class="form-est" type="submit" id="editar" name="editar" value="Editar"></td>

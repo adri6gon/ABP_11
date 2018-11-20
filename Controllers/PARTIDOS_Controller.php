@@ -10,6 +10,7 @@ if (!IsAuthenticated()){
 
 //MODELO CAMPEONATO
 include_once '../Models/PARTIDOS_Model.php';
+include_once '../Models/USUARIOSPARTIDOS_Model.php';
 //VISTAS CAMPEONATO
  include '../Views/PARTIDO_SHOWALL_View.php';
 // include '../Views/CAMPEONATO_SEARCH_View.php';
@@ -84,55 +85,52 @@ Switch ($_REQUEST['action']){
 			}
 			break;
 
-		case 'SEARCH':
-        // //Si tiene permisos
-		// 	if(comprobarRol($_REQUEST['action'])){
-		// 		if (!$_POST){//Si viene vacio
-        //             //Nuevo modelo vacio
-		// 			$campeonato = new CAMPEONATOS_Model('','','','');
-        //             //Nueva vista search
-		// 			new SEARCH_CAMPEONATO('../Controllers/CAMPEONATOS_Controller.php');
-		// 		}
-		// 		else{
-        //             //Recoge los datos del data form
-		// 			$CAMPEONATOS = get_data_form();
-		// 			//exit();
-        //             //Si tiene grupo
-		// 				$datos = $CAMPEONATOS->SEARCH();
-		// 				//var_dump($datos);
-        //             //Nueva vista showall
-		// 			new CAMPEONATO_SHOWALL(true,$lista, $datos, '../Controllers/CAMPEONATOS_Controller.php?action=SEARCH');
-		// 		}
-		// 	}else{//Si no tiene permisos
-		// 		new MESSAGE($alerta,'../index.php');
-		// 	}
-		// 	break;
 		case 'PROMOCIONAR':
-        //Si tiene permisos 
+        // //Si tiene permisos
+		if(comprobarRol($_REQUEST['action'])){
+			//nuevo modelo de usuarios
+			$PARTIDO = new PARTIDOS_Model($_REQUEST['idPartido'], '', '', '','','');
+			//Recoge los datos de usuarios
+			$mensaje = $PARTIDO->Promocionar();
+			//Nueva vista
+			new MESSAGE($mensaje,'../Controllers/PARTIDOS_Controller.php');
+		}else{//Si no tiene permisos
+			new MESSAGE($alerta,'../Controllers/PARTIDOS_Controller.php');
+		}
+		break;
+
+		case 'DESPROMOCIONAR':
+		//Si tiene permisos 
 			if(comprobarRol($_REQUEST['action'])){
-                //nuevo modelo de usuarios
+				//nuevo modelo de usuarios
 				$PARTIDO = new PARTIDOS_Model($_REQUEST['idPartido'], '', '', '','','');
-                //Recoge los datos de usuarios
-				$mensaje = $PARTIDO->Promocionar();
-                //Nueva vista
+				//Recoge los datos de usuarios
+				$mensaje = $PARTIDO->Despromocionar();
+				//Nueva vista
 				new MESSAGE($mensaje,'../Controllers/PARTIDOS_Controller.php');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/PARTIDOS_Controller.php');
 			}
-                break;
-            case 'DESPROMOCIONAR':
-                //Si tiene permisos 
-                    if(comprobarRol($_REQUEST['action'])){
-                        //nuevo modelo de usuarios
-                        $PARTIDO = new PARTIDOS_Model($_REQUEST['idPartido'], '', '', '','','');
-                        //Recoge los datos de usuarios
-                        $mensaje = $PARTIDO->Despromocionar();
-                        //Nueva vista
-                        new MESSAGE($mensaje,'../Controllers/PARTIDOS_Controller.php');
-                    }else{//Si no tiene permisos
-                        new MESSAGE($alerta,'../Controllers/PARTIDOS_Controller.php');
-                    }
-                        break;
+				break;
+
+		case 'INSCRIBIR':
+                //nuevo modelo de usuarios
+				$USERPARTIDO = new USUARIOSPARTIDOS_Model($_SESSION['login'], $_REQUEST['idPartido']);
+                //Recoge los datos de usuarios
+				$mensaje = $USERPARTIDO->_INSCRIBIRSE();
+                //Nueva vista
+				new MESSAGE($mensaje,'../Controllers/Index_Controller.php');
+			break;
+
+		case 'DESINSCRIBIR':
+					//nuevo modelo de usuarios
+					$USERPARTIDO = new USUARIOSPARTIDOS_Model($_SESSION['login'], $_REQUEST['idPartido']);
+					//Recoge los datos de usuarios
+					$mensaje = $USERPARTIDO->_DESINSCRIBIRSE();
+					//Nueva vista
+					new MESSAGE($mensaje,'../Controllers/Index_Controller.php');
+					 break;
+
 		default: //Default entra el showall
         //Si no teine permisos
 			if(comprobarRol($_REQUEST['action'])){

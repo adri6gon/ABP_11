@@ -101,7 +101,7 @@ function _SHOWALLUSER($sesion){
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH(){
 	if(!empty($this)){
-		$sql = "SELECT `idpareja`, `login1`, `login2`FROM PAREJA WHERE(
+		$sql = "SELECT `idpareja`, `login1`, `login2` FROM PAREJA WHERE(
 					(idpareja LIKE '%$this->idpareja%') &&
     				(login1 LIKE '%$this->login1%') &&
     				(login2 LIKE '%$this->login2%'))";
@@ -126,24 +126,24 @@ function SEARCH(){
 //funcion DELETE : comprueba que la tupla a borrar existe y una vez
 // verificado la borra
 function _DELETE(){
-   	$sql = "SELECT * from PAREJA where idpareja = '".$this->idpareja."'";
+   	$sql = "SELECT * FROM PAREJA WHERE idpareja = $this->idpareja ";
 	$result = $this->mysqli->query($sql);
 	if ($result->num_rows == 0){
 		return 'La pareja no existe, no se puede borrar.';
 	}
 	else{
-		$sqlBorrar = "DELETE FROM PAREJA WHERE idpareja = '".$this->idpareja."'";
+		$sqlBorrar = "DELETE FROM PAREJA WHERE idpareja = '".$this->idpareja."' ";
 		if(!$this->mysqli->query($sqlBorrar)){
 			return 'Error en el borrado de la pareja.';
 		}
 		else{ 
-			return 'Pareja eliminada con éxito.';
+			return 'Pareja eliminada con exito.';
 			}
 	}
 }
 // funcion RellenaDatos: recupera todos los atributos de una tupla a partir de su clave
 function RellenaDatos(){
-    $sql = "SELECT `idpareja`, `login1`, `login2`  FROM PAREJA WHERE idpareja = '$this->idpareja'";
+    $sql = "SELECT `idpareja`, `login1`, `login2`  FROM PAREJA WHERE idpareja = '".$this->idpareja."'";
 	$result = $this->mysqli->query($sql);  
 	if($result ->num_rows >0){
 		$tupla = mysqli_fetch_assoc($result);		  
@@ -160,18 +160,19 @@ function RellenaDatos(){
 function EDIT()
 {
 	// se construye la sentencia de busqueda de la tupla en la bd
-    $sql = "SELECT * FROM PAREJA WHERE (idpareja= '$this->idpareja')";
+    $sql = "SELECT * FROM PAREJA WHERE (idpareja= $this->idpareja)";
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si el numero de filas es igual a uno es que lo encuentra
     if ($result->num_rows == 1)
     {	// se construye la sentencia de modificacion en base a los atributos de la clase
 		$sql = "UPDATE PAREJA SET 
-					idpareja = '$this->idpareja',
 					login1 = '$this->login1',
-					login2 = '$this->login2',				
-				WHERE ( idpareja = '$this->idpareja'
+					login2 = '$this->login2'			
+				WHERE ( idpareja = $this->idpareja
 				)";
+
+	
 		// si hay un problema con la query se envia un mensaje de error en la modificacion
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación de la pareja.'; 
