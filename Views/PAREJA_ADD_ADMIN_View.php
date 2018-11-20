@@ -1,13 +1,10 @@
 <?php
 
-class ADD_PAREJA {
+class ADD_PAREJA_ADMIN {
 //Constructor
 	function __construct($volver){
 		//Enlace de vuelta atras
 		$this->volver=$volver;
-		if (comprobarRol('deportista')) {
-			$this->usuario=$_SESSION['login'];
-		}
 		
 		$this->render();
 	}
@@ -26,7 +23,7 @@ class ADD_PAREJA {
 							</tr>
 							<tr>
 								<td> Login 1:</td>
-								<td><input class="form-est" type="text" id="login1" name="login1" value= <?php echo $this->usuario ; ?> size="10" maxlength="10" placeholder="Login 1*" onBlur="comprobarTexto(this,this.size)" required readonly></td>
+								<td><input class="form-est" type="text" id="login1" name="login1" size="10" maxlength="10" placeholder="Login 1*" onBlur="comprobarTexto(this,this.size)" required readonly></td>
 							</tr>
 							<tr>
 								<td>Login 2: </td>
@@ -37,7 +34,7 @@ class ADD_PAREJA {
 								<td colspan="2" align="center"><input class="form-est" type="submit" id="insertar" name="insertar" value="Añadir pareja" ></td>
 							</tr>
 						 </table>
-						 <p><a href=" <?php echo $this->volver; ?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
+						 <p><a href="<?php echo $this->volver; ?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 					</form>
 				</div>
 

@@ -32,7 +32,6 @@ class PAREJA_SHOWALL {
                             <!--Bucle PHP con las tuplas.
 El primer for recorre la lista con los valores de las tuplas de la BD y en el segundo recorre los nombres de los atributos, entonces al estar en un campo determinado muestra el valor que tiene en la BD. Ademas muestra los iconos con las acciones a hacer en cada uno de ellos.-->
 						<?php
-							//$atributos = array('login', 'password', 'DNI', 'nombre', 'apellidos', 'telefono', 'email', 'FechaNacimiento', 'fotopersonal', 'sexo');
 							for($j=0;$j<count($this->datos);$j++){
 								echo "<tr>";
 								for($i=0; $i<count($this->lista);$i++){

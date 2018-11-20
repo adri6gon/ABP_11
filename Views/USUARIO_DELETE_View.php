@@ -1,10 +1,3 @@
-<!--
-Funcion del archivo: Vista que genera la tabla en detallede una tupla con la opcion de borrado de la misma.
-Autor: j0z5zs
-Fecha: 23/12/17
--->
- 
-
 <?php
 
 class USUARIO_DELETEView {

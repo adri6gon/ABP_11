@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Vista de mensaje que se lanza despues de la ejecucion de algunas consultas contra la BD, como mensaje informativo al usuario.
-Autor: j0z5zs
-Fecha: 23/12/17
--->
 <?php
 
 class MESSAGE {

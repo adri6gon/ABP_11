@@ -1,9 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene la vista de la inserción de un campeonato
-Autor: Noe
-Fecha: 05/11/18
-GONZA MARIQUITA
--->
 <?php
 
 class ADD_CAMPEONATO {

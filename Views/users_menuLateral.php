@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Vista que genera el menu lateral cuando un usuario esta logeado en la web
-Autor: j0z5zs
-Fecha: 23/11/17
--->
 	<!--Navegador PROVISIONAL-->
 		<div class="cuerpo">
 			<nav class="menu">
@@ -37,6 +32,12 @@ Fecha: 23/11/17
 					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php?action=RESERVAS">RESERVAS</a></li>';
 					}	
+					if(comprobarRol('admin')){
+						echo '<li><a href="./PARTIDOS_Controller.php">PARTIDOS</a></li>';
+					}		
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./PAREJA_Controller.php">PAREJA</a></li>';
+					}								
 				?>		
 				</ul>
 			</nav>

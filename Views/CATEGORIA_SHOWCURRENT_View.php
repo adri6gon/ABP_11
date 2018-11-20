@@ -1,9 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene el show current de un campeonato
-Autor: Noe
-Fecha: 05/11/18
--->
-
 <?php
 
 class CATEGORIA_SHOWCURRENT {

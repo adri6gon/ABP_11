@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Vista que genera la cabecera de la web.
-Autor: j0z5zs
-Fecha: 23/12/17
--->
 <?php
 	include_once '../Functions/Authentication.php';
 ?>
@@ -23,9 +18,9 @@ Fecha: 23/12/17
 		<script type="text/javascript" src="../Views/jscript/validaciones.js"></script>
 		<script type="text/javascript" src="../Views/jscript/comprobacion.js"></script>	
 		<script>
-		  $( function() {
-			$( "#fechanac" ).datepicker();
-		  } );
+		 // $( function() {
+		//	$( "#fechanac" ).datepicker();
+		//  } );
 		</script>
 			
 		
@@ -36,7 +31,7 @@ Fecha: 23/12/17
 		<header>
 				<div id="cabecera-izq">
 					<div id="logo">
-						<a href="../Controllers/USUARIOS_Controller.php"><img src="../Views/images/cabecera.png" alt="Padel" title="Padel"/></a>
+						<a href="../Controllers/Index_Controller.php"><img src="../Views/images/cabecera.png" alt="Padel" title="Padel"/></a>
 					</div>
 					<div id="titulo">
 						<h1>

@@ -1,8 +1,3 @@
-/**
-Funcion del archivo: Archivo con las diferentes validaciones(las exigidas en la ET1) y las validaciones extras necesarias para la validacion de todos los formularios.
-Autor: j0z5zs
-Fecha: 23/12/17
-**/
 
 /**La mayoria de las funciones de validacion tienen una "doble funcion" estas deben devolver un boolean
 con el fin de poder habilitar o inhabilitar el boton de submit de los diferentes formularios(o como 
