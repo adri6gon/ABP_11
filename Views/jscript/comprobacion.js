@@ -1,8 +1,3 @@
-/**
-Funcion del archivo: Archivo con los metodos de comprobacion del formulario con la finalidad de habilitar/deshabilitar el boton submit de los mismos.
-Autor: j0z5zs
-Fecha: 23/12/17
-**/
 //Funcion para validar el login de los usuarios
 function validarLogin(){
 	//Comprobamos que el usuario ha introducido texto en los inputs del login y hablitamos el boton

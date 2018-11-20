@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene la vista del busqueda de un campeonato
-Autor: Noe
-Fecha: 05/11/18
--->
 <?php
 
 class SEARCH_CAMPEONATO {

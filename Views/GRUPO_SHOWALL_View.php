@@ -1,9 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene el show all de todos los grupos
-Autor: Noe
-Fecha: 05/11/18
--->
-
 <?php
 class GRUPO_SHOWALL {
 

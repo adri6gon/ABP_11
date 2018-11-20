@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Vista contenedora del formulario de login a la web.
-Autor: j0z5zs
-Fecha: 23/12/17
--->
 <?php
 
 	class Login{

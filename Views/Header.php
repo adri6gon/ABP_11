@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Vista que genera la cabecera de la web.
-Autor: j0z5zs
-Fecha: 23/12/17
--->
 <?php
 	include_once '../Functions/Authentication.php';
 ?>

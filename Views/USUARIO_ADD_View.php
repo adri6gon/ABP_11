@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene la vista del add de un usuario
-Autor: j0z5zs
-Fecha: 23/12/17
--->
 <?php
 
 class ADD_USUARIO {

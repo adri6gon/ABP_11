@@ -56,15 +56,6 @@ if (!isset($_REQUEST['action'])){
 }
 
 	Switch ($_REQUEST['action']){
-		//En principio vamos a generar los cruces por categoria(a su vez de cada uno de los grupos) de un campeonato,
-		//despues aumentaremos a que al pulsar el boton genere los cruces de todas las categorias de un mismo campeonato
-		case 'GENERATE':
-			$campeonato = $_REQUEST['idCampeonato'];
-			$categoria = $_REQUEST['idCategoria'];
-		
-			
-		
-		break;
 		case 'SEARCH':
         //Si tiene permisos
 			if(comprobarRol('admin')){
@@ -152,17 +143,5 @@ if (!isset($_REQUEST['action'])){
 				new MESSAGE($alerta,'../index.php');
 			}
 	}
-/*function generarEnfrentamiento($parejaActual,$numParGrupo){
-	
-	if($parejaActual!=$numParGrupo){
-		$siquiente = $parejaActual+1;
-		for($i = $siguiente, $i<=$numParGrupo, $i++){
-				//Cruce($parejaActual,$i)
-				//Add enfrentamiento(ojo obtener siguiente pareja, no van por orden, lo ideal seria obtener del modelo con una funcion las parejas que estan apuntadas en ese grupo!)
-			
-		}
-		$this->generarEnfrentamiento($siquiente,$numParGrupo);
-	}	
-}*/
 
 ?>
