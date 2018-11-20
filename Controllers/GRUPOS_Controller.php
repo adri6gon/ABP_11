@@ -39,6 +39,8 @@ function get_data_form(){
 $lista = array('idGrupo', 'nombre','idCategoria', 'idCampeonato');
 $lista2 = array('idCampeonato', 'nombre');
 $lista3 = array('idCategoria', 'nivel','genero');
+$listapa = array('idPareja','login1','login2');
+
 $funcionalidad = "GRUPOS";
 $alerta = "No tiene permisos para esta acción.";
 
@@ -79,12 +81,34 @@ Switch ($_REQUEST['action']){
 				$GRUPOS = new GRUPOS_Model($_REQUEST['idGrupo'], '', '', '');
                 //Recoge los datos de usuarios
 				$valores = $GRUPOS->RellenaDatos();
+				$valores2 = $GRUPOS->RellenaParejas();
                 //Nueva vista
-				new GRUPO_SHOWCURRENT($valores,'../Controllers/GRUPOS_Controller.php',$lista);
+                var_dump($valores2);
+                var_dump($listapa);
+				new GRUPO_SHOWCURRENT($valores,$valores2,'../Controllers/GRUPOS_Controller.php',$lista,$listapa);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
 			}
 				break;
+		case 'GENERAR':
+				if(comprobarRol('admin')){
+                    	//Recoge los datos con getdataform
+						$GRUPOS = new GRUPOS_Model($_REQUEST['idGrupo'], '', $_REQUEST['idCategoria'], $_REQUEST['idCampeonato']);
+                    	//LLamas al add del modelo
+						$respuesta = $GRUPOS->GEN_ENFRENTAMIENTO();				
+						include_once '../Functions/Authentication.php';
+						if(!IsAuthenticated()){//Si no esta autenticado
+							new MESSAGE($respuesta,'../Controllers/Login_Controller.php');
+						}else{//Si esta autenticado
+							new MESSAGE($respuesta,'../Controllers/GRUPOS_Controller.php');
+						}
+					
+				}//Si no tiene los permisos mostramos el mensaje de alerta
+				else{
+					new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
+				}
+				break;
+
 		default: //Default entra el showall
         //Si no teine permisos
 			if(comprobarRol('deportista')){

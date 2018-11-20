@@ -8,11 +8,12 @@ Fecha: 05/11/18
 
 class GRUPO_SHOWCURRENT {
 
-	function __construct($array,$volver,$lista){
+	function __construct($array,$array2,$volver,$lista,$lista2){
 		$this->datos = $array;
+		$this->datospa = $array2;
 		$this->volver = $volver;
 		$this->lista = $lista;
-		//$this->lista2 = $lista2;
+		$this->listapa = $lista2;
 		//$this->arg = $arg;		
 		$this->render();
 	}
@@ -31,6 +32,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 
 $lista2 como array auxiliar para enviar datos de otra tabla a esta vista p.e: Categoria de un mismo grupo
 $arg es un string auxiliar para enviar el nombre de los atributos del array auxiliar p.e: Enviar "Miembro " y concatenar -->
+
 					<?php	
 							for($j=0;$j<count($this->lista);$j++){
 								echo "<tr>";
@@ -51,10 +53,33 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 					?>
 					
 				</table>
+<h2>Parejas del grupo:</h2>
+				<table>
+
+					<?php	
+
+						if($this->datospa!=null){
+							for($i=0; $i<count($this->listapa);$i++){
+								echo "<th>".$this->listapa[$i]."</th>";			
+							}
+
+							for($j=0;$j<count($this->datospa);$j++){
+								echo "<tr>";
+								for($i=0; $i<count($this->listapa);$i++){
+										echo "<td>".$this->datospa[$j][($this->listapa)[$i]]."</td>";	
+								}
+							}
+						}else{
+							echo "&nbsp;&nbspTodavía no hay parejas asignadas a este grupo.";
+						}
+					?>
+					
+				</table>
+
 				<table class="tablas"><tr><th>
-				<p>Generar grupos 
+				<p>Generar enfrentamientos 
 					<?php
-					echo '<a href="'.$_SERVER['PHP_SELF'].'?action=GENERATE&'.($this->lista)[2].'='.$this->datos[($this->lista)[2]].'"><img src="../Views/images/generargrupos.png" width="30" size"30" title="Generar" alt="Generar"></a>';
+					echo '<a href="'.$_SERVER['PHP_SELF'].'?action=GENERAR&'.($this->lista)[0].'='.$this->datos[($this->lista)[0]].'&'.($this->lista)[2].'='.$this->datos[($this->lista)[2]].'&'.($this->lista)[3].'='.$this->datos[($this->lista)[3]].'"><img src="../Views/images/generarcalendario.png" width="40" size"40" title="Generar" alt="Generar"></a>';
 					?>
 						
 					</p></th></tr>

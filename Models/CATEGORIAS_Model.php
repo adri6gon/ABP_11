@@ -182,6 +182,9 @@ function GENERATE_GROUPS(){
         $sql2 = "SELECT genero, nivel, idCampeonato FROM CATEGORIA WHERE (idCategoria = '$this->idCategoria')";
 
          $result2 = $this->mysqli->query($sql2);
+		 $result = $this->mysqli->query($sql);
+		 //Si el número de parejas es superior a 0
+         if($result->num_rows>0){
         if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 			return 'No se ha podido conectar con la base de datos'; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
 		}else{
@@ -200,8 +203,8 @@ function GENERATE_GROUPS(){
 			//var_dump($sql4);
 			$result4 = $this->mysqli->query($sql4);
 			if(!$result4->num_rows>0){
-
-			if(($result->num_rows%16)==0){
+				//Grupos de 8 parejas
+				if(($result->num_rows%16)==0){
 				//Calculamos el número de grupos que crearemos
 				for($i = ($result->num_rows/8); $i > 0; $i--){
 
@@ -248,7 +251,7 @@ function GENERATE_GROUPS(){
 					return 'Inserción realizada con éxito'; //operacion de insertado correcta
 				}
 
-					
+					//Grupos de 10 parejas
 				}else if(($result->num_rows%20)==0){
 				//Calculamos el número de grupos que crearemos
 				for($i = ($result->num_rows/10); $i > 0; $i--){
@@ -269,10 +272,8 @@ function GENERATE_GROUPS(){
 						$idGruop = $this->mysqli->insert_id;
 					for($j; $j < ($result->num_rows/$i); $j++){
 						//INSERT EN GRUPO_PAREJA
-						//echo $j.("\n");
-						//echo $idGruop;
-						//echo $parejas[$j][0].("\n");
 						$pareja = $parejas[$j][0];
+						//echo $idGruop." ".$this->idCategoria." ".$idCampeonato." ".$pareja."\n";
 
 						$sql5 = "INSERT INTO `GRUPO_PAREJA`(`GrupoidGrupo`, `GrupoidCategoria`, `GrupoidCampeonato`, `ParejaidPareja`) 
 						VALUES ('$idGruop',
@@ -297,7 +298,7 @@ function GENERATE_GROUPS(){
 				else{ //si no da error en la insercion devolvemos mensaje de exito
 					return 'Inserción realizada con éxito'; //operacion de insertado correcta
 				}
-
+					//Grupos de 12 parejas
 				}else if(($result->num_rows%24)==0){
 				//Calculamos el número de grupos que crearemos
 				for($i = ($result->num_rows/12); $i > 0; $i--){
@@ -345,18 +346,22 @@ function GENERATE_GROUPS(){
 					return 'Inserción realizada con éxito'; //operacion de insertado correcta
 				}
 
-
+						//Si el numero de parejas no permite grupos de 8 10 o 12
 				} else{
 					return 'El número de parejas no permite la generación de grupos.'; //Número incorrecto de parejas
-			}
-		 }else{
-		 	//var_dump($result4);
-		 	return 'Ya existen grupos para esta Categoria'; // introduzca un valor para la categoria
-		 }
-		}
+				}
+
+		 	} else{
+		 		return 'Ya existen grupos para esta Categoria'; // introduzca un valor para la categoria
+			 }
+		} /////7
+		} else{
+	 	return 'No hay parejas asignadas a esta categoria'; // introduzca un valor para la categoria
+	 	}
 	}else{
 		return 'Introduzca una categoria'; // introduzca un valor para la categoria
 	}
+ 
 }
 
 function login(){
