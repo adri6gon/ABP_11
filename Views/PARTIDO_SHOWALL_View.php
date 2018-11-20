@@ -1,9 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene el show all de todos los campeonatos
-Autor: Ivan
-Fecha: Mañana
--->
-
 <?php
 class PARTIDO_SHOWALL {
 

@@ -1,8 +1,3 @@
-/**
-Funcion del archivo: Archivo con el codigo js de los calendarios de los campos fecha en la web.
-Autor: j0z5zs
-Fecha: 23/12/17
-**/
 // Tigra Calendar v5.2 (11/20/2011)
 // http://www.softcomplex.com/products/tigra_calendar/
 // License: Public Domain... You're welcome.

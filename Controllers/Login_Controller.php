@@ -1,8 +1,3 @@
-<!--
-Funcion del archivo: Controlador de la pagina de Login. Crea la vista de login o comprueba si es correcto el usuario y la contraseña y crea la sesion.
-Autor: Adrian Gonzalez
-Fecha: 23/12/17
--->
 <?php
 session_start();
 //Si no ha enviado el login y la password
