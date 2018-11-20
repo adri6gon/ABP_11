@@ -120,8 +120,6 @@ function SEARCH(){
 function genEnf($ParejaActual, $numParejas, $ArrayParejas){
 
 	for($i = $ParejaActual+1; $i < $numParejas; $i++){
-		echo $i."\n";
-		var_dump($ParejaActual);
 		$this->emparejar($ParejaActual, $i, $ArrayParejas);
 	} 
 	if($ParejaActual == $numParejas-1){
@@ -184,8 +182,6 @@ function GEN_ENFRENTAMIENTO(){
 						$parejas[$aux] = $fila[0];
 						$aux++;
 					}
-					var_dump($parejas);
-					//exit();
 
 							$this->genEnf(0,count($parejas),$parejas);
 
