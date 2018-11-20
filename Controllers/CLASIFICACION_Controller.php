@@ -63,7 +63,7 @@ if (!isset($_REQUEST['action'])){
 			//var_dump($datos);
 			
 			
-			new CLASIFICACION_SHOWALL($datos,$parejasPuntos,'');
+			new CLASIFICACION_SHOWALL($datos,'../Controllers/CATEGORIAS_Controller.php');
 		}
 	}else if($_REQUEST['action']=='CLASIFICACION'){
 		$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model('',$_REQUEST['idGrupo'],'','',$_REQUEST['idCategoria'],$_REQUEST['idCampeonato'],'','','');
