@@ -183,6 +183,7 @@ Switch ($_REQUEST['action']){
 				}//Si no tiene los permisos mostramos el mensaje de alerta
 				else{
 					new MESSAGE($alerta,'../Controllers/CATEGORIAS_Controller.php');
+
 				}
 				break;
 		default: //Default entra el showall
