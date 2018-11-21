@@ -63,7 +63,7 @@ if (!isset($_REQUEST['action'])){
 			//var_dump($datos);
 			
 			
-			new CLASIFICACION_SHOWALL($datos,'../Controllers/CATEGORIAS_Controller.php');
+			new CLASIFICACION_SHOWALL($datos,$parejasPuntos,'');
 		}
 	}else if($_REQUEST['action']=='CLASIFICACION'){
 		$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model('',$_REQUEST['idGrupo'],'','',$_REQUEST['idCategoria'],$_REQUEST['idCampeonato'],'','','');
@@ -75,16 +75,15 @@ if (!isset($_REQUEST['action'])){
 		for($i = 0;$i<count($datos);$i++){
 			$ganador = ganador($datos[$i]);
 			$ganadorString = (string)$ganador;
-			if($ganador){
-				$parejasPuntos[$ganadorString] +=3;
-				if($datos[$i][11]!=$ganador){
+			$parejasPuntos[$ganadorString] +=3;
+			
+			if($datos[$i][11]!=$ganador){
 				$pareja1 = (string)$datos[$i][11];
 				$parejasPuntos[$pareja1] +=1;
-				}else{
-					$pareja2 = (string)$datos[$i][12];
-					$parejasPuntos[$pareja2] +=1;
-				}
-			}			
+			}else{
+				$pareja2 = (string)$datos[$i][12];
+				$parejasPuntos[$pareja2] +=1;
+			}
 		}
 		//Array indice: idPareja ->valor:puntos en este grupo(Funcionando)
 		new CLASIFICACION_GRUPO_SHOWALL($parejas,'../Controllers/CLASIFICACION_Controller.php?action=CRUCES&idCategoria='.$_REQUEST['idCategoria'].'&idCampeonato='.$_REQUEST['idCampeonato'],$parejasPuntos);
@@ -94,15 +93,11 @@ function ganador($partido){
 	$set2 = $partido[9];
 	$set3 = $partido[10];
 	$ganador = $partido[11];
-	if($set1=="0-0"){
-		return false;
+	$sum =  ganadorSet($set1)+ganadorSet($set2)+ganadorSet($set3);
+	if($sum<=2){
+		return $partido[11];
 	}else{
-		$sum =  ganadorSet($set1)+ganadorSet($set2)+ganadorSet($set3);
-		if($sum<=2){
-			return $partido[11];
-		}else{
-			return $partido[12];
-		}
+		return $partido[12];
 	}
 }
 
@@ -110,9 +105,10 @@ function ganadorSet($set){
 	$arr1 = str_split($set);
 	if($arr1[0]>$arr1[2]){
 		return 0;
-	}else if($arr1[0]>$arr1[2]){
+	}else{
 		return 2;
 	}
-	
+	if($set == null)
+	return 0;
 }
 ?>

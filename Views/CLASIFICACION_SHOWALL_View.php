@@ -13,8 +13,11 @@ class CLASIFICACION_SHOWALL {
 <div style="overflow-x:auto;">
 				<h2><?php  echo 'Tabla ShowAll Enfrentamientos/Grupo:';?></h2>
 					<?php
+
+					if($this->datos){
 						$grupo = null;
 						for($j=0;$j<count($this->datos);$j++){
+							var_dump(count($this->datos));
 							if($grupo != $this->datos[$j][0]){
 								$grupo = $this->datos[$j][0];
 								echo '<h3>Grupo '.$grupo.':</h3>';
@@ -40,6 +43,10 @@ class CLASIFICACION_SHOWALL {
 							
 						}
 						echo '</table>';
+
+						}else{
+							echo " &nbsp;&nbsp;No hay grupos asignados a esta categoría todavía.";
+						}
 					?>
 					<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 </div>
