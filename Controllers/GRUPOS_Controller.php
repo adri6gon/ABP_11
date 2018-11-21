@@ -83,8 +83,8 @@ Switch ($_REQUEST['action']){
 				$valores = $GRUPOS->RellenaDatos();
 				$valores2 = $GRUPOS->RellenaParejas();
                 //Nueva vista
-                var_dump($valores2);
-                var_dump($listapa);
+                //var_dump($valores2);
+                //var_dump($listapa);
 				new GRUPO_SHOWCURRENT($valores,$valores2,'../Controllers/GRUPOS_Controller.php',$lista,$listapa);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');

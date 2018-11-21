@@ -39,7 +39,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
-								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/editar.png"></a>&nbsp <a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a><a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
+								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/editar.png"></a>&nbsp <a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a> <a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/Inscribirse.png"> <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
 								
 							}
 							?>

@@ -12,11 +12,13 @@ if (!IsAuthenticated()){
 include_once '../Models/CAMPEONATOS_Model.php';
 //VISTAS CAMPEONATO
 include '../Views/CAMPEONATO_SHOWALL_View.php';
+include '../Views/CAMPEONATO_SHOWALL_USER_View.php';
 include '../Views/CAMPEONATO_SEARCH_View.php';
 include '../Views/CAMPEONATO_ADD_View.php';
 include '../Views/CAMPEONATO_DELETE_View.php';
 include '../Views/CAMPEONATO_EDIT_View.php';
 include '../Views/CAMPEONATO_SHOWCURRENT_View.php';
+include '../Views/CAMPEONATO_INSCRIBIRSE_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 
@@ -164,9 +166,38 @@ Switch ($_REQUEST['action']){
 				new MESSAGE($alerta,'../Controllers/CAMPEONATOS_Controller.php');
 			}
 				break;
+		case 'INSCRIBIR':
+        //Si tiene permisos 
+			if(comprobarRol('deportista')){
+				if(!$_POST){
+	                //nuevo modelo de usuarios
+					$CAMPEONATOS = new CAMPEONATOS_Model($_REQUEST['idCampeonato'], '', '', '');
+					$categorias =$CAMPEONATOS->getCategorias();
+					$parejas = $CAMPEONATOS->getParejas($_SESSION['login']);
+					$nombreCampeonato = $CAMPEONATOS->RellenaDatos();
+	                //Recoge los datos de usuarios
+					$valores = $CAMPEONATOS->RellenaDatos();
+					$admin=false;
+					if(comprobarRol('admin')){
+						$admin =true;
+					}
+	                //Nueva vista
+					new INSCRIBIRSE_CAMPEONATO($categorias,$parejas,$nombreCampeonato,'../Controllers/CAMPEONATOS_Controller.php',$lista,$admin);
+				}else{ 
+					$idCategoria = $_POST['idCategoria'];
+					$idPareja = $_POST['idPareja'];
+					$CAMPEONATOS = new CAMPEONATOS_Model($_POST['idCampeonato'],'','','');
+					$resultado = $CAMPEONATOS->inscribirse($idCategoria,$idPareja);
+					new MESSAGE($resultado,'../Controllers/CAMPEONATOS_Controller.php');
+				}
+			}else{//Si no tiene permisos
+				new MESSAGE($alerta,'../index.php');
+			}
+				break;
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol('deportista')){
+
+			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
 					$CAMPEONATOS = new CAMPEONATOS_Model('','', '', '');
@@ -180,9 +211,26 @@ Switch ($_REQUEST['action']){
 				$datos = $CAMPEONATOS->_SHOWALL();
                 //Nueva vista
 				new CAMPEONATO_SHOWALL(false,$lista, $datos, '../index.php');
+			}else{
+			if(comprobarRol('deportista')){
+				if (!$_POST){//Si viene vacio
+                    //Nuevo modelo vacio
+					$CAMPEONATOS = new CAMPEONATOS_Model('','', '', '');
+				}
+				else{//Recoge los datos
+					$CAMPEONATOS = get_data_form();
+				}
+				//var_dump($USUARIOS);
+				//exit();
+                //Llama al showall del modelo
+				$datos = $CAMPEONATOS->_SHOWALL();
+                //Nueva vista
+				new CAMPEONATO_SHOWALL_USER(false,$lista, $datos, '../index.php');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/CAMPEONATOS_Controller.php');
 			}
+		}
 	}
+	
 
 ?>
