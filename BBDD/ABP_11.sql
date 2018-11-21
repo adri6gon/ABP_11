@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-11-2018 a las 18:20:20
+-- Tiempo de generación: 21-11-2018 a las 13:18:46
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -41,7 +41,7 @@ CREATE TABLE `CAMPEONATO` (
 
 INSERT INTO `CAMPEONATO` (`idCampeonato`, `nombre`, `fechaIniInscripcion`, `fechaFinInscripcion`) VALUES
 (1, 'Roland Garros', '2018-10-24', '2018-10-31'),
-(2, 'Wimbledon', '2018-10-24', '2018-10-31');
+(2, 'Wimbeldon', '2018-11-29', '2018-12-27');
 
 -- --------------------------------------------------------
 
@@ -64,15 +64,9 @@ INSERT INTO `CATEGORIA` (`idCategoria`, `genero`, `nivel`, `idCampeonato`) VALUE
 (1, 'M', 'Primera', 1),
 (2, 'M', 'Segunda', 1),
 (3, 'M', 'Tercera', 1),
-(4, 'F', 'Primera', 2),
-(5, 'F', 'Segunda', 2),
-(6, 'F', 'Tercera', 2),
 (7, 'F', 'Primera', 1),
 (8, 'F', 'Segunda', 1),
-(9, 'F', 'Tercera', 1),
-(10, 'M', 'Segunda', 2),
-(11, 'M', 'Primera', 2),
-(12, 'M', 'Tercera', 2);
+(9, 'F', 'Tercera', 1);
 
 -- --------------------------------------------------------
 
@@ -106,7 +100,11 @@ INSERT INTO `CATEGORIA_PAREJA` (`CategoriaidCategoria`, `CategoriaidCampeonato`,
 (1, 1, 17),
 (1, 1, 18),
 (1, 1, 19),
-(1, 1, 20);
+(1, 1, 20),
+(1, 1, 21),
+(1, 1, 22),
+(1, 1, 23),
+(1, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -131,12 +129,51 @@ CREATE TABLE `ENFRENTAMIENTO` (
 --
 
 INSERT INTO `ENFRENTAMIENTO` (`idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPareja2`, `GrupoidCategoria`, `GrupoidCampeonato`, `set1`, `set2`, `set3`) VALUES
-(1, 1, 1, 2, 1, 1, '', '', ''),
-(2, 1, 3, 4, 1, 1, '', '', ''),
-(3, 1, 1, 4, 1, 1, NULL, NULL, NULL),
-(4, 1, 2, 3, 1, 1, NULL, NULL, NULL),
-(5, 1, 2, 4, 1, 1, NULL, NULL, NULL),
-(6, 1, 1, 3, 1, 1, NULL, NULL, NULL);
+(606, 8, 1, 2, 1, 1, '0-0', '0-0', '0-0'),
+(607, 8, 1, 3, 1, 1, '0-0', '0-0', '0-0'),
+(608, 8, 1, 4, 1, 1, '0-0', '0-0', '0-0'),
+(609, 8, 1, 5, 1, 1, '0-0', '0-0', '0-0'),
+(610, 8, 1, 10, 1, 1, '0-0', '0-0', '0-0'),
+(611, 8, 1, 11, 1, 1, '0-0', '0-0', '0-0'),
+(612, 8, 1, 12, 1, 1, '0-0', '0-0', '0-0'),
+(613, 8, 1, 13, 1, 1, '0-0', '0-0', '0-0'),
+(614, 8, 1, 14, 1, 1, '0-0', '0-0', '0-0'),
+(615, 8, 2, 3, 1, 1, '0-0', '0-0', '0-0'),
+(616, 8, 2, 4, 1, 1, '0-0', '0-0', '0-0'),
+(617, 8, 2, 5, 1, 1, '0-0', '0-0', '0-0'),
+(618, 8, 2, 10, 1, 1, '0-0', '0-0', '0-0'),
+(619, 8, 2, 11, 1, 1, '0-0', '0-0', '0-0'),
+(620, 8, 2, 12, 1, 1, '0-0', '0-0', '0-0'),
+(621, 8, 2, 13, 1, 1, '0-0', '0-0', '0-0'),
+(622, 8, 2, 14, 1, 1, '0-0', '0-0', '0-0'),
+(623, 8, 3, 4, 1, 1, '0-0', '0-0', '0-0'),
+(624, 8, 3, 5, 1, 1, '0-0', '0-0', '0-0'),
+(625, 8, 3, 10, 1, 1, '0-0', '0-0', '0-0'),
+(626, 8, 3, 11, 1, 1, '0-0', '0-0', '0-0'),
+(627, 8, 3, 12, 1, 1, '0-0', '0-0', '0-0'),
+(628, 8, 3, 13, 1, 1, '0-0', '0-0', '0-0'),
+(629, 8, 3, 14, 1, 1, '0-0', '0-0', '0-0'),
+(630, 8, 4, 5, 1, 1, '0-0', '0-0', '0-0'),
+(631, 8, 4, 10, 1, 1, '0-0', '0-0', '0-0'),
+(632, 8, 4, 11, 1, 1, '0-0', '0-0', '0-0'),
+(633, 8, 4, 12, 1, 1, '0-0', '0-0', '0-0'),
+(634, 8, 4, 13, 1, 1, '0-0', '0-0', '0-0'),
+(635, 8, 4, 14, 1, 1, '0-0', '0-0', '0-0'),
+(636, 8, 5, 10, 1, 1, '0-0', '0-0', '0-0'),
+(637, 8, 5, 11, 1, 1, '0-0', '0-0', '0-0'),
+(638, 8, 5, 12, 1, 1, '0-0', '0-0', '0-0'),
+(639, 8, 5, 13, 1, 1, '0-0', '0-0', '0-0'),
+(640, 8, 5, 14, 1, 1, '0-0', '0-0', '0-0'),
+(641, 8, 10, 11, 1, 1, '0-0', '0-0', '0-0'),
+(642, 8, 10, 12, 1, 1, '0-0', '0-0', '0-0'),
+(643, 8, 10, 13, 1, 1, '0-0', '0-0', '0-0'),
+(644, 8, 10, 14, 1, 1, '0-0', '0-0', '0-0'),
+(645, 8, 11, 12, 1, 1, '0-0', '0-0', '0-0'),
+(646, 8, 11, 13, 1, 1, '0-0', '0-0', '0-0'),
+(647, 8, 11, 14, 1, 1, '0-0', '0-0', '0-0'),
+(648, 8, 12, 13, 1, 1, '0-0', '0-0', '0-0'),
+(649, 8, 12, 14, 1, 1, '0-0', '0-0', '0-0'),
+(650, 8, 13, 14, 1, 1, '0-0', '0-0', '0-0');
 
 -- --------------------------------------------------------
 
@@ -156,12 +193,8 @@ CREATE TABLE `GRUPO` (
 --
 
 INSERT INTO `GRUPO` (`idGrupo`, `nombre`, `idCategoria`, `idCampeonato`) VALUES
-(1, 'MasculinoPrimera', 1, 1),
-(2, 'MasculinoSegunda', 1, 1),
-(3, 'MasculinoTercera', 3, 1),
-(4, 'FemeninoPrimera', 7, 1),
-(5, 'FemeninoSegunda', 8, 1),
-(6, 'FemeninoTercera', 9, 1);
+(8, 'PrimeraM 2', 1, 1),
+(9, 'PrimeraM 1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -181,10 +214,26 @@ CREATE TABLE `GRUPO_PAREJA` (
 --
 
 INSERT INTO `GRUPO_PAREJA` (`GrupoidGrupo`, `GrupoidCategoria`, `GrupoidCampeonato`, `ParejaidPareja`) VALUES
-(1, 1, 1, 1),
-(1, 1, 1, 2),
-(1, 1, 1, 3),
-(1, 1, 1, 4);
+(8, 1, 1, 1),
+(8, 1, 1, 2),
+(8, 1, 1, 3),
+(8, 1, 1, 4),
+(8, 1, 1, 5),
+(8, 1, 1, 10),
+(8, 1, 1, 11),
+(8, 1, 1, 12),
+(8, 1, 1, 13),
+(8, 1, 1, 14),
+(9, 1, 1, 15),
+(9, 1, 1, 16),
+(9, 1, 1, 17),
+(9, 1, 1, 18),
+(9, 1, 1, 19),
+(9, 1, 1, 20),
+(9, 1, 1, 21),
+(9, 1, 1, 22),
+(9, 1, 1, 23),
+(9, 1, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -319,7 +368,7 @@ INSERT INTO `PISTA` (`idPista`, `restriccion`, `nombre`, `hora`, `fecha`) VALUES
 (6, 0, 'Court1', '18:30:00', '2018-10-10'),
 (7, 0, 'Court1', '20:00:00', '2018-10-10'),
 (8, 1, 'Court2', '09:00:00', '2018-10-10'),
-(9, 0, 'Court2', '10:30:00', '2018-10-10'),
+(9, 1, 'Court2', '10:30:00', '2018-10-10'),
 (10, 0, 'Court2', '12:00:00', '2018-10-10'),
 (11, 0, 'Court2', '13:30:00', '2018-10-10'),
 (12, 0, 'Court2', '20:00:00', '2018-10-10'),
@@ -547,16 +596,6 @@ CREATE TABLE `PISTA_ENFRENTAMIENTO` (
   `Pistanombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `PISTA_ENFRENTAMIENTO`
---
-
-INSERT INTO `PISTA_ENFRENTAMIENTO` (`PistaidPista`, `EnfrentamientoidEnfrentamiento`, `Pistanombre`) VALUES
-(3, 1, 'Court1'),
-(4, 2, 'Court1'),
-(5, 3, 'Court1'),
-(6, 4, 'Court1');
-
 -- --------------------------------------------------------
 
 --
@@ -598,6 +637,7 @@ INSERT INTO `PISTA_USUARIO` (`PistaidPista`, `Usuariologin`, `Pistanombre`) VALU
 (1, 'noe', 'Court1'),
 (2, 'noe', 'Court1'),
 (8, 'noe', 'Court2'),
+(9, 'luis', 'Court2'),
 (16, 'adri', 'Court3');
 
 -- --------------------------------------------------------
@@ -679,6 +719,85 @@ INSERT INTO `USUARIO` (`login`, `password`, `rol`, `nombre`, `apellidos`) VALUES
 ('jaco', 'jaco', 'deportista', 'jacobo', 'martinez'),
 ('josemi', 'josemi', 'deportista', 'jose', 'mi'),
 ('josemii', 'josemi', 'deportista', 'jose', 'mi'),
+('jug1', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug10', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug11', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug12', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug13', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug14', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug15', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug16', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug17', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug18', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug19', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug2', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug20', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug21', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug22', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug23', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug24', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug25', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug26', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug27', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug28', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug29', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug3', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug30', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug31', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug32', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug33', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug34', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug35', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug36', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug37', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug38', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug39', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug4', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug40', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug41', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug42', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug43', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug44', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug45', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug46', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug48', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug49', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug5', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug50', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug51', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug52', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug53', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug54', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug55', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug56', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug57', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug58', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug59', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug6', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug60', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug61', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug62', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug63', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug64', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug65', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug66', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug67', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug68', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug69', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug7', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug70', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug71', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug72', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug73', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug74', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug75', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug76', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug77', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug78', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug79', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug8', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug80', 'hola', 'deportista', 'jugador', 'jugador'),
+('jug9', 'hola', 'deportista', 'jugador', 'jugador'),
 ('kidd', 'keo', 'deportista', 'kidd', 'keo'),
 ('kiddi', 'keo', 'deportista', 'kidd', 'keo'),
 ('locoplaya', 'locoplaya', 'deportista', 'locoplaya', 'loco'),
@@ -1007,7 +1126,13 @@ ALTER TABLE `CAMPEONATO`
 -- AUTO_INCREMENT de la tabla `ENFRENTAMIENTO`
 --
 ALTER TABLE `ENFRENTAMIENTO`
-  MODIFY `idEnfrentamiento` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idEnfrentamiento` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=651;
+
+--
+-- AUTO_INCREMENT de la tabla `GRUPO`
+--
+ALTER TABLE `GRUPO`
+  MODIFY `idGrupo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `NOTICIA`
@@ -1048,9 +1173,9 @@ ALTER TABLE `CATEGORIA_PAREJA`
 -- Filtros para la tabla `ENFRENTAMIENTO`
 --
 ALTER TABLE `ENFRENTAMIENTO`
-  ADD CONSTRAINT `FKEnfrentami378644` FOREIGN KEY (`idGrupo`,`GrupoidCategoria`,`GrupoidCampeonato`) REFERENCES `GRUPO` (`idGrupo`, `idCategoria`, `idCampeonato`),
-  ADD CONSTRAINT `Participar1` FOREIGN KEY (`idPareja1`) REFERENCES `PAREJA` (`idPareja`),
-  ADD CONSTRAINT `Participar2` FOREIGN KEY (`idPareja2`) REFERENCES `PAREJA` (`idPareja`);
+  ADD CONSTRAINT `FKEnfrentami378644` FOREIGN KEY (`idGrupo`,`GrupoidCategoria`,`GrupoidCampeonato`) REFERENCES `GRUPO` (`idGrupo`, `idCategoria`, `idCampeonato`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Participar1` FOREIGN KEY (`idPareja1`) REFERENCES `PAREJA` (`idPareja`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Participar2` FOREIGN KEY (`idPareja2`) REFERENCES `PAREJA` (`idPareja`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `GRUPO`
