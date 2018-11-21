@@ -205,6 +205,7 @@ function GENERATE_GROUPS(){
 			if(!$result4->num_rows>0){
 				//Grupos de 8 parejas
 				if(($result->num_rows%16)==0){
+					$jug = 8;
 				//Calculamos el número de grupos que crearemos
 				for($i = ($result->num_rows/8); $i > 0; $i--){
 
@@ -222,7 +223,7 @@ function GENERATE_GROUPS(){
 					}
 
 						$idGruop = $this->mysqli->insert_id;
-					for($j; $j < ($result->num_rows/$i); $j++){
+					for($j; $j < $jug; $j++){
 						//INSERT EN GRUPO_PAREJA
 						$pareja = $parejas[$j][0];
 						//echo $idGruop." ".$this->idCategoria." ".$idCampeonato." ".$pareja."\n";
@@ -240,6 +241,7 @@ function GENERATE_GROUPS(){
 							$band = false;
 						}
 					}
+					$jug = $jug + 8;
 
 				}
 
@@ -254,8 +256,9 @@ function GENERATE_GROUPS(){
 					//Grupos de 10 parejas
 				}else if(($result->num_rows%20)==0){
 				//Calculamos el número de grupos que crearemos
+					$jug = 10;
 				for($i = ($result->num_rows/10); $i > 0; $i--){
-
+					//4 3 2 1
 					$sql3 = "INSERT INTO `GRUPO`(`idGrupo`, `nombre`, `idCategoria`, `idCampeonato`) 
 						VALUES ('',
 							'$nombre $i',
@@ -270,7 +273,8 @@ function GENERATE_GROUPS(){
 					}
 
 						$idGruop = $this->mysqli->insert_id;
-					for($j; $j < ($result->num_rows/$i); $j++){
+					for($j; $j < $jug; $j++){
+						//20/4->5 0-4 //20/3->6 //20/2->10 
 						//INSERT EN GRUPO_PAREJA
 						$pareja = $parejas[$j][0];
 						//echo $idGruop." ".$this->idCategoria." ".$idCampeonato." ".$pareja."\n";
@@ -288,6 +292,7 @@ function GENERATE_GROUPS(){
 							$band = false;
 						}
 					}
+					$jug= $jug+10;
 
 				}
 
@@ -300,6 +305,7 @@ function GENERATE_GROUPS(){
 				}
 					//Grupos de 12 parejas
 				}else if(($result->num_rows%24)==0){
+					$jug = 12;
 				//Calculamos el número de grupos que crearemos
 				for($i = ($result->num_rows/12); $i > 0; $i--){
 
@@ -317,7 +323,7 @@ function GENERATE_GROUPS(){
 					}
 
 						$idGruop = $this->mysqli->insert_id;
-					for($j; $j < ($result->num_rows/$i); $j++){
+					for($j; $j < $jug; $j++){
 						//INSERT EN GRUPO_PAREJA
 						$pareja = $parejas[$j][0];
 						//echo $idGruop." ".$this->idCategoria." ".$idCampeonato." ".$pareja."\n";
@@ -335,6 +341,7 @@ function GENERATE_GROUPS(){
 							$band = false;
 						}
 					}
+					$jug = $jug +12;
 
 				}
 

@@ -179,13 +179,10 @@ Switch ($_REQUEST['action']){
 						}else{//Si esta autenticado
 							new MESSAGE($respuesta,'../Controllers/CATEGORIAS_Controller.php');
 						}
-
 					
 				}//Si no tiene los permisos mostramos el mensaje de alerta
 				else{
 					new MESSAGE($alerta,'../Controllers/CATEGORIAS_Controller.php');
-
-
 				}
 				break;
 		default: //Default entra el showall

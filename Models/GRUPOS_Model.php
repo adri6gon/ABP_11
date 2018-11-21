@@ -120,14 +120,14 @@ function SEARCH(){
 function genEnf($ParejaActual, $numParejas, $ArrayParejas){
 
 	for($i = $ParejaActual+1; $i < $numParejas; $i++){
-		echo $i."\n";
-		var_dump($ParejaActual);
+		//echo $i."\n";
+		//var_dump($ParejaActual);
 		$this->emparejar($ParejaActual, $i, $ArrayParejas);
 	} 
 	if($ParejaActual == $numParejas-1){
 		return true;
 	}else{
-		$this->genEnf($ParejaActual+1,$numParejas,$ArrayParejas);
+		return $this->genEnf($ParejaActual+1,$numParejas,$ArrayParejas);
 		
 	}
 
@@ -146,12 +146,15 @@ function emparejar($ParejaActual, $Rival, $ArrayParejas){
 			if(!$resultcomp->num_rows>0){
 
 
-				$sql = "INSERT INTO `ENFRENTAMIENTO`(`idGrupo`, `idPareja1`, `idPareja2`, `GrupoidCategoria`, `GrupoidCampeonato`) 
+				$sql = "INSERT INTO `ENFRENTAMIENTO`(`idGrupo`, `idPareja1`, `idPareja2`, `GrupoidCategoria`, `GrupoidCampeonato`,`set1`,`set2`,`set3`) 
 					VALUES ('$this->idGrupo',
 						'$par1',
 						'$par2',
 						'$this->idCategoria',
-						'$this->idCampeonato')";
+						'$this->idCampeonato',
+						'0-0',
+						'0-0',
+						'0-0')";
 
 					if (!$this->mysqli->query($sql)) { // si da error en la ejecución del insert devolvemos mensaje
 						return 'Error en la inserción';
@@ -184,12 +187,16 @@ function GEN_ENFRENTAMIENTO(){
 						$parejas[$aux] = $fila[0];
 						$aux++;
 					}
-					var_dump($parejas);
+					//var_dump($parejas);
 					//exit();
 
-							$this->genEnf(0,count($parejas),$parejas);
+							if($this->genEnf(0,count($parejas),$parejas)){
+								return 'Se han generado los enfrentamientos del grupo.';
+							}else{
+								return 'No se han generado los enfrentamientos del grupo';
+							}
 
-							return 'Se han generado los enfrentamientos del grupo.';
+							
 
 				}else{
 					return 'No se han asignado parejas al grupo todavía.'; // introduzca un valor para la categoria
