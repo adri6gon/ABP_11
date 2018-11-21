@@ -157,14 +157,10 @@ function SEARCH(){
 	}
 }
 
-function INSCRIBIRSE(){
-	if(!empty($this)){
-		$sql = "SELECT `idCampeonato`, `nombre`, `fechaIniInscripcion`, `fechaFinInscripcion` FROM CAMPEONATO WHERE(
-					(idCampeonato LIKE '%$this->idCampeonato%') &&
-    				(nombre LIKE '%$this->nombre%') &&
-    				(fechaIniInscripcion LIKE '%$this->fechaIniInscripcion%') &&
-    				(fechaFinInscripcion LIKE '%$this->fechaFinInscripcion%'))";
-	}	
+function getParejas($login){
+		$sql = "SELECT `idPareja`, `login1`, `login2` FROM PAREJA WHERE(
+					(login1 = '$login') OR
+    				(login2 = '$login') )";	
     	$result = $this->mysqli->query($sql);  
   // var_dump($result);
 		//exit();
@@ -181,55 +177,52 @@ function INSCRIBIRSE(){
 	}
 }
 
-function login(){
-	$sql = "SELECT *
-			FROM USUARIO
-			WHERE (
-				(login = '$this->login') 
-			)";
-	$resultado = $this->mysqli->query($sql);
-	if ($resultado->num_rows == 0){
-		return 'El login no existe';
-	}
-	else{
-		$tupla = $resultado->fetch_array();
-		if ($tupla['password'] == $this->password){
-			return true;
+function getCategorias(){
+		$sql = "SELECT `idCategoria`, `genero`, `nivel` , `idCampeonato` FROM CATEGORIA WHERE(
+					 idCampeonato = '$this->idCampeonato')";	
+    	$result = $this->mysqli->query($sql);  
+  // var_dump($result);
+		//exit();
+	if($result->num_rows>0){
+		//
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
 		}
-		else{
-			return 'La password para este usuario no es correcta';
-		}
-	}
-}//fin login
-function comprobarAdmin(){
-	$sql = "SELECT rol FROM USUARIO WHERE rol='admin' AND login = '$this->login'";
-	$resultado = $this->mysqli->query($sql);
-	$j = 0;
-	while($tupla = mysqli_fetch_row($result)){
-			$tuplas[$j] = $tupla[0];
-			$j++;
-	}
-	if($tuplas == null){
+		return $tuplas;
+	}else{
 		return false;
 	}
-	else{
-		return $tuplas;
-	}
 }
-function getRol(){
-	$sql = "SELECT rol
-			FROM USUARIO
-			WHERE (
-				(login = '$this->login') 
-			)";
-	$resultado = $this->mysqli->query($sql);
-	if ($resultado->num_rows == 0){
-		return 'El login no existe';
-	}
-	else{
-		return $resultado;
-	}		
+function inscribirse($idCategoria,$idPareja){
+	// construimos el sql para buscar esa clave en la tabla
+        $sql = "SELECT * FROM CATEGORIA_PAREJA WHERE (CategoriaidCampeonato = '$this->idCampeonato' AND ParejaidPareja = '$idPareja' AND 
+    			CategoriaidCategoria = '$idCategoria')";
+
+		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+			return 'No se ha podido conectar con la base de datos'; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+		}
+		else { // si la ejecución de la query no da error
+			if ($result->num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
+				//construimos la sentencia sql de inserción en la bd
+				$sql = "INSERT INTO `CATEGORIA_PAREJA`(`CategoriaidCategoria`, `CategoriaidCampeonato`, `ParejaIdPareja`)
+				VALUES ('$idCategoria',
+						'$this->idCampeonato',
+						'$idPareja')";
+				if (!$this->mysqli->query($sql)) { // si da error en la ejecución del insert devolvemos mensaje
+					return 'Error en la inserción';
+				}
+				else{ //si no da error en la insercion devolvemos mensaje de exito
+					return 'Inscripción realizada con éxito'; //operacion de insertado correcta
+				}
+				
+			}
+			else // si ya existe ese valor de clave en la tabla devolvemos el mensaje correspondiente
+				return 'Ya esta inscrito'; // ya existe
+		}
 }
+
 
 }
 

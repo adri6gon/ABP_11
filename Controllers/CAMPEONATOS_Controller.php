@@ -18,6 +18,7 @@ include '../Views/CAMPEONATO_ADD_View.php';
 include '../Views/CAMPEONATO_DELETE_View.php';
 include '../Views/CAMPEONATO_EDIT_View.php';
 include '../Views/CAMPEONATO_SHOWCURRENT_View.php';
+include '../Views/CAMPEONATO_INSCRIBIRSE_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 
@@ -165,15 +166,30 @@ Switch ($_REQUEST['action']){
 				new MESSAGE($alerta,'../index.php');
 			}
 				break;
-		case 'INSCRIBIRSE':
+		case 'INSCRIBIR':
         //Si tiene permisos 
 			if(comprobarRol('deportista')){
-                //nuevo modelo de usuarios
-				$CAMPEONATOS = new CAMPEONATOS_Model($_REQUEST['idCampeonato'], '', '', '');
-                //Recoge los datos de usuarios
-				$valores = $CAMPEONATOS->RellenaDatos();
-                //Nueva vista
-				new CAMPEONATO_INSCRIBIRSE($valores,'../Controllers/CAMPEONATOS_Controller.php',$lista);
+				if(!$_POST){
+	                //nuevo modelo de usuarios
+					$CAMPEONATOS = new CAMPEONATOS_Model($_REQUEST['idCampeonato'], '', '', '');
+					$categorias =$CAMPEONATOS->getCategorias();
+					$parejas = $CAMPEONATOS->getParejas($_SESSION['login']);
+					$nombreCampeonato = $CAMPEONATOS->RellenaDatos();
+	                //Recoge los datos de usuarios
+					$valores = $CAMPEONATOS->RellenaDatos();
+					$admin=false;
+					if(comprobarRol('admin')){
+						$admin =true;
+					}
+	                //Nueva vista
+					new INSCRIBIRSE_CAMPEONATO($categorias,$parejas,$nombreCampeonato,'../Controllers/CAMPEONATOS_Controller.php',$lista,$admin);
+				}else{ 
+					$idCategoria = $_POST['idCategoria'];
+					$idPareja = $_POST['idPareja'];
+					$CAMPEONATOS = new CAMPEONATOS_Model($_POST['idCampeonato'],'','','');
+					$resultado = $CAMPEONATOS->inscribirse($idCategoria,$idPareja);
+					new MESSAGE($resultado,'../Controllers/CAMPEONATOS_Controller.php');
+				}
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}
