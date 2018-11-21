@@ -89,28 +89,28 @@ function _SHOWALL(){
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH(){
 	if(!empty($this)){
-		$sql = "SELECT `idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPareja2`, `GrupoIdCategoria`, `GrupoIdCampeonato` FROM ENFRENTAMIENTO WHERE(
+		$sql = "SELECT * FROM ENFRENTAMIENTO WHERE(
 					(idEnfrentamiento LIKE '%$this->idEnfrentamiento%') &&
     				(idGrupo LIKE '%$this->idGrupo%') &&
     				(idPareja1 LIKE '%$this->idPareja1%') &&
     				(idPareja2 LIKE '%$this->idPareja2%') &&
-					(GrupoIdCategoria LIKE '%$this->GrupoIdCategoria%')
+					(GrupoIdCategoria LIKE '%$this->GrupoIdCategoria%')&&
 					(GrupoIdCampeonato LIKE '%$this->GrupoIdCampeonato%'))";
-	}	
-    	$result = $this->mysqli->query($sql);  
-  // var_dump($result);
-		//exit();
-	if($result->num_rows>0){
-		//
-		$j = 0;
-		while($tupla = mysqli_fetch_assoc($result)){
-		   $tuplas[$j] = $tupla;
-		   $j++;		
-		}
-		return $tuplas;
-	}else{
-		return false;
 	}
+	$result = $this->mysqli->query($sql);  
+	// var_dump($result);
+		  //exit();
+	  if($result->num_rows>0){
+		  //
+		  $j = 0;
+		  while($tupla = mysqli_fetch_assoc($result)){
+			 $tuplas[$j] = $tupla;
+			 $j++;		
+		  }
+		  return $tuplas;
+	  }else{
+		  return false;
+	  }
 }
 
 //funcion DELETE : comprueba que la tupla a borrar existe y una vez

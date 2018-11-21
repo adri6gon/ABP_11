@@ -16,7 +16,7 @@ class PAREJA_SHOWALL_USER {
 <div style="overflow-x:auto;">
 				<h2><?php if(!$this->search){ echo 'Tabla ShowAll';}else{echo 'Tabla Busqueda';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
-							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp 
+							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>
 					</div>
 					<table class="tablas separador">
 						<tr>

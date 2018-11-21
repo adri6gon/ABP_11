@@ -1,5 +1,11 @@
+<!--
+Funcion del archivo: Archivo que contiene el show all de todos los campeonatos para usuarios
+Autor: Luis
+Fecha: 05/11/18
+-->
+
 <?php
-class CATEGORIA_SHOWALL {
+class CAMPEONATO_SHOWALL_USER {
 
 	function __construct($search,$lista,$array,$volver){
 		$this->search = $search;
@@ -15,9 +21,9 @@ class CATEGORIA_SHOWALL {
 ?>
 
 <div style="overflow-x:auto;">
-				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CATEGORIAS';}else{echo 'Tabla Busqueda de CATEGORIAS';} ?>:</h2>
+				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CAMPEONATO';}else{echo 'Tabla Busqueda de CAMPEONATO';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
-							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
+							 <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
 					</div>
 					<table class="tablas separador">
 						<tr>
@@ -39,11 +45,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
-								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/editar.png"></a>&nbsp 
-								<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a>
-								<a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a>
-								<a href="CLASIFICACION_Controller.php?action=CRUCES&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'&'.($this->lista)[3].'='.$this->datos[$j][($this->lista)[3]].'"><img src="../Views/images/resultados.png"></a>
-								</td></tr>';
+								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/Inscribirse.png"> <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
 								
 							}
 							?>

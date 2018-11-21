@@ -41,6 +41,7 @@ class CLASIFICACION_SHOWALL {
 						}
 						echo '</table>';
 					?>
+					<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 </div>
 <?php		
 	include 'Footer.php';

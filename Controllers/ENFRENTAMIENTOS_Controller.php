@@ -10,7 +10,7 @@ if (!IsAuthenticated()){
 
 include_once '../Models/ENFRENTAMIENTOS_Model.php';
 include '../Views/ENFRENTAMIENTOS_SHOWALL_View.php';
-//include '../Views/ENFRENTAMIENTO_SEARCH_View.php';
+include '../Views/ENFRENTAMIENTO_SEARCH_View.php';
 //include '../Views/ENFRENTAMIENTO_DELETE_View.php';
 include '../Views/ENFRENTAMIENTO_RESULTADO_View.php';
 include '../Views/ENFRENTAMIENTO_SHOWCURRENT_View.php';
@@ -21,13 +21,13 @@ function get_data_form(){
 
 	$idEnfrentamiento = $_REQUEST['idEnfrentamiento'];
 	$idGrupo = $_REQUEST['idGrupo'];
-	$idPareja1user = $_REQUEST['idPareja1'];
+	$idPareja1 = $_REQUEST['idPareja1'];
 	$idPareja2 = $_REQUEST['idPareja2'];
-	$GrupoIdCategoria = $_REQUEST['GrupoidCategoria'];
-	$GrupoIdCampeonato = $_REQUEST['GrupoidCampeonato'];
-	$set1 = $_REQUEST['set1'];
-	$set2 = $_REQUEST['set2'];
-	$set3 = $_REQUEST['set3'];
+	$GrupoIdCategoria = $_REQUEST['idCategoria'];
+	$GrupoIdCampeonato = $_REQUEST['idCampeonato'];
+	//$set1 = $_REQUEST['set1'];
+	//$set2 = $_REQUEST['set2'];
+	//$set3 = $_REQUEST['set3'];
 	
 	$action = $_REQUEST['action'];
 	
@@ -38,9 +38,10 @@ function get_data_form(){
 		$idPareja2, 
 		$GrupoIdCategoria,
 		$GrupoIdCampeonato,
-		$set1,
-		$set2,
-		$set3
+		null,
+		null,
+		null
+		
 	);
 
 	return $ENFRENTAMIENTOS;
@@ -61,17 +62,16 @@ if (!isset($_REQUEST['action'])){
 			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
-					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model('','','','','');
-                    //Nueva vista search
+					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model('','','','','','','','','');
+					//Nueva vista search
 					new SEARCH_ENFRENTAMIENTO('../Controllers/ENFRENTAMIENTOS_Controller.php');
 				}
 				else{
                     //Recoge los datos del data form
 					$ENFRENTAMIENTOS = get_data_form();
-					//exit();
                     //Si tiene grupo
 						$datos = $ENFRENTAMIENTOS->SEARCH();
-						//var_dump($datos);
+						var_dump($datos);
                     //Nueva vista showall
 					new ENFRENTAMIENTO_SHOWALL(true,$lista, $datos, '../Controllers/ENFRENTAMIENTOS_Controller.php?action=SEARCH');
 				}
