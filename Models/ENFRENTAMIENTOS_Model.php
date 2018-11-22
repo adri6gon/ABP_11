@@ -170,9 +170,12 @@ function RESULTADO()
 }
 function getResultados(){
 	// se construye la sentencia de busqueda de la tupla en la bd
-    $sql = "SELECT g.idGrupo, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3`, p1.idPareja,p2.idPareja, c.idCampeonato, cat.idCategoria
+	/** SELECT g.idGrupo, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3`, p1.idPareja,p2.idPareja, c.idCampeonato, cat.idCategoria
 	FROM ENFRENTAMIENTO e, PAREJA p1, PAREJA p2, CATEGORIA cat, CAMPEONATO c, GRUPO g 
-	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND GrupoidCategoria = cat.idCategoria AND GrupoidCampeonato = c.idCampeonato AND e.idGrupo=g.idGrupo AND p1.login1 != p2.login1 AND  p1.login1 != p2.login2 AND p1.login2 != p2.login1 AND p1.login2 != p2.login2 AND e.GrupoidCategoria ='$this->GrupoIdCategoria' AND e.GrupoidCampeonato='$this->GrupoIdCampeonato')";
+	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND GrupoidCategoria = cat.idCategoria AND GrupoidCampeonato = c.idCampeonato AND e.idGrupo=g.idGrupo AND e.idGrupo='$this->idGrupo' AND p1.login1 != p2.login1 AND  p1.login1 != p2.login2 AND p1.login2 != p2.login1 AND p1.login2 != p2.login2 AND e.GrupoidCampeonato='$this->GrupoIdCampeonato') */
+    $sql = "SELECT g.idGrupo,e.idEnfrentamiento, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3`, p1.idPareja,p2.idPareja, c.idCampeonato, cat.idCategoria
+	FROM ENFRENTAMIENTO e, PAREJA p1, PAREJA p2, CATEGORIA cat, CAMPEONATO c, GRUPO g 
+	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND GrupoidCategoria = cat.idCategoria AND GrupoidCampeonato = c.idCampeonato AND e.idGrupo=g.idGrupo AND e.idGrupo='$this->idGrupo' AND e.GrupoidCampeonato='$this->GrupoIdCampeonato')";
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
 	// var_dump($result);
@@ -191,9 +194,12 @@ function getResultados(){
 }
 function getResultadosGrupo(){
 	// se construye la sentencia de busqueda de la tupla en la bd
+	/** SELECT g.idGrupo, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3`, p1.idPareja,p2.idPareja, c.idCampeonato, cat.idCategoria
+	FROM ENFRENTAMIENTO e, PAREJA p1, PAREJA p2, CATEGORIA cat, CAMPEONATO c, GRUPO g 
+	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND g.idGrupo = '$this->idGrupo' AND GrupoidCampeonato = c.idCampeonato AND e.idGrupo=g.idGrupo AND p1.login1 != p2.login1 AND  p1.login1 != p2.login2 AND p1.login2 != p2.login1 AND p1.login2 != p2.login2 AND e.GrupoidCampeonato='$this->GrupoIdCampeonato')*/
     $sql = "SELECT g.idGrupo, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3`, p1.idPareja,p2.idPareja, c.idCampeonato, cat.idCategoria
 	FROM ENFRENTAMIENTO e, PAREJA p1, PAREJA p2, CATEGORIA cat, CAMPEONATO c, GRUPO g 
-	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND GrupoidCategoria = cat.idCategoria AND g.idGrupo = '$this->idGrupo' AND GrupoidCampeonato = c.idCampeonato AND e.idGrupo=g.idGrupo AND p1.login1 != p2.login1 AND  p1.login1 != p2.login2 AND p1.login2 != p2.login1 AND p1.login2 != p2.login2 AND e.GrupoidCategoria ='$this->GrupoIdCategoria' AND e.GrupoidCampeonato='$this->GrupoIdCampeonato')";
+	WHERE (e.idPareja1 = p1.idPareja AND e.idPareja2 = p2.idPareja AND g.idGrupo = '$this->idGrupo' AND GrupoidCampeonato = c.idCampeonato AND e.idGrupo=g.idGrupo AND cat.idCategoria = e.GrupoidCategoria)";
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
 	// var_dump($result);
@@ -212,7 +218,7 @@ function getResultadosGrupo(){
 }
 function getParejas()
 {
-	$sql = "SELECT `idPareja`, `login1`, `login2` FROM PAREJA p, GRUPO_PAREJA gp WHERE gp.GrupoidGrupo ='$this->idGrupo' AND gp.ParejaidPareja = p.idPareja AND gp.GrupoidCategoria = '$this->GrupoIdCategoria' AND gp.GrupoidCampeonato = '$this->GrupoIdCampeonato'";
+	$sql = "SELECT `idPareja`, `login1`, `login2` FROM PAREJA p, GRUPO_PAREJA gp WHERE gp.GrupoidGrupo ='$this->idGrupo' AND gp.ParejaidPareja = p.idPareja AND gp.GrupoidCampeonato = '$this->GrupoIdCampeonato'";
 	 // se ejecuta la query
 	 $result = $this->mysqli->query($sql);
 	 // var_dump($result);

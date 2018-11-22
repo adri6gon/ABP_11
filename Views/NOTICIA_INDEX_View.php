@@ -37,7 +37,7 @@ echo "style='margin-top:80px;'";?>>
 		for($j=0;$j<count($this->partidos);$j++){ ?>
 			
 			<div class="noticia">
-				<br><img src="/ABP_11/Views/images/matchpadel.jpg" width=130px ><br>
+				<br><img src="../Views/images/matchpadel.jpg" width=130px ><br>
 				<p><strong>Fecha: </strong> <?= $this->partidos[$j]["fecha"] ?> </p>
 				<p><strong>Hora:</strong> <?= $this->partidos[$j]["hora"] ?> </p>
 				<p><strong>Pista: </strong><?= $this->partidos[$j]["Pistanombre"] ?> </p>

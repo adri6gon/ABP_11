@@ -39,7 +39,8 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
-								echo '<td>&nbsp;&nbsp;&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
+								echo '<td>&nbsp;&nbsp;&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a>
+									  <a href="CLASIFICACION_Controller.php?action=CRUCES&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'&'.($this->lista)[3].'='.$this->datos[$j][($this->lista)[3]].'"><img src="../Views/images/resultados.png"></a></td></tr>';
 								
 							}
 							?>

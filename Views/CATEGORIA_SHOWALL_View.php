@@ -1,11 +1,12 @@
 <?php
 class CATEGORIA_SHOWALL {
 
-	function __construct($search,$lista,$array,$volver){
+	function __construct($search,$lista,$array,$volver,$admin){
 		$this->search = $search;
 		$this->lista = $lista;
 		$this->datos = $array;
 		$this->volver = $volver;
+		$this->admin = $admin;
 		$this->render();
 	}
 
@@ -16,8 +17,15 @@ class CATEGORIA_SHOWALL {
 
 <div style="overflow-x:auto;">
 				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CATEGORIAS';}else{echo 'Tabla Busqueda de CATEGORIAS';} ?>:</h2>
+					
 					<div id="anhadir-borrar" style="text-align: center;">
-							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
+					<?php
+						if($this->admin)
+							echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp<a href="'.$_SERVER['PHP_SELF'].'?action=SEARCH"><img src="../Views/images/busqueda.png"></a>';
+						else
+						echo '&nbsp <a href="'.$_SERVER['PHP_SELF'].'?action=SEARCH"><img src="../Views/images/busqueda.png"></a>';
+					?>
+					
 					</div>
 					<table class="tablas separador">
 						<tr>
@@ -39,11 +47,15 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
-								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/editar.png"></a>&nbsp 
-								<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a>
-								<a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a>
-								<a href="CLASIFICACION_Controller.php?action=CRUCES&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'&'.($this->lista)[3].'='.$this->datos[$j][($this->lista)[3]].'"><img src="../Views/images/resultados.png"></a>
-								</td></tr>';
+								if($this->admin){
+									echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/editar.png"></a>&nbsp 
+									<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/borrar.png"></a>';
+									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a>
+									</td></tr>';
+								}else{
+									echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a>
+									</td></tr>';
+								}
 								
 							}
 							?>

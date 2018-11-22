@@ -2,10 +2,10 @@
 
 class CLASIFICACION_GRUPO_SHOWALL {
 
-	function __construct($array,$volver,$lista){
+	function __construct($array,$volver){
 		$this->datos = $array;
 		$this->volver = $volver;
-		$this->lista = $lista;	
+		//$this->lista = $lista;	
 		$this->render();
 	}
 
@@ -18,13 +18,12 @@ class CLASIFICACION_GRUPO_SHOWALL {
 <h2>Clasificacion del Grupo:</h2>
 				<table class="tablas">
 					<?php	
-							foreach($this->datos as $valor){
-								echo "<tr><th>".$valor['login1'].'-'.$valor['login2']."</th>";
-									if($this->lista[$valor['idPareja']] !=null){
-										echo "<td>".$this->lista[(string)$valor['idPareja']]." puntos</td></tr>";
-									}else{
-										echo "<td>0</td></tr>";
-									}
+
+							for($i = 0; $i < count($this->datos);$i++){
+								echo "<tr><th>"."</p>\n".$this->datos[$i][1].'-'.$this->datos[$i][2]."</th>";
+
+								echo "<td>"."&nbsp".$this->datos[$i][3]." puntos</td></tr>";
+
 							}
 					?>
 				</table>

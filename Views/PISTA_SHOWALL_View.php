@@ -17,8 +17,8 @@ class PISTA_SHOWALL {
 				<h2>Pistas disponibles:</h2>
 	<?php		
 		echo "<h2>".$this->datos[0]['fecha']."</h2>";
-	echo '<a href="'.$_SERVER['PHP_SELF'].'?action=PREVDAY&fecha='.$this->datos[0]['fecha'].'">Anterior</a>&nbsp';
-	 echo '<a href="'.$_SERVER['PHP_SELF'].'?action=NEXTDAY&fecha='.$this->datos[0]['fecha'].'">Siguiente</a>';
+	echo '&nbsp&nbsp&nbsp&nbsp<a href="'.$_SERVER['PHP_SELF'].'?action=PREVDAY&fecha='.$this->datos[0]['fecha'].'"><img witdh=40 height=40 src="../Views/images/prevArrow.png"></a>&nbsp';
+	 echo '&nbsp&nbsp&nbsp&nbsp<a href="'.$_SERVER['PHP_SELF'].'?action=NEXTDAY&fecha='.$this->datos[0]['fecha'].'"><img witdh=40 height=40 src="../Views/images/nextArrow.png"></a>';
 		?>
 		<table class="tablas separador">
 						<tr>
