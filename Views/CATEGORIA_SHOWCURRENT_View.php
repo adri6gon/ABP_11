@@ -2,10 +2,11 @@
 
 class CATEGORIA_SHOWCURRENT {
 
-	function __construct($array,$volver,$lista){
+	function __construct($array,$volver,$lista,$admin){
 		$this->datos = $array;
 		$this->volver = $volver;
 		$this->lista = $lista;
+		$this->admin = $admin;
 		//$this->lista2 = $lista2;
 		//$this->arg = $arg;		
 		$this->render();
@@ -43,7 +44,9 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 							}*/
 					?>
 				</table>
-
+				<?php
+					if($this->admin){
+				?>			
 				<table class="tablas"><tr><th>
 				<p>Generar grupos 
 					<?php
@@ -51,7 +54,9 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 					?>	
 					</p></th></tr>
 			</table>
-
+						<?php
+					}
+						?>
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 <?php		
 	include 'Footer.php';
