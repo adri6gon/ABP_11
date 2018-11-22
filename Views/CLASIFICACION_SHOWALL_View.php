@@ -17,7 +17,7 @@ class CLASIFICACION_SHOWALL {
 					if($this->datos){
 						$grupo = null;
 						for($j=0;$j<count($this->datos);$j++){
-							var_dump(count($this->datos));
+							//var_dump(count($this->datos));
 							if($grupo != $this->datos[$j][0]){
 								$grupo = $this->datos[$j][0];
 								echo '<h3>Grupo '.$grupo.':</h3>';
@@ -25,12 +25,12 @@ class CLASIFICACION_SHOWALL {
 								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=CLASIFICACION&idGrupo='.$this->datos[$j][0].'&idCategoria='.$this->datos[$j][13].'&idCampeonato='.$this->datos[$j][14].'">Ver clasificación de este grupo</a>';
 								echo "<table><tr>";
 								echo '<tr>
-								<th>Login1-P1</th><th>Login2-P1</th><th>Login1-P2</th><th>Login2-P2</th><th>Campeonato</th><th>Grupo</th><th>Categoria</th><th>Set1</th><th>Set2</th><th>Set3</th>
+								<th>idEnf</th><th>Login1-P1</th><th>Login2-P1</th><th>Login1-P2</th><th>Login2-P2</th><th>Campeonato</th><th>Grupo</th><th>Categoria</th><th>Set1</th><th>Set2</th><th>Set3</th>
 								</tr>';
 							}else{
 								echo "<tr>";
 							}
-							for($i=1; $i<11;$i++){
+							for($i=1; $i<12;$i++){
 									echo "<td>".$this->datos[$j][$i]."</td>";
 								
 							}
