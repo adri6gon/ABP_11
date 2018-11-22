@@ -73,23 +73,55 @@ if (!isset($_REQUEST['action'])){
 		//g.idGrupo, p1.login1,p1.login2,p2.login1,p2.login2,c.nombre, g.nombre, cat.nivel,`set1`, `set2`, `set3`, p1.idPareja,p2.idPareja, c.idCampeonato, cat.idCategoria
 		$parejasPuntos = array();
 		unset($parejasPuntos);
+		for($j = 0; $j < count($parejas); $j++){
+			array_push($parejas[$j],0);
+		}
+
 		for($i = 0;$i<count($datos);$i++){
 			$ganador = ganador($datos[$i]);
-			$ganadorString = (string)$ganador;
+
 			if($ganador){
-				$parejasPuntos[$ganadorString] +=3;
+				//$parejasPuntos[$ganadorString] +=3;
+				//$parejas[$ganadorString][3] +=3;
+				$a = getpos($ganador,$parejas);
+				if(isset($parejas[$a][3])){
+					//$parejasPuntos[$pareja2] +=1;{}
+					$parejas[$a][3] +=3;}
 				if($datos[$i][11]!=$ganador){
-				$pareja1 = (string)$datos[$i][11];
-				$parejasPuntos[$pareja1] +=1;
+				$pareja1 = $datos[$i][11];
+				//$parejasPuntos[$pareja1] +=1;
+				//$parejas[$pareja1][3] +=1;
+				$a = getpos($pareja1,$parejas);
+				if(isset($parejas[$a][3])){
+					//$parejasPuntos[$pareja2] +=1;{}
+					$parejas[$a][3] +=1;}
 				}else{
-					$pareja2 = (string)$datos[$i][12];
-					$parejasPuntos[$pareja2] +=1;
+					$pareja2 = $datos[$i][12];
+					$a = getpos($pareja2,$parejas);
+					if(isset($parejas[$a][3])){
+					//$parejasPuntos[$pareja2] +=1;{}
+					$parejas[$a][3] +=1;}
 				}
-			}			
+			}	
+
 		}
-		var_dump($parejasPuntos);
+
+		$isOrdered = false;
+		while(!$isOrdered){
+		$isOrdered = true;
+			for($i = 1; $i < count($parejas); $i++){
+				if($parejas[$i][3] > $parejas[$i - 1][3]){
+					$aux = $parejas[$i];
+					$parejas[$i] = $parejas[$i - 1];
+					$parejas[$i - 1] = $aux;	
+					$isOrdered = false;
+			}
+		}
+		
+	}
+
 		//Array indice: idPareja ->valor:puntos en este grupo(Funcionando)
-		new CLASIFICACION_GRUPO_SHOWALL($parejas,'../Controllers/CLASIFICACION_Controller.php?action=CRUCES&idGrupo='.$_REQUEST['idGrupo'].'&idCampeonato='.$_REQUEST['idCampeonato'],$parejasPuntos);
+		new CLASIFICACION_GRUPO_SHOWALL($parejas,'../Controllers/CLASIFICACION_Controller.php?action=CRUCES&idGrupo='.$_REQUEST['idGrupo'].'&idCampeonato='.$_REQUEST['idCampeonato']);
 	}
 	function ganador($partido){
 		$set1 = $partido[8];
@@ -117,5 +149,19 @@ if (!isset($_REQUEST['action'])){
 			return 0;
 		}
 		
+	}
+
+	function getpos($id, $array){
+
+		$toret= null;
+		$i=0;
+		for($i=0;$i<count($array);$i++){
+
+			if($id == $array[$i][0]){
+				$toret = $i;
+			}
+		}
+
+		return $toret;
 	}
 ?>
