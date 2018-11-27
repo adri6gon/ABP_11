@@ -158,11 +158,13 @@ function EDIT()
 function RESERVE($login)
 {
 	// se construye la sentencia de busqueda de la tupla en la bd
-    $sql = "SELECT * FROM PISTA_USUARIO WHERE (idPista = '$this->idPista' & Pistanombre = '$this->nombre')";
+	$sql = "SELECT * FROM PISTA_USUARIO WHERE (idPista = '$this->idPista' & Pistanombre = '$this->nombre')";
+	$sql2 = "SELECT * FROM PISTA_USUARIO WHERE (Usuariologin='$login')";
 	// se ejecuta la query
-    $result = $this->mysqli->query($sql);
+	$result = $this->mysqli->query($sql);
+	$resultado = $this->mysqli->query($sql2);
     // si el numero de filas es igual a 0 hacemos la reserva--> Pista libre
-    if ($result==null)
+    if ($result==null && $resultado->num_rows<5)
     {
 		$sqlIns = "INSERT INTO `PISTA_USUARIO`(`PistaidPista`, `Usuariologin`, `Pistanombre`) VALUES ('$this->idPista','$login','$this->nombre')";
 		// si hay un problema con la query se envia un mensaje de error en la modificacion
@@ -180,8 +182,8 @@ function RESERVE($login)
 				return 'Reservado correctamente';
 			}
 		}
-		}else{
-			return 'Pista ocupada.';
+	}else{
+		return 'Pista ocupada o limite alcanzado.';
 	}
 }
 function YOUR_RESERVES($login)

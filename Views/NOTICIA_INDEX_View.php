@@ -38,7 +38,7 @@ echo "style='margin-top:80px;'";?>>
 			
 			<div class="noticia">
 				<br><img src="../Views/images/matchpadel.jpg" width=130px ><br>
-				<p><strong>Fecha: </strong> <?= $this->partidos[$j]["fecha"] ?> </p>
+				<p><strong>Fecha: </strong> <?php echo $this->partidos[$j]["fecha"]; ?> </p>
 				<p><strong>Hora:</strong> <?= $this->partidos[$j]["hora"] ?> </p>
 				<p><strong>Pista: </strong><?= $this->partidos[$j]["Pistanombre"] ?> </p>
 				<?php if(isset($_SESSION['login'])){ 

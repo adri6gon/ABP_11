@@ -33,6 +33,7 @@ else{
 
 		$selectUser = $PARTIDOS->_SELECTUSER();
 
+		//var_dump($numInscritos);
 		new NOTICIA_INDEX_VIEW($datosNoticias,$listaNoticias, $partidos, $numInscritos, $selectUser);
 
 
