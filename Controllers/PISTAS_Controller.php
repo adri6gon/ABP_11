@@ -212,8 +212,12 @@ if (!isset($_REQUEST['action'])){
 			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
-               	//Ejecutamos el borrado de la reserva
-				$reserva = $PISTAS->DEL_RESERVES($_SESSION['login']);
+				   //Ejecutamos el borrado de la reserva
+				if(comprobarRol('admin')){
+					$reserva = $PISTAS->DEL_RESERVES_ADMIN();
+				}else{
+					$reserva = $PISTAS->DEL_RESERVES($_SESSION['login']);
+				}
 				new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php?action=RESERVAS');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');

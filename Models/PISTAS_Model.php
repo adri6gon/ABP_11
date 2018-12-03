@@ -242,6 +242,30 @@ function DEL_RESERVES($login){
 		}
 	}
 }
+function DEL_RESERVES_ADMIN(){
+	$sql = "SELECT * from PISTA_USUARIO where PistaidPista = '".$this->idPista."' AND Pistanombre='".$this->nombre."'";
+	$result = $this->mysqli->query($sql);
+	if ($result->num_rows == 0){
+		return 'La RESERVA no existe, no se puede borrar.';
+	}
+	else{
+		$sqlBorrar = "DELETE FROM PISTA_USUARIO WHERE PistaidPista = '".$this->idPista."' AND Pistanombre='".$this->nombre."'";
+		if(!$this->mysqli->query($sqlBorrar)){
+			return 'Error en el borrado.';
+		}
+		else{ 
+			$sqlRestri = "UPDATE PISTA SET 
+							restriccion = 0				
+						WHERE ( idPista = '$this->idPista'
+						)";
+			if($this->mysqli->query($sqlRestri)){
+				return 'Reserva borrada con exito.';
+			}else{
+				return 'Error en la restriccion';
+			}
+		}
+	}
+}
 }//fin Modelo
 
 
