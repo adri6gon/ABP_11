@@ -1,9 +1,3 @@
-<!--
-Funcion del archivo: Archivo que contiene el show all de todos los campeonatos para usuarios
-Autor: Luis
-Fecha: 05/11/18
--->
-
 <?php
 class CAMPEONATO_SHOWALL_USER {
 
@@ -28,7 +22,7 @@ class CAMPEONATO_SHOWALL_USER {
 					<table class="tablas separador">
 						<tr>
 						<?php
-						for($i=0; $i<count($this->lista);$i++){
+						for($i=1; $i<count($this->lista);$i++){
 								echo "<th>".$this->lista[$i]."</th>";			
 						}
 						echo "<th>Acciones</th></tr>";
@@ -41,7 +35,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 							//$atributos = array('login', 'password', 'DNI', 'nombre', 'apellidos', 'telefono', 'email', 'FechaNacimiento', 'fotopersonal', 'sexo');
 							for($j=0;$j<count($this->datos);$j++){
 								echo "<tr>";
-								for($i=0; $i<count($this->lista);$i++){
+								for($i=1; $i<count($this->lista);$i++){
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
