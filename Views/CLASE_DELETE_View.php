@@ -30,7 +30,7 @@ class CLASE_DELETE {
 
 					?>
 				</table>
-				<p><a href="<?php echo $this->volver; ?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=DELETE&borrar=true&idClase=<?php echo $this->datos['idClase'];?>"><img src="../Views/images/borrar3.png" title="Borrar" alt="Borrar"></a></p>
+				<p><a href="<?php echo $this->volver; ?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=DELETE&borrar=true&idClase=<?php echo $this->datos['idClase'];?>&idPista=<?echo $this->datos['idPista'];?>&Pistanombre=<? echo $this->datos['Pistanombre'];?>"><img src="../Views/images/borrar3.png" title="Borrar" alt="Borrar"></a></p>
 <?php
 						
 	include 'Footer.php';

@@ -31,7 +31,11 @@
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('admin')){
 						echo '<li><a href="./ESCUELAS_Controller.php">ESCUELAS</a></li>';
-					}		
+					}
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./CLASES_Controller.php">CLASES</a></li>';
+					}
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('deportista')){
 						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';

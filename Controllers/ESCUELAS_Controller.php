@@ -12,13 +12,11 @@ if (!IsAuthenticated()){
 include_once '../Models/ESCUELAS_Model.php';
 //VISTAS ESCUELA
 include '../Views/ESCUELA_SHOWALL_View.php';
-include '../Views/ESCUELA_SHOWALL_USER_View.php';
 include '../Views/ESCUELA_SEARCH_View.php';
 include '../Views/ESCUELA_ADD_View.php';
 include '../Views/ESCUELA_DELETE_View.php';
 include '../Views/ESCUELA_EDIT_View.php';
 include '../Views/ESCUELA_SHOWCURRENT_View.php';
-include '../Views/ESCUELA_INSCRIBIRSE_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 

@@ -17,7 +17,12 @@ class CLASE_SHOWALL {
 <div style="overflow-x:auto;">
 				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CLASE';}else{echo 'Tabla Busqueda de CLASE';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
-							<a href="<?php $_SERVER['PHP_SELF'] ?>?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
+						<?
+							if(comprobarRol('admin')){
+								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>$nbsp';
+							}
+						?>
+							 <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
 					</div>
 					<table class="tablas separador">
 						<tr>
@@ -42,7 +47,13 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
-								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/editar.png"></a>&nbsp <a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/borrar.png"></a> <a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png"> <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
+								echo '<td>';
+								if(comprobarRol('admin')){
+									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/editar.png"></a>&nbsp 
+											<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/borrar.png"></a>';
+								}
+										  echo '<a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png"> 
+										  <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
 								
 							}
 							?>

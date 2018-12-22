@@ -26,7 +26,7 @@ function __construct($idEscuela, $idClase, $fecha,$hora, $capacidadAlumnos, $idP
 }
 
 function RellenaDatos(){
-    $sql = "SELECT E.nombre , C.fecha, C.hora, C.capacidadAlumnos, C.Pistanombre, C.entrenador,C.idClase FROM CLASES C,ESCUELA_DEPORTIVA E WHERE C.idEscuela = E.idEscuela && C.idClase='$this->idClase'";
+    $sql = "SELECT E.nombre , C.fecha, C.hora, C.capacidadAlumnos, C.Pistanombre, C.entrenador,C.idClase, C.idPista FROM CLASES C,ESCUELA_DEPORTIVA E WHERE C.idEscuela = E.idEscuela && C.idClase='$this->idClase'";
 	$result = $this->mysqli->query($sql);  
 	if($result ->num_rows >0){
 		$tupla = mysqli_fetch_assoc($result);		  
@@ -68,8 +68,6 @@ function _SHOWALL(){
 function ADD(){
 	//var_dump($this);
 	//exit();
-    if (!($this->idCategoria <> '')){ // si el atributo clave de la entidad no esta vacio
-		
 		// construimos el sql para buscar esa clave en la tabla
         $sql = "SELECT * FROM CLASES WHERE (idClase = '$this->idClase')";
         //$sql2 = "SELECT * FROM CAMPEONATO WHERE (idCampeonato = '$this->idCampeonato')";
@@ -80,9 +78,8 @@ function ADD(){
 		else { // si la ejecución de la query no da error
 			if ($result->num_rows == 0 /*AND $result2->num_rows == 0*/){ // miramos si el resultado de la consulta es vacio (no existe el login)
 				//construimos la sentencia sql de inserción en la bd
-				$sql = "INSERT INTO `CLASES`(idEscuela, idClase, fecha,hora,capacidadAlumnos,idPista,Pistanombre, entrenador) 
+				$sql = "INSERT INTO `CLASES`(idEscuela, fecha,hora,capacidadAlumnos,idPista,Pistanombre, entrenador) 
 				VALUES ('$this->idEscuela',
-						'$this->idClase',
 						'$this->fecha',
 						'$this->hora',
 						'$this->capacidadAlumnos',
@@ -100,10 +97,6 @@ function ADD(){
 			else // si ya existe ese valor de clave en la tabla devolvemos el mensaje correspondiente
 				return 'Ya existe en la base de datos'; // ya existe
 		}
-    }
-    else{ // si el atributo clave de la bd es vacio solicitamos un valor en un mensaje
-        return 'Introduzca un valor'; // introduzca un valor para el usuario
-	}
 } 
 
 //funcion DELETE : comprueba que la tupla a borrar existe y una vez
@@ -185,6 +178,49 @@ function SEARCH(){
 		return $tuplas;
 	}else{
 		return false;
+	}
+}
+function getEscuelas(){
+	$sql = "SELECT idEscuela, nombre FROM ESCUELA_DEPORTIVA";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_row($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
+function isFull(){
+	$sql = "SELECT capacidadAlumnos from CLASES where idClase = '".$this->idClase."'";
+	$sql2 = "SELECT COUNT(Usuariologin) FROM `USUARIO_CLASES` WHERE idClase = '".$this->idClase."'";
+	$result = $this->mysqli->query($sql);  
+	$resultado = $this->mysqli->query($sql2);  
+	$primero =  mysqli_fetch_row($result);
+	$segundo =  mysqli_fetch_row($resultado);
+	if($primero[0] == $segundo[0]){
+		return true;
+	}else{
+		return false;
+	}
+}
+function inscribirse($login){
+	$sql = "SELECT * FROM `USUARIO_CLASES` WHERE idClase = '".$this->idClase."' && Usuariologin='".$login;
+	$result =$this->mysqli->query($sql);
+	if($result->num_rows){
+		$sqlIns = "INSERT INTO `USUARIO_CLASES`(`Usuariologin`, `idClase`) VALUES ('$login','$this->idClase')";
+		if (!$this->mysqli->query($sqlIns)) { // si da error en la ejecución del insert devolvemos mensaje
+			return 'Error en la inscripción';
+		}
+		else{ //si no da error en la insercion devolvemos mensaje de exito
+			return 'Inscripción realizada con éxito'; //operacion de insertado correcta
+		}
+	}else{
+		return "El usuario ya esta inscrito en esta clase";
 	}
 }
 }

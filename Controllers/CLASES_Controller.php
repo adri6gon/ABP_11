@@ -10,12 +10,14 @@ if (!IsAuthenticated()){
 
 //MODELO CLASE
 include_once '../Models/CLASES_Model.php';
+include_once '../Models/PISTAS_Model.php';
 //VISTAS CLASE
 include '../Views/CLASE_SHOWALL_View.php';
 include '../Views/CLASE_SEARCH_View.php';
 include '../Views/CLASE_ADD_View.php';
 include '../Views/CLASE_DELETE_View.php';
 include '../Views/CLASE_EDIT_View.php';
+include '../Views/CLASE_INSCRIBIRSE_View.php';
 include '../Views/CLASE_SHOWCURRENT_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
@@ -62,16 +64,28 @@ Switch ($_REQUEST['action']){
 			if(comprobarRol('admin')){
 				if(!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
-					$CLASE = new CLASES_Model('','','','','','','');
+					$CLASE = new CLASES_Model('','','','','','','','');
 					//Datos campeonato
-                    $datos = $CLASE->RellenaDatosCampeonato();
+					$escuelas = $CLASE->getEscuelas();
+					//var_dump($escuelas);
+					//exit();
                     //Nueva vista
-					$add = new ADD_CLASE($datos,$lista2,'../Controllers/CLASES_Controller.php');
+					$add = new ADD_CLASE($escuelas,'../Controllers/CLASES_Controller.php');
 				}else{//Si no viene vacio
                     //Recoge los datos con getdataform
 					$CLASE = get_data_form();
-                    //LLamas al add del modelo
-					$respuesta = $CLASE->ADD();				
+					//var_dump($CLASE);
+					//exit();
+					//LLamas al add del modelo
+					//Reservar pista para las clases antes de realizar inserccion de la clase
+					$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['Pistanombre'], '','');
+					//Ejecutamos la reserva
+					$reserva = $PISTAS->RESERVE($_SESSION['login']);
+					if($reserva = 'Reservado correctamente' ){
+						$respuesta = $CLASE->ADD();
+					}else{
+						$respuesta = $reserva;
+					}			
 					include_once '../Functions/Authentication.php';
 					if(!IsAuthenticated()){//Si no esta autenticado
 						new MESSAGE($respuesta,'../Controllers/Login_Controller.php');
@@ -94,7 +108,10 @@ Switch ($_REQUEST['action']){
 					$CLASES= new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
 					if(isset($_GET['borrar'])){//Si recibe orden de borrar
 						//$respuesta1 =$CAMPEONATOS->DEL_IMG();
-                        //Borra con delete del modelo
+						//Borra con delete del modelo
+						$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['Pistanombre'], '','');
+						//Ejecutamos la reserva
+						$reserva = $PISTAS->DEL_RESERVES($_SESSION['login']);
 						$respuesta = $CLASES->_DELETE();
 						// mensaje con el volver y delete
 						new MESSAGE($respuesta, '../Controllers/CLASES_Controller.php');
@@ -177,23 +194,27 @@ Switch ($_REQUEST['action']){
 				new MESSAGE($alerta,'../Controllers/CLASES_Controller.php');
 			}
 				break;
-		case 'GENERAR':
+		case 'INSCRIBIR':
+				if(!$_GET){	
+					$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
+					//Recoge los datos de usuarios
+					$valores = $CLASES->RellenaDatos();
+					$tope = $CLASES->isFull();
+					$admin = false;
 				if(comprobarRol('admin')){
-                    	//Recoge los datos con getdataform
-						$CLASES = new CLASES_Model($_REQUEST['idClase'], '', '', '','','','');
-                    	//LLamas al add del modelo
-						$respuesta = $CLASES->GENERATE_GROUPS();				
-						include_once '../Functions/Authentication.php';
-						if(!IsAuthenticated()){//Si no esta autenticado
-							new MESSAGE($respuesta,'../Controllers/Login_Controller.php');
-						}else{//Si esta autenticado
-							new MESSAGE($respuesta,'../Controllers/CLASES_Controller.php');
-						}
-					
-				}//Si no tiene los permisos mostramos el mensaje de alerta
-				else{
-					new MESSAGE($alerta,'../Controllers/CLASES_Controller.php');
-
+					$admin = true;
+				}
+					new INSCRIBIRSE_CLASE('../Controllers/CLASES_Controller.php',$lista,$valores,$admin,$tope);
+				}else{
+					$idClase = $_REQUEST['idClase'];
+					if(isset($_POST['login'])){
+						$login = $_POST['login'];
+					}else{
+						$login = $_SESSION['login'];
+					}
+					$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
+					$respuesta = $CLASES->inscribirse($login);
+					new MESSAGE($respuesta,'../Controllers/CLASES_Controller.php');
 				}
 				break;
 		default: //Default entra el showall
