@@ -209,9 +209,9 @@ function isFull(){
 	}
 }
 function inscribirse($login){
-	$sql = "SELECT * FROM `USUARIO_CLASES` WHERE idClase = '".$this->idClase."' && Usuariologin='".$login;
+	$sql = "SELECT * FROM `USUARIO_CLASES` WHERE idClase = ".$this->idClase." && Usuariologin='".$login."'";
 	$result =$this->mysqli->query($sql);
-	if($result->num_rows){
+	if($result->num_rows==0){
 		$sqlIns = "INSERT INTO `USUARIO_CLASES`(`Usuariologin`, `idClase`) VALUES ('$login','$this->idClase')";
 		if (!$this->mysqli->query($sqlIns)) { // si da error en la ejecución del insert devolvemos mensaje
 			return 'Error en la inscripción';

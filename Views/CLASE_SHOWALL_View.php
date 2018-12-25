@@ -19,7 +19,7 @@ class CLASE_SHOWALL {
 					<div id="anhadir-borrar" style="text-align: center;">
 						<?
 							if(comprobarRol('admin')){
-								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>$nbsp';
+								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp';
 							}
 						?>
 							 <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
