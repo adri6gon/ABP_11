@@ -2,12 +2,13 @@
 
 class GRUPO_SHOWCURRENT {
 
-	function __construct($array,$array2,$volver,$lista,$lista2){
+	function __construct($array,$array2,$volver,$lista,$lista2, $admin){
 		$this->datos = $array;
 		$this->datospa = $array2;
 		$this->volver = $volver;
 		$this->lista = $lista;
 		$this->listapa = $lista2;
+		$this->admin = $admin;
 		//$this->arg = $arg;		
 		$this->render();
 	}
@@ -69,7 +70,9 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 					?>
 					
 				</table>
-
+						<?php
+								if($this->admin){
+						?>
 				<table class="tablas"><tr><th>
 				<p>Generar enfrentamientos 
 					<?php
@@ -79,6 +82,9 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 					</p></th></tr>
 
 			</table>
+			<?php
+								}
+			?>
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 <?php		
 	include 'Footer.php';

@@ -82,14 +82,19 @@ Switch ($_REQUEST['action']){
                 //Recoge los datos de usuarios
 				$valores = $GRUPOS->RellenaDatos();
 				$valores2 = $GRUPOS->RellenaParejas();
+				$admin = false;
+				if(comprobarRol('admin')){
+					$admin = true;
+				}
                 //Nueva vista
                 //var_dump($valores2);
                 //var_dump($listapa);
-				new GRUPO_SHOWCURRENT($valores,$valores2,'../Controllers/GRUPOS_Controller.php',$lista,$listapa);
+				new GRUPO_SHOWCURRENT($valores,$valores2,'../Controllers/GRUPOS_Controller.php',$lista,$listapa,$admin);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
 			}
 				break;
+
 		case 'GENERAR':
 				if(comprobarRol('admin')){
                     	//Recoge los datos con getdataform

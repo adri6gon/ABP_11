@@ -1,5 +1,5 @@
 <?php
-class CAMPEONATO_SHOWALL_USER {
+class CLASE_SHOWALL {
 
 	function __construct($search,$lista,$array,$volver){
 		$this->search = $search;
@@ -15,14 +15,22 @@ class CAMPEONATO_SHOWALL_USER {
 ?>
 
 <div style="overflow-x:auto;">
-				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CAMPEONATO';}else{echo 'Tabla Busqueda de CAMPEONATO';} ?>:</h2>
+				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CLASE';}else{echo 'Tabla Busqueda de CLASE';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
+						<?
+							if(comprobarRol('admin')){
+								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp';
+							}
+						?>
 							 <a href="<?php $_SERVER['PHP_SELF'] ?>?action=SEARCH"><img src="../Views/images/busqueda.png"></a>
 					</div>
 					<table class="tablas separador">
 						<tr>
 						<?php
-						for($i=1; $i<count($this->lista);$i++){
+						for($i=0; $i<count($this->lista);$i++){
+                            if($i==0 && !$this->search)
+                                echo "<th>Escuela Deportiva</th>";
+                            else
 								echo "<th>".$this->lista[$i]."</th>";			
 						}
 						echo "<th>Acciones</th></tr>";
@@ -35,11 +43,17 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 							//$atributos = array('login', 'password', 'DNI', 'nombre', 'apellidos', 'telefono', 'email', 'FechaNacimiento', 'fotopersonal', 'sexo');
 							for($j=0;$j<count($this->datos);$j++){
 								echo "<tr>";
-								for($i=1; $i<count($this->lista);$i++){
+								for($i=0; $i<count($this->lista);$i++){
 										echo "<td>".$this->datos[$j][($this->lista)[$i]]."</td>";
 									
 								}
-								echo '<td><a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/Inscribirse.png"> <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
+								echo '<td>';
+								if(comprobarRol('admin')){
+									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/editar.png"></a>&nbsp 
+											<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/borrar.png"></a>';
+								}
+										  echo '<a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png"> 
+										  <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
 								
 							}
 							?>

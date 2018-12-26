@@ -118,7 +118,7 @@ function SEARCH(){
 }
 
 function genEnf($ParejaActual, $numParejas, $ArrayParejas){
-
+	$band = false;
 	for($i = $ParejaActual+1; $i < $numParejas; $i++){
 		$this->emparejar($ParejaActual, $i, $ArrayParejas);
 	} 
@@ -126,7 +126,6 @@ function genEnf($ParejaActual, $numParejas, $ArrayParejas){
 		return true;
 	}else{
 		return $this->genEnf($ParejaActual+1,$numParejas,$ArrayParejas);
-		
 	}
 
 }

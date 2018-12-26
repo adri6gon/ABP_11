@@ -85,6 +85,22 @@ function _SHOWALL(){
 	}
 }
 
+function getIdCampeonato(){
+	$sql = "SELECT idCampeonato FROM GRUPO WHERE idCampeonato='$this->GrupoIdCampeonato'";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_assoc($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
+
 //funcion SEARCH: hace una búsqueda en la tabla con
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH(){
@@ -219,6 +235,26 @@ function getResultadosGrupo(){
 function getParejas()
 {
 	$sql = "SELECT `idPareja`, `login1`, `login2` FROM PAREJA p, GRUPO_PAREJA gp WHERE gp.GrupoidGrupo ='$this->idGrupo' AND gp.ParejaidPareja = p.idPareja AND gp.GrupoidCampeonato = '$this->GrupoIdCampeonato'";
+	 // se ejecuta la query
+	 $result = $this->mysqli->query($sql);
+	 // var_dump($result);
+		   //exit();
+	   if($result->num_rows>0){
+		   //
+		   $j = 0;
+		   while($tupla = mysqli_fetch_array($result)){
+			  $tuplas[$j] = $tupla;
+			  $j++;		
+		   }
+		   return $tuplas;
+	   }else{
+		   return false;
+	   }
+}
+
+function getGrupos()
+{
+	$sql = "SELECT `idGrupo` FROM GRUPO WHERE idCategoria='$this->GrupoIdCategoria'";
 	 // se ejecuta la query
 	 $result = $this->mysqli->query($sql);
 	 // var_dump($result);

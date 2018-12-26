@@ -26,13 +26,9 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 $lista2 como array auxiliar para enviar datos de otra tabla a esta vista p.e: Campeonatos de un mismo grupo
 $arg es un string auxiliar para enviar el nombre de los atributos del array auxiliar p.e: Enviar "Miembro " y concatenar -->
 					<?php	
-							for($j=0;$j<count($this->lista);$j++){
+							for($j=1;$j<count($this->lista);$j++){
 								echo "<tr>";
-								if(($this->lista)[$j]!='Ruta'){
 									echo "<th>".($this->lista)[$j]."</th><td>".$this->datos[($this->lista)[$j]]."</td>";
-								}else{									
-									echo "<th>".($this->lista)[$j]."</th><td><a href='".$this->datos[($this->lista)[$j]]."' target='_blank'>".$this->datos[($this->lista)[$j]]."</a></td>";
-									}
 								echo "<tr>";
 							}
 							/*if($this->lista2!=''){

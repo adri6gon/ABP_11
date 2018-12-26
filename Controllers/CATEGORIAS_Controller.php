@@ -161,8 +161,11 @@ Switch ($_REQUEST['action']){
 				$CATEGORIAS = new CATEGORIAS_Model($_REQUEST['idCategoria'], '', '', '');
                 //Recoge los datos de usuarios
 				$valores = $CATEGORIAS->RellenaDatos();
+				$admin = false;
+				if(comprobarRol('admin'))
+					$admin = true;
                 //Nueva vista
-				new CATEGORIA_SHOWCURRENT($valores,'../Controllers/CATEGORIAS_Controller.php',$lista);
+				new CATEGORIA_SHOWCURRENT($valores,'../Controllers/CATEGORIAS_Controller.php',$lista,$admin);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/CATEGORIAS_Controller.php');
 			}
@@ -196,12 +199,16 @@ Switch ($_REQUEST['action']){
 				else{//Recoge los datos
 					$CATEGORIAS = get_data_form();
 				}
+				$admin= false;
+				if(comprobarRol('admin')){
+					$admin = true;
+				}
 				//var_dump($USUARIOS);
 				//exit();
                 //Llama al showall del modelo
 				$datos = $CATEGORIAS->_SHOWALL();
                 //Nueva vista
-				new CATEGORIA_SHOWALL(false,$lista, $datos, '../index.php');
+				new CATEGORIA_SHOWALL(false,$lista, $datos, '../index.php',$admin);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/CATEGORIAS_Controller.php');
 			}

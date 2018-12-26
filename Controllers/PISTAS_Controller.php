@@ -121,21 +121,23 @@ if (!isset($_REQUEST['action'])){
 		//Si no teine permisos
 			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
+					
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])-86400);
-					$PISTAS = new PISTAS_Model('','', '', '', $siguiente);
+					if(!($siguiente < date("Y-m-d",strtotime('2018-11-22')))){
+						$PISTAS = new PISTAS_Model('','', '', '', $siguiente);
+						$datos = $PISTAS->_SHOWALL();
+						//var_dump($PISTAS);
+						$pistas = $PISTAS->_SHOWNAMES();
+						//Nueva vista
+						new PISTA_SHOWALL($lista,$pistas, $datos, '../index.php');
+					}else{
+						new MESSAGE("No existen pistas disponibles","../Controllers/PISTAS_Controller.php");
+					}
 				}
 				else{//Recoge los datos
 					$PISTAS = get_data_form();
 				}
-				//var_dump($PISTAS);
-				//exit();
-                //Llama al showall del modelo
-				$datos = $PISTAS->_SHOWALL();
-				//var_dump($PISTAS);
-				$pistas = $PISTAS->_SHOWNAMES();
-                //Nueva vista
-				new PISTA_SHOWALL($lista,$pistas, $datos, '../index.php');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}
@@ -147,19 +149,20 @@ if (!isset($_REQUEST['action'])){
 				if (!$_POST){//Si viene vacio
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])+86400);
-					$PISTAS = new PISTAS_Model('','', '', '', $siguiente);
+					if(!($siguiente > date("Y-m-d",strtotime('2018-11-29')))){
+						$PISTAS = new PISTAS_Model('','', '', '', $siguiente);
+						$datos = $PISTAS->_SHOWALL();
+						//var_dump($PISTAS);
+						$pistas = $PISTAS->_SHOWNAMES();
+						//Nueva vista
+						new PISTA_SHOWALL($lista,$pistas, $datos, '../index.php');
+					}else{
+						new MESSAGE("No existen pistas disponibles","../Controllers/PISTAS_Controller.php");
+					}
 				}
 				else{//Recoge los datos
 					$PISTAS = get_data_form();
 				}
-				//var_dump($PISTAS);
-				//exit();
-                //Llama al showall del modelo
-				$datos = $PISTAS->_SHOWALL();
-				//var_dump($PISTAS);
-				$pistas = $PISTAS->_SHOWNAMES();
-                //Nueva vista
-				new PISTA_SHOWALL($lista,$pistas, $datos, '../index.php');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}
@@ -209,8 +212,12 @@ if (!isset($_REQUEST['action'])){
 			if(comprobarRol('deportista')){
                 //nuevo modelo de PISTAS
 				$PISTAS = new PISTAS_Model($_REQUEST['idPista'], '', $_REQUEST['nombre'], '','');
-               	//Ejecutamos el borrado de la reserva
-				$reserva = $PISTAS->DEL_RESERVES($_SESSION['login']);
+				   //Ejecutamos el borrado de la reserva
+				if(comprobarRol('admin')){
+					$reserva = $PISTAS->DEL_RESERVES_ADMIN();
+				}else{
+					$reserva = $PISTAS->DEL_RESERVES($_SESSION['login']);
+				}
 				new MESSAGE($reserva,'../Controllers/PISTAS_Controller.php?action=RESERVAS');
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../Controllers/PISTAS_Controller.php');
@@ -221,7 +228,7 @@ if (!isset($_REQUEST['action'])){
 			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
-					$PISTAS = new PISTAS_Model('','', '', '', '2018-11-20');
+					$PISTAS = new PISTAS_Model('','', '', '', '2018-11-22');
 				}
 				else{//Recoge los datos
 					$PISTAS = get_data_form();
