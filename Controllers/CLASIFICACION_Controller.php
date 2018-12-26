@@ -69,6 +69,7 @@ if (!isset($_REQUEST['action'])){
 		}
 	}else if($_REQUEST['action']=='CLASIFICACION'){
 
+
 		$parejas = getClas($_REQUEST['idGrupo'],$_REQUEST['idCampeonato']);
 
 
@@ -137,7 +138,6 @@ if (!isset($_REQUEST['action'])){
 
 		//Array indice: idPareja ->valor:puntos en este grupo(Funcionando)
 		new CLASIFICACION_PLAYOFF($idgrupos,$aux,'../Controllers/CATEGORIAS_Controller.php');
-
 	}
 
 
@@ -183,6 +183,7 @@ if (!isset($_REQUEST['action'])){
 
 		return $toret;
 	}
+
 
 	function getClas($idGroup,$idChamp){
 		$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model('',$idGroup,'','','',$idChamp,'','','');
