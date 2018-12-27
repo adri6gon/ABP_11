@@ -8,15 +8,13 @@ if (!IsAuthenticated()){
 	header('Location:../index.php');
 } 
 
-//MODELO CAMPEONATO
+
 include_once '../Models/PARTIDOS_Model.php';
 include_once '../Models/USUARIOSPARTIDOS_Model.php';
-//VISTAS CAMPEONATO
- include '../Views/PARTIDO_SHOWALL_View.php';
-// include '../Views/CAMPEONATO_SEARCH_View.php';
+
+include '../Views/PARTIDO_SHOWALL_View.php';
+
 include '../Views/PARTIDO_ADD_View.php';
-// include '../Views/CAMPEONATO_EDIT_View.php';
-// include '../Views/CAMPEONATO_SHOWCURRENT_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 
