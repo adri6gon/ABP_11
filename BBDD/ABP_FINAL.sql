@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-12-2018 a las 17:21:22
+-- Tiempo de generación: 27-12-2018 a las 16:34:32
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -136,6 +136,14 @@ CREATE TABLE `CLASES` (
   `Pistanombre` varchar(30) NOT NULL,
   `entrenador` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `CLASES`
+--
+
+INSERT INTO `CLASES` (`idEscuela`, `idClase`, `fecha`, `hora`, `capacidadAlumnos`, `idPista`, `Pistanombre`, `entrenador`) VALUES
+(1, 1, '2018-12-18', '18:00:00', 5, 3, 'Court 1', 'noe'),
+(3, 2, '2018-12-20', '00:59:00', 5, 11, 'Court2', 'noe');
 
 -- --------------------------------------------------------
 
@@ -281,8 +289,17 @@ INSERT INTO `ENFRENTAMIENTO` (`idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPar
 
 CREATE TABLE `ESCUELA_DEPORTIVA` (
   `idEscuela` int(10) NOT NULL,
-  `nombre` varchar(30) NOT NULL
+  `nombre` varchar(50) NOT NULL,
+  `Fundacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ESCUELA_DEPORTIVA`
+--
+
+INSERT INTO `ESCUELA_DEPORTIVA` (`idEscuela`, `nombre`, `Fundacion`) VALUES
+(1, 'Escuela1', '2018-12-19'),
+(3, 'Escuela2', '2018-12-20');
 
 -- --------------------------------------------------------
 
@@ -488,7 +505,7 @@ INSERT INTO `PISTA` (`idPista`, `restriccion`, `nombre`, `hora`, `fecha`) VALUES
 (8, 0, 'Court2', '09:00:00', '2018-11-22'),
 (9, 1, 'Court2', '10:30:00', '2018-11-22'),
 (10, 1, 'Court2', '12:00:00', '2018-11-22'),
-(11, 0, 'Court2', '13:30:00', '2018-11-22'),
+(11, 1, 'Court2', '13:30:00', '2018-11-22'),
 (12, 0, 'Court2', '20:00:00', '2018-11-22'),
 (13, 0, 'Court2', '18:30:00', '2018-11-22'),
 (14, 0, 'Court3', '09:00:00', '2018-11-22'),
@@ -756,6 +773,7 @@ INSERT INTO `PISTA_USUARIO` (`PistaidPista`, `Usuariologin`, `Pistanombre`) VALU
 (4, 'luis', 'Court1'),
 (9, 'luis', 'Court2'),
 (10, 'luis', 'Court2'),
+(11, 'adri', 'Court2'),
 (17, 'noe', 'Court3'),
 (19, 'noe', 'Court3');
 
@@ -1123,6 +1141,18 @@ CREATE TABLE `USUARIO_CLASES` (
   `asistencia` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `USUARIO_CLASES`
+--
+
+INSERT INTO `USUARIO_CLASES` (`Usuariologin`, `idClase`, `asistencia`) VALUES
+('alex', 1, 0),
+('bejo', 1, 0),
+('bejoi', 1, 0),
+('costa', 1, 0),
+('luis', 1, 0),
+('luis', 2, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -1280,7 +1310,7 @@ ALTER TABLE `CAMPEONATO`
 -- AUTO_INCREMENT de la tabla `CLASES`
 --
 ALTER TABLE `CLASES`
-  MODIFY `idClase` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idClase` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ENFRENTAMIENTO`
@@ -1292,7 +1322,7 @@ ALTER TABLE `ENFRENTAMIENTO`
 -- AUTO_INCREMENT de la tabla `ESCUELA_DEPORTIVA`
 --
 ALTER TABLE `ESCUELA_DEPORTIVA`
-  MODIFY `idEscuela` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEscuela` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `GRUPO`
