@@ -281,7 +281,7 @@ INSERT INTO `ENFRENTAMIENTO` (`idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPar
 
 CREATE TABLE `ESCUELA_DEPORTIVA` (
   `idEscuela` int(10) NOT NULL,
-  `nombre varchar` int(11) NOT NULL
+  `nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

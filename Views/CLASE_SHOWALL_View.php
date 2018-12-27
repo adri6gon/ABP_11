@@ -17,7 +17,7 @@ class CLASE_SHOWALL {
 <div style="overflow-x:auto;">
 				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CLASE';}else{echo 'Tabla Busqueda de CLASE';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
-						<?
+						<?php
 							if(comprobarRol('admin')){
 								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp';
 							}
