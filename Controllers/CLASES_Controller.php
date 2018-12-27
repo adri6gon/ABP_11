@@ -195,17 +195,37 @@ Switch ($_REQUEST['action']){
 			}
 				break;
 		case 'INSCRIBIR':
-				if(!$_GET){	
+				if($_GET){
+					$idClase = $_REQUEST['idClase'];
+					$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
+					$tope = $CLASES->isFull();
+					//Recoge los datos de usuarios
+					$valores = $CLASES->RellenaDatos();
+					if(isset($_POST['login'])){
+						$login = $_POST['login'];
+					}else{
+						$login = $_SESSION['login'];
+					}
+					if($tope){
+						$respuesta = "Clase llena, no se puede inscribir.";
+					}else
+						$respuesta = $CLASES->inscribirse($login);
+					
+					new MESSAGE($respuesta,'../Controllers/CLASES_Controller.php');
+				}
+				break;
+		case 'INSCRIBIR_ADMIN':
+				if(!$_POST){
 					$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
 					//Recoge los datos de usuarios
 					$valores = $CLASES->RellenaDatos();
 					$tope = $CLASES->isFull();
 					$admin = false;
-				if(comprobarRol('admin')){
-					$admin = true;
-				}
+					if(comprobarRol('admin')){
+						$admin = true;
+					}
 					new INSCRIBIRSE_CLASE('../Controllers/CLASES_Controller.php',$lista,$valores,$admin,$tope);
-				}else{
+			    }else{
 					$idClase = $_REQUEST['idClase'];
 					if(isset($_POST['login'])){
 						$login = $_POST['login'];
@@ -216,7 +236,7 @@ Switch ($_REQUEST['action']){
 					$respuesta = $CLASES->inscribirse($login);
 					new MESSAGE($respuesta,'../Controllers/CLASES_Controller.php');
 				}
-				break;
+				break;	
 		default: //Default entra el showall
         //Si no teine permisos
 			if(comprobarRol('deportista')){
