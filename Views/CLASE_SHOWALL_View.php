@@ -52,6 +52,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/editar.png"></a>&nbsp 
 											<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/borrar.png"></a>';
 									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR_ADMIN&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png">';
+									
 								}else{
 									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png">';
 								}

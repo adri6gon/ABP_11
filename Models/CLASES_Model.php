@@ -223,6 +223,33 @@ function inscribirse($login){
 		return "El usuario ya esta inscrito en esta clase";
 	}
 }
+function getAsistencia(){
+	$sql = "SELECT `Usuariologin`, `asistencia` FROM `USUARIO_CLASES` WHERE `idClase` = '".$this->idClase."'";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$j = 0;
+		while($tupla = mysqli_fetch_row($result)){
+		   $tuplas[$j] = $tupla;
+		   $j++;		
+		}
+		return $tuplas;
+	}
+	else{
+		return  false;
+	}
+}
+
+function setAsistencia($usuario){
+	$sql = "UPDATE USUARIO_CLASES SET asistencia=!asistencia WHERE idClase = '$this->idClase' && Usuariologin='$usuario'";
+        if (!($resultado = $this->mysqli->query($sql))){
+			return false; 
+		}
+		else{ 
+			return true;
+			
+		}
+}
+
 }
 
 

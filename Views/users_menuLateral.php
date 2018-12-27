@@ -13,15 +13,15 @@
 					if(comprobarRol('admin')){
 						echo '<li><a href="./NOTICIAS_Controller.php">NOTICIAS</a></li>';
 					}
-					if(comprobarRol('deportista')){
+					if(comprobarRol('deportista') || comprobarRol('entrenador')){
 						echo '<li><a href="./CAMPEONATOS_Controller.php">CAMPEONATOS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('deportista')){
+					if(comprobarRol('deportista')|| comprobarRol('entrenador')){
 						echo '<li><a href="./CATEGORIAS_Controller.php">CATEGORIAS</a></li>';
 					}
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('deportista')){
+					if(comprobarRol('deportista')|| comprobarRol('entrenador')){
 						echo '<li><a href="./GRUPOS_Controller.php">&nbsp&nbsp&nbsp&nbspGRUPOS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
@@ -33,11 +33,11 @@
 						echo '<li><a href="./ESCUELAS_Controller.php">ESCUELAS</a></li>';
 					}
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('deportista')){
+					if(comprobarRol('deportista')|| comprobarRol('entrenador')){
 						echo '<li><a href="./CLASES_Controller.php">CLASES</a></li>';
 					}
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('deportista')){
+					if(comprobarRol('deportista')|| comprobarRol('entrenador')){
 						echo '<li><a href="./PISTAS_Controller.php">PISTAS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace

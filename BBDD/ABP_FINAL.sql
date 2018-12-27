@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-12-2018 a las 16:34:32
+-- Tiempo de generación: 27-12-2018 a las 18:18:11
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -848,7 +848,7 @@ INSERT INTO `USUARIO` (`login`, `password`, `rol`, `nombre`, `apellidos`) VALUES
 ('iiia1', 'iii', 'deportista', 'i', 'i'),
 ('inmortal', 'inmortal', 'deportista', 'in', 'mortal'),
 ('inmortali', 'inmortal', 'deportista', 'in', 'mortal'),
-('ivan', 'ivan', 'deportista', 'ivan', 'fernandez'),
+('ivan', 'ivan', 'entrenador', 'ivan', 'fernandez'),
 ('ivan1', 'ivan1', 'deportista', 'ivan', 'de dios'),
 ('jacinto', 'jacinto', 'deportista', 'ja', 'cinto'),
 ('jacintoi', 'jacinto', 'deportista', 'ja', 'cinto'),
@@ -1146,9 +1146,9 @@ CREATE TABLE `USUARIO_CLASES` (
 --
 
 INSERT INTO `USUARIO_CLASES` (`Usuariologin`, `idClase`, `asistencia`) VALUES
-('alex', 1, 0),
-('bejo', 1, 0),
-('bejoi', 1, 0),
+('alex', 1, 1),
+('bejo', 1, 1),
+('bejoi', 1, 1),
 ('costa', 1, 0),
 ('luis', 1, 0),
 ('luis', 2, 0);

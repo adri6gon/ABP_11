@@ -29,8 +29,14 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 									echo "<th>".($this->lista)[$j]."</th><td>".$this->datos[($this->lista)[$j]]."</td>";
 								echo "<tr>";
 							}
+
+							
 					?>
 				</table>
+				<?php
+				if(comprobarRol('admin') || comprobarRol('entrenador'))
+					echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ASISTENCIA&idClase='.$this->datos['idClase'].'">Control de asistencia</a>';
+				?>
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 <?php		
 	include 'Footer.php';

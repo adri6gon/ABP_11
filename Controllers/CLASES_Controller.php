@@ -19,6 +19,7 @@ include '../Views/CLASE_DELETE_View.php';
 include '../Views/CLASE_EDIT_View.php';
 include '../Views/CLASE_INSCRIBIRSE_View.php';
 include '../Views/CLASE_SHOWCURRENT_View.php';
+include '../Views/CLASES_ASISTENCIA_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 
@@ -237,6 +238,36 @@ Switch ($_REQUEST['action']){
 					new MESSAGE($respuesta,'../Controllers/CLASES_Controller.php');
 				}
 				break;	
+
+		case 'ASISTENCIA':
+			if(!$_POST){
+				$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
+				$valores = $CLASES->getAsistencia();
+				$asisList = array("Usuariologin","asistencia");
+				new CLASES_ASISTENCIA($asisList,$valores,"../Controllers/CLASES_Controller.php",$_REQUEST['idClase']);
+			}else{
+				$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
+				$valores = $CLASES->getAsistencia();
+				$asistencia = $_POST['asistencia'];
+				$respuesta = true;
+				for($i=0; $i<count($valores);$i++){
+					$usuario = $valores[$i][0];
+					$estado = $valores[$i][1];
+					if(in_array($usuario,$asistencia) && $estado=='0'){
+							$respuesta = $CLASES->setAsistencia($usuario);
+					}elseif(!in_array($usuario,$asistencia) && $estado=='1'){
+							$respuesta = $CLASES->setAsistencia($usuario);
+					}
+				}
+				
+				if(!$respuesta){
+					$resp = "No se han modificado correctamente.";
+				}else{
+					$resp = "Asistencia completada correctamente.";
+				}
+				new MESSAGE($resp,'../Controllers/CLASES_Controller.php');
+			}
+				break;
 		default: //Default entra el showall
         //Si no teine permisos
 			if(comprobarRol('deportista')){
