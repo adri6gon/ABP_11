@@ -2,11 +2,14 @@
 
 class ENFRENTAMIENTO_SHOWCURRENT {
 
-	function __construct($array,$volver,$lista, $admin){
+	function __construct($array,$volver,$lista, $admin,$hora,$fecha,$asignado){
 		$this->datos = $array;
 		$this->volver = $volver;
 		$this->lista = $lista;
 		$this->admin = $admin;
+		$this->hora = $hora;
+		$this->fecha = $fecha;
+		$this->asignado = $asignado;
 		$this->render();
 	}
 
@@ -33,18 +36,26 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 								}else{									
 									echo "<th>".($this->lista)[$j]."</th><td><a href='".$this->datos[($this->lista)[$j]]."' target='_blank'>".$this->datos[($this->lista)[$j]]."</a></td>";
 									}
-								echo "<tr>";
+								echo "</tr>";
 							}
+							echo "<tr><th>Hora propuesta</th><td>".$this->hora."</td></tr>";
+							echo "<tr><th>Fecha propuesta</th><td>".$this->fecha."</td>";
+							echo "</tr>";
 							if($this->admin){
 								//Insertar resultado del enfrentamiento
 								echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=RESULTADO&'.($this->lista)[0].'='.$this->datos["idEnfrentamiento"].'">Insertar resultado</a>';
-							}
-							/*if($this->lista2!=''){
-								for($i=0;$i<count($this->lista2);$i++){
-									$num = (string)$i+1;
-									echo "<tr><th>".$this->arg.$num."</th><td>".($this->lista2)[$i]."</td><tr>";
+							}else{
+								if(!$this->hora && !$this->fecha){
+									echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=PROPONER-HORA&'.($this->lista)[0].'='.$this->datos["idEnfrentamiento"].'"><img src="../Views/images/fijar-hora.png" title="Fijar hora" alt="Fijar hora"></a>';
+								}elseif(!$this->asignado){
+									//Aceptar
+									echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=ACEPTAR-HORA&'.($this->lista)[0].'='.$this->datos["idEnfrentamiento"].'"><img src="../Views/images/fijar-hora.png" title="Aceptar hora" alt="Aceptar hora"></a>';
+									//Rechazar
+									echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=CANCELAR-HORA&'.($this->lista)[0].'='.$this->datos["idEnfrentamiento"].'"><img src="../Views/images/cancel-hour.png" title="Cancelar hora" alt="Cancelar hora"></a>';
+							
 								}
-							}*/
+							}
+
 					?>
 				</table>
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>

@@ -235,6 +235,134 @@ function getParejas()
 		   return false;
 	   }
 }
+function getMisEnfrentamientos($login){
+		$sql = "SELECT DISTINCT(E.idEnfrentamiento),P.login1, P.login2,P2.login1 as P2login1,P2.login2 as P2login2, C.genero,C.nivel, G.nombre, E.set1, E.set2,E.set3 FROM ENFRENTAMIENTO E, PAREJA P, GRUPO G, CATEGORIA_PAREJA CP, CATEGORIA C, CAMPEONATO CA, PAREJA P2 WHERE (E.idPareja1 = P.idPareja || E.idPareja2 = P.idPareja) && (P.login1 = '$login' || P.login2='$login') && C.idCategoria = E.GrupoidCategoria && GrupoidCategoria = CP.CategoriaidCategoria && P2.idPareja = E.idPareja2 && G.idGrupo = E.idGrupo";
+		$result = $this->mysqli->query($sql);  
+		if($result->num_rows>0){
+			$j = 0;
+			while($tupla = mysqli_fetch_array($result)){
+			   $tuplas[$j] = $tupla;
+			   $j++;		
+			}
+			return $tuplas;
+		}else{
+			return false;
+		}
+	
+}
+function getHoraFecha(){
+	$sql = "SELECT horaPropuesta, fechaPropuesta from ENFRENTAMIENTO where idEnfrentamiento = '$this->idEnfrentamiento'";
+	$result = $this->mysqli->query($sql);  
+	if($result ->num_rows >0){
+		$tupla = mysqli_fetch_assoc($result);		  
+		return $tupla;
+	}
+	else{
+		return  false;
+	}
+}
+function insertHoraFecha($hora,$fecha){
+		$sql = "UPDATE `ENFRENTAMIENTO` SET fechaPropuesta = '$fecha', horaPropuesta = '$hora' WHERE `idEnfrentamiento`='$this->idEnfrentamiento'";
+		if (!$this->mysqli->query($sql)) { // si da error en la ejecución del insert devolvemos mensaje
+				return 'Error en la inserción';
+		}else{ //si no da error en la insercion devolvemos mensaje de exito
+			return 'Fecha y hora fijadas'; //operacion de insertado correcta
+		}	
+}
+function comprobarPista($hora,$fecha){
+	$sql = "SELECT restriccion FROM `PISTA` WHERE hora = '$hora' && fecha = '$fecha'";
+	$result = $this->mysqli->query($sql);
+	if (!$result) { // si da error en la ejecución del insert devolvemos mensaje
+		return false;
+	}else{ 
+		if($result->num_rows>0){
+			$j = 0;
+			while($tupla = mysqli_fetch_array($result)){
+			   $tuplas[$j] = $tupla;
+			   $j++;		
+			}
+			$band = false;
+			foreach($tuplas as $tupla){
+				if($tupla[0]==0){
+					$band = true;
+				}
+			}
+			return $band;
+		}
+	}	
+}
+function getHora(){
+	$array = $this->getHoraFecha();
+	return $array['horaPropuesta'];
+}
+function getFecha(){
+	$array = $this->getHoraFecha();
+	return $array['fechaPropuesta'];
+}
+function cancelPropuesta(){
+	$sql = "UPDATE `ENFRENTAMIENTO` SET fechaPropuesta = null, horaPropuesta = null WHERE `idEnfrentamiento`='$this->idEnfrentamiento'";
+		if (!$this->mysqli->query($sql)) { // si da error en la ejecución del insert devolvemos mensaje
+				return 'Error en la inserción';
+		}else{ //si no da error en la insercion devolvemos mensaje de exito
+			return 'Fecha y hora rechazadas'; //operacion de insertado correcta
+		}
+}
+function aceptarPropuesta(){
+	$hora = $this->getHora();
+	$fecha = $this->getFecha();
+	if($this->comprobarPista($hora,$fecha)){
+		$pista = $this->getPistasDisponibles($hora,$fecha);
+		if(!$pista){
+			return "Pistas no disponibles para esa hora/fecha.";
+		}else{
+			return $this->asignarPista($pista);
+		}
+	}else{
+		return "No se puede asignar pista en esa hora/fecha";
+	}
+}
+function getPistasDisponibles($hora,$fecha){
+	$sql = "SELECT idPista,nombre FROM `PISTA` WHERE hora = '$hora' && fecha = '$fecha' && restriccion = '0'";
+		$result = $this->mysqli->query($sql);
+		if($result->num_rows>0){
+			$j = 0;
+			while($tupla = mysqli_fetch_array($result)){
+			   $tuplas[$j] = $tupla;
+			   $j++;		
+			}
+			return $tuplas[0];
+		}else
+			return false;
+}
+function asignarPista($pista){
+	//Pista es un array con idPista y nombre
+	$idpista = $pista['idPista'];
+	$nombre = $pista['nombre'];
+	$sql = "INSERT INTO `PISTA_ENFRENTAMIENTO`(`PistaidPista`, `EnfrentamientoidEnfrentamiento`, `Pistanombre`) VALUES ('$idpista','$this->idEnfrentamiento','$nombre')";
+	if (!$this->mysqli->query($sql)) { // si da error en la ejecución del insert devolvemos mensaje
+		return 'Error en la inserción en pista_enfrentamiento';
+	}
+	else{ 
+		$sqlUp = "UPDATE PISTA SET 
+					restriccion = 1				
+				WHERE ( idPista = '$idpista'
+				)";
+			if (!($resul = $this->mysqli->query($sqlUp))){
+				return 'Error en la reserva'; 
+			}else{
+				return 'Reservado correctamente para el enfrentamiento';
+			}
+	}
+}
+function isAsigned(){
+	$sql = "SELECT * FROM `PISTA_ENFRENTAMIENTO` WHERE `EnfrentamientoidEnfrentamiento`= '$this->idEnfrentamiento'";
+	$result = $this->mysqli->query($sql);
+	if($result->num_rows>0){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 }//fin Modelo
 

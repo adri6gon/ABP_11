@@ -12,6 +12,8 @@ include_once '../Models/ENFRENTAMIENTOS_Model.php';
 include '../Views/ENFRENTAMIENTOS_SHOWALL_View.php';
 include '../Views/ENFRENTAMIENTO_SEARCH_View.php';
 //include '../Views/ENFRENTAMIENTO_DELETE_View.php';
+include '../Views/ENFRENTAMIENTOS_MIS_View.php';
+include '../Views/ENFRENTAMIENTO_FIJAR_HORA_View.php';
 include '../Views/ENFRENTAMIENTO_RESULTADO_View.php';
 include '../Views/ENFRENTAMIENTO_SHOWCURRENT_View.php';
 include '../Views/MESSAGE_View.php';
@@ -86,6 +88,9 @@ if (!isset($_REQUEST['action'])){
 				$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'], '', '', '','','','','','');
                 //Recoge los datos de ENFRENTAMIENTOs
 				$valores = $ENFRENTAMIENTOS->RellenaDatos();
+				$hora = $ENFRENTAMIENTOS->getHora();
+				$fecha = $ENFRENTAMIENTOS->getFecha();
+				$asigned = $ENFRENTAMIENTOS->isAsigned();
                 //Nueva vista
 				$admin = false;
 				if(comprobarRol('admin')){
@@ -93,7 +98,8 @@ if (!isset($_REQUEST['action'])){
 				}else{
 					$admin = false;
 				}
-				new ENFRENTAMIENTO_SHOWCURRENT($valores,'../Controllers/ENFRENTAMIENTOS_Controller.php',$lista,$admin);
+
+				new ENFRENTAMIENTO_SHOWCURRENT($valores,'../Controllers/ENFRENTAMIENTOS_Controller.php',$lista,$admin,$hora,$fecha,$asigned);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}
@@ -121,6 +127,60 @@ if (!isset($_REQUEST['action'])){
 				}				
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
+			}
+		break;
+		case 'MIS-ENFRENTAMIENTOS':
+			  //Si no tiene permisos
+			  if(comprobarRol('deportista')){
+				if (!$_POST){//Si viene vacio
+                    //Nuevo modelo vacio
+					$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model('','', '', '', '','','','','');
+				}
+				//var_dump($ENFRENTAMIENTOS);
+				//exit();
+                //Llama al showall del modelo
+				$datos = $ENFRENTAMIENTOS->getMisEnfrentamientos($_SESSION['login']);
+				//var_dump($datos);
+				//exit();
+				$lista3 = array('idEnfrentamiento','login1', 'login2','P2login1','P2login2', 'genero','nivel', 'nombre','set1', 'set2','set3');
+                //Nueva vista
+				new MIS_ENFRENTAMIENTO_SHOWALL($lista3, $datos, '../ENFRENTAMIENTOS_Controller.php');
+			}else{//Si no tiene permisos
+				new MESSAGE($alerta,'../index.php');
+			}
+		break;
+		case 'ACEPTAR-HORA':
+			if(comprobarRol('deportista')){
+				$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'], '', '', '','','','','','');
+				$result = $ENFRENTAMIENTOS->aceptarPropuesta();
+				new MESSAGE($result,'../index.php');
+			}
+		break;
+		case 'CANCELAR-HORA':
+			if(comprobarRol('deportista')){
+					$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'], '', '', '','','','','','');
+					$result = $ENFRENTAMIENTOS->cancelPropuesta();
+					new MESSAGE($result,'../index.php');
+			}
+		break;
+		case 'PROPONER-HORA':
+			if(comprobarRol('deportista')){
+				if (!$_POST){//Si viene vacio
+                    //Nuevo modelo vacio
+					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
+					$horaActual = $ENFRENTAMIENTO->getHoraFecha();
+					//Vista form para hora y fecha
+					new HORA_ENFRENTAMIENTO('../ENFRENTAMIENTOS_Controller.php?action=SHOWCURRENT&idEnfrentamiento='.$_REQUEST['idEnfrentamiento'],$_REQUEST['idEnfrentamiento']);
+				}else{
+					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
+					$hora = $_REQUEST['hora'];
+					$fecha = $_REQUEST['fecha'];
+					if($ENFRENTAMIENTO->comprobarPista($hora,$fecha)){
+						$result = $ENFRENTAMIENTO->insertHoraFecha($hora,$fecha);
+					}else
+						$result = "No hay pistas disponibles en esa hora/fecha";
+					new MESSAGE($result,'../index.php');
+				}
 			}
 		break;
 		default: //Default entra el showall

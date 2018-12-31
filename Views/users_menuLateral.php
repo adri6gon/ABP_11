@@ -25,8 +25,12 @@
 						echo '<li><a href="./GRUPOS_Controller.php">&nbsp&nbsp&nbsp&nbspGRUPOS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
-					if(comprobarRol('admin')){
+					if(comprobarRol('deportista')){
 						echo '<li><a href="./ENFRENTAMIENTOS_Controller.php">ENFRENTAMIENTOS</a></li>';
+					}
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./ENFRENTAMIENTOS_Controller.php?action=MIS-ENFRENTAMIENTOS">MIS ENFRENTAMIENTOS</a></li>';
 					}	
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('admin')){

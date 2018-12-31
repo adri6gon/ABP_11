@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-12-2018 a las 18:18:11
+-- Tiempo de generación: 31-12-2018 a las 15:04:32
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -160,126 +160,147 @@ CREATE TABLE `ENFRENTAMIENTO` (
   `GrupoidCampeonato` int(10) NOT NULL,
   `set1` varchar(3) DEFAULT '0-0',
   `set2` varchar(3) DEFAULT '0-0',
-  `set3` varchar(3) DEFAULT '0-0'
+  `set3` varchar(3) DEFAULT '0-0',
+  `fechaPropuesta` date DEFAULT NULL,
+  `horaPropuesta` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ENFRENTAMIENTO`
 --
 
-INSERT INTO `ENFRENTAMIENTO` (`idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPareja2`, `GrupoidCategoria`, `GrupoidCampeonato`, `set1`, `set2`, `set3`) VALUES
-(859, 19, 77, 78, 1, 1, '6-3', '3-6', '4-6'),
-(860, 19, 77, 79, 1, 1, '6-1', '2-6', '6-4'),
-(861, 19, 77, 80, 1, 1, '6-2', '3-6', '7-5'),
-(862, 19, 77, 81, 1, 1, '6-4', '4-6', '6-7'),
-(863, 19, 77, 82, 1, 1, '3-6', '6-2', '6-1'),
-(864, 19, 77, 83, 1, 1, '1-6', '6-3', '6-0'),
-(865, 19, 77, 84, 1, 1, '6-3', '2-6', '6-1'),
-(866, 19, 78, 79, 1, 1, '6-2', '2-6', '7-5'),
-(867, 19, 78, 80, 1, 1, '6-7', '7-6', '6-7'),
-(868, 19, 78, 81, 1, 1, '1-6', '6-3', '6-3'),
-(869, 19, 78, 82, 1, 1, '2-6', '6-1', '6-3'),
-(870, 19, 78, 83, 1, 1, '6-3', '4-6', '6-1'),
-(871, 19, 78, 84, 1, 1, '1-6', '3-6', '6-2'),
-(872, 19, 79, 80, 1, 1, '2-6', '7-5', '6-1'),
-(873, 19, 79, 81, 1, 1, '4-6', '7-5', '6-7'),
-(874, 19, 79, 82, 1, 1, '6-3', '2-6', '2-6'),
-(875, 19, 79, 83, 1, 1, '6-1', '1-6', '6-1'),
-(876, 19, 79, 84, 1, 1, '6-2', '3-6', '6-2'),
-(877, 19, 80, 81, 1, 1, '7-5', '5-7', '2-6'),
-(878, 19, 80, 82, 1, 1, '6-3', '3-6', '6-4'),
-(879, 19, 80, 83, 1, 1, '7-5', '5-7', '7-5'),
-(880, 19, 80, 84, 1, 1, '1-6', '6-1', '6-1'),
-(881, 19, 81, 82, 1, 1, '0-6', '6-1', '6-2'),
-(882, 19, 81, 83, 1, 1, '2-6', '6-3', '6-7'),
-(883, 19, 81, 84, 1, 1, '6-1', '2-6', '6-7'),
-(884, 19, 82, 83, 1, 1, '6-2', '1-6', '3-6'),
-(885, 19, 82, 84, 1, 1, '6-1', '2-6', '6-4'),
-(886, 19, 83, 84, 1, 1, '6-1', '1-6', '6-1'),
-(887, 18, 1, 70, 1, 1, '6-2', '2-6', '6-1'),
-(888, 18, 1, 71, 1, 1, '2-6', '6-3', '3-6'),
-(889, 18, 1, 72, 1, 1, '6-3', '4-6', '4-6'),
-(890, 18, 1, 73, 1, 1, '6-3', '2-6', '7-5'),
-(891, 18, 1, 74, 1, 1, '2-6', '6-1', '6-3'),
-(892, 18, 1, 75, 1, 1, '6-4', '4-6', '6-2'),
-(893, 18, 1, 76, 1, 1, '6-3', '3-6', '6-1'),
-(894, 18, 70, 71, 1, 1, '6-4', '4-6', '7-5'),
-(895, 18, 70, 72, 1, 1, '4-6', '6-2', '6-1'),
-(896, 18, 70, 73, 1, 1, '6-1', '2-6', '6-3'),
-(897, 18, 70, 74, 1, 1, '6-2', '4-6', '6-1'),
-(898, 18, 70, 75, 1, 1, '2-6', '6-1', '6-2'),
-(899, 18, 70, 76, 1, 1, '1-6', '6-3', '6-2'),
-(900, 18, 71, 72, 1, 1, '4-6', '6-2', '6-1'),
-(901, 18, 71, 73, 1, 1, '2-6', '6-1', '6-3'),
-(902, 18, 71, 74, 1, 1, '3-6', '7-5', '7-5'),
-(903, 18, 71, 75, 1, 1, '1-6', '6-1', '6-2'),
-(904, 18, 71, 76, 1, 1, '2-6', '6-1', '7-5'),
-(905, 18, 72, 73, 1, 1, '6-1', '2-6', '6-3'),
-(906, 18, 72, 74, 1, 1, '6-2', '3-6', '6-7'),
-(907, 18, 72, 75, 1, 1, '7-5', '5-7', '6-1'),
-(908, 18, 72, 76, 1, 1, '2-6', '6-3', '6-4'),
-(909, 18, 73, 74, 1, 1, '1-6', '6-4', '4-6'),
-(910, 18, 73, 75, 1, 1, '2-6', '6-3', '6-2'),
-(911, 18, 73, 76, 1, 1, '1-6', '6-3', '6-2'),
-(912, 18, 74, 75, 1, 1, '2-6', '6-4', '6-3'),
-(913, 18, 74, 76, 1, 1, '6-1', '2-6', '6-4'),
-(914, 18, 75, 76, 1, 1, '6-1', '2-6', '6-4'),
-(915, 20, 54, 55, 0, 3, '6-2', '6-3', '0-0'),
-(916, 20, 54, 56, 0, 3, '6-1', '5-7', '6-4'),
-(917, 20, 54, 57, 0, 3, '6-4', '3-6', '6-3'),
-(918, 20, 54, 58, 0, 3, '0-0', '0-0', '0-0'),
-(919, 20, 54, 59, 0, 3, '0-0', '0-0', '0-0'),
-(920, 20, 54, 60, 0, 3, '0-0', '0-0', '0-0'),
-(921, 20, 54, 61, 0, 3, '0-0', '0-0', '0-0'),
-(922, 20, 55, 56, 0, 3, '0-0', '0-0', '0-0'),
-(923, 20, 55, 57, 0, 3, '0-0', '0-0', '0-0'),
-(924, 20, 55, 58, 0, 3, '0-0', '0-0', '0-0'),
-(925, 20, 55, 59, 0, 3, '0-0', '0-0', '0-0'),
-(926, 20, 55, 60, 0, 3, '0-0', '0-0', '0-0'),
-(927, 20, 55, 61, 0, 3, '0-0', '0-0', '0-0'),
-(928, 20, 56, 57, 0, 3, '0-0', '0-0', '0-0'),
-(929, 20, 56, 58, 0, 3, '0-0', '0-0', '0-0'),
-(930, 20, 56, 59, 0, 3, '0-0', '0-0', '0-0'),
-(931, 20, 56, 60, 0, 3, '0-0', '0-0', '0-0'),
-(932, 20, 56, 61, 0, 3, '0-0', '0-0', '0-0'),
-(933, 20, 57, 58, 0, 3, '0-0', '0-0', '0-0'),
-(934, 20, 57, 59, 0, 3, '0-0', '0-0', '0-0'),
-(935, 20, 57, 60, 0, 3, '0-0', '0-0', '0-0'),
-(936, 20, 57, 61, 0, 3, '0-0', '0-0', '0-0'),
-(937, 20, 58, 59, 0, 3, '0-0', '0-0', '0-0'),
-(938, 20, 58, 60, 0, 3, '0-0', '0-0', '0-0'),
-(939, 20, 58, 61, 0, 3, '0-0', '0-0', '0-0'),
-(940, 20, 59, 60, 0, 3, '0-0', '0-0', '0-0'),
-(941, 20, 59, 61, 0, 3, '0-0', '0-0', '0-0'),
-(942, 20, 60, 61, 0, 3, '0-0', '0-0', '0-0'),
-(943, 21, 62, 63, 0, 3, '0-0', '0-0', '0-0'),
-(944, 21, 62, 64, 0, 3, '0-0', '0-0', '0-0'),
-(945, 21, 62, 65, 0, 3, '0-0', '0-0', '0-0'),
-(946, 21, 62, 66, 0, 3, '0-0', '0-0', '0-0'),
-(947, 21, 62, 67, 0, 3, '0-0', '0-0', '0-0'),
-(948, 21, 62, 68, 0, 3, '0-0', '0-0', '0-0'),
-(949, 21, 62, 69, 0, 3, '0-0', '0-0', '0-0'),
-(950, 21, 63, 64, 0, 3, '0-0', '0-0', '0-0'),
-(951, 21, 63, 65, 0, 3, '0-0', '0-0', '0-0'),
-(952, 21, 63, 66, 0, 3, '0-0', '0-0', '0-0'),
-(953, 21, 63, 67, 0, 3, '0-0', '0-0', '0-0'),
-(954, 21, 63, 68, 0, 3, '0-0', '0-0', '0-0'),
-(955, 21, 63, 69, 0, 3, '0-0', '0-0', '0-0'),
-(956, 21, 64, 65, 0, 3, '0-0', '0-0', '0-0'),
-(957, 21, 64, 66, 0, 3, '0-0', '0-0', '0-0'),
-(958, 21, 64, 67, 0, 3, '0-0', '0-0', '0-0'),
-(959, 21, 64, 68, 0, 3, '0-0', '0-0', '0-0'),
-(960, 21, 64, 69, 0, 3, '0-0', '0-0', '0-0'),
-(961, 21, 65, 66, 0, 3, '0-0', '0-0', '0-0'),
-(962, 21, 65, 67, 0, 3, '0-0', '0-0', '0-0'),
-(963, 21, 65, 68, 0, 3, '0-0', '0-0', '0-0'),
-(964, 21, 65, 69, 0, 3, '0-0', '0-0', '0-0'),
-(965, 21, 66, 67, 0, 3, '0-0', '0-0', '0-0'),
-(966, 21, 66, 68, 0, 3, '0-0', '0-0', '0-0'),
-(967, 21, 66, 69, 0, 3, '0-0', '0-0', '0-0'),
-(968, 21, 67, 68, 0, 3, '0-0', '0-0', '0-0'),
-(969, 21, 67, 69, 0, 3, '0-0', '0-0', '0-0'),
-(970, 21, 68, 69, 0, 3, '0-0', '0-0', '0-0');
+INSERT INTO `ENFRENTAMIENTO` (`idEnfrentamiento`, `idGrupo`, `idPareja1`, `idPareja2`, `GrupoidCategoria`, `GrupoidCampeonato`, `set1`, `set2`, `set3`, `fechaPropuesta`, `horaPropuesta`) VALUES
+(859, 19, 77, 78, 1, 1, '6-3', '3-6', '4-6', NULL, NULL),
+(860, 19, 77, 79, 1, 1, '6-1', '2-6', '6-4', NULL, NULL),
+(861, 19, 77, 80, 1, 1, '6-2', '3-6', '7-5', NULL, NULL),
+(862, 19, 77, 81, 1, 1, '6-4', '4-6', '6-7', NULL, NULL),
+(863, 19, 77, 82, 1, 1, '3-6', '6-2', '6-1', NULL, NULL),
+(864, 19, 77, 83, 1, 1, '1-6', '6-3', '6-0', NULL, NULL),
+(865, 19, 77, 84, 1, 1, '6-3', '2-6', '6-1', NULL, NULL),
+(866, 19, 78, 79, 1, 1, '6-2', '2-6', '7-5', NULL, NULL),
+(867, 19, 78, 80, 1, 1, '6-7', '7-6', '6-7', NULL, NULL),
+(868, 19, 78, 81, 1, 1, '1-6', '6-3', '6-3', NULL, NULL),
+(869, 19, 78, 82, 1, 1, '2-6', '6-1', '6-3', NULL, NULL),
+(870, 19, 78, 83, 1, 1, '6-3', '4-6', '6-1', NULL, NULL),
+(871, 19, 78, 84, 1, 1, '1-6', '3-6', '6-2', NULL, NULL),
+(872, 19, 79, 80, 1, 1, '2-6', '7-5', '6-1', NULL, NULL),
+(873, 19, 79, 81, 1, 1, '4-6', '7-5', '6-7', NULL, NULL),
+(874, 19, 79, 82, 1, 1, '6-3', '2-6', '2-6', NULL, NULL),
+(875, 19, 79, 83, 1, 1, '6-1', '1-6', '6-1', NULL, NULL),
+(876, 19, 79, 84, 1, 1, '6-2', '3-6', '6-2', NULL, NULL),
+(877, 19, 80, 81, 1, 1, '7-5', '5-7', '2-6', NULL, NULL),
+(878, 19, 80, 82, 1, 1, '6-3', '3-6', '6-4', NULL, NULL),
+(879, 19, 80, 83, 1, 1, '7-5', '5-7', '7-5', NULL, NULL),
+(880, 19, 80, 84, 1, 1, '1-6', '6-1', '6-1', NULL, NULL),
+(881, 19, 81, 82, 1, 1, '0-6', '6-1', '6-2', NULL, NULL),
+(882, 19, 81, 83, 1, 1, '2-6', '6-3', '6-7', NULL, NULL),
+(883, 19, 81, 84, 1, 1, '6-1', '2-6', '6-7', NULL, NULL),
+(884, 19, 82, 83, 1, 1, '6-2', '1-6', '3-6', NULL, NULL),
+(885, 19, 82, 84, 1, 1, '6-1', '2-6', '6-4', NULL, NULL),
+(886, 19, 83, 84, 1, 1, '6-1', '1-6', '6-1', NULL, NULL),
+(887, 18, 1, 70, 1, 1, '6-2', '2-6', '6-1', '2018-11-22', '17:00:00'),
+(888, 18, 1, 71, 1, 1, '2-6', '6-3', '3-6', '2018-11-22', '10:30:00'),
+(889, 18, 1, 72, 1, 1, '6-3', '4-6', '4-6', NULL, NULL),
+(890, 18, 1, 73, 1, 1, '6-3', '2-6', '7-5', NULL, NULL),
+(891, 18, 1, 74, 1, 1, '2-6', '6-1', '6-3', NULL, NULL),
+(892, 18, 1, 75, 1, 1, '6-4', '4-6', '6-2', NULL, NULL),
+(893, 18, 1, 76, 1, 1, '6-3', '3-6', '6-1', NULL, NULL),
+(894, 18, 70, 71, 1, 1, '6-4', '4-6', '7-5', NULL, NULL),
+(895, 18, 70, 72, 1, 1, '4-6', '6-2', '6-1', NULL, NULL),
+(896, 18, 70, 73, 1, 1, '6-1', '2-6', '6-3', NULL, NULL),
+(897, 18, 70, 74, 1, 1, '6-2', '4-6', '6-1', NULL, NULL),
+(898, 18, 70, 75, 1, 1, '2-6', '6-1', '6-2', NULL, NULL),
+(899, 18, 70, 76, 1, 1, '1-6', '6-3', '6-2', NULL, NULL),
+(900, 18, 71, 72, 1, 1, '4-6', '6-2', '6-1', NULL, NULL),
+(901, 18, 71, 73, 1, 1, '2-6', '6-1', '6-3', NULL, NULL),
+(902, 18, 71, 74, 1, 1, '3-6', '7-5', '7-5', NULL, NULL),
+(903, 18, 71, 75, 1, 1, '1-6', '6-1', '6-2', NULL, NULL),
+(904, 18, 71, 76, 1, 1, '2-6', '6-1', '7-5', NULL, NULL),
+(905, 18, 72, 73, 1, 1, '6-1', '2-6', '6-3', NULL, NULL),
+(906, 18, 72, 74, 1, 1, '6-2', '3-6', '6-7', NULL, NULL),
+(907, 18, 72, 75, 1, 1, '7-5', '5-7', '6-1', NULL, NULL),
+(908, 18, 72, 76, 1, 1, '2-6', '6-3', '6-4', NULL, NULL),
+(909, 18, 73, 74, 1, 1, '1-6', '6-4', '4-6', NULL, NULL),
+(910, 18, 73, 75, 1, 1, '2-6', '6-3', '6-2', NULL, NULL),
+(911, 18, 73, 76, 1, 1, '1-6', '6-3', '6-2', NULL, NULL),
+(912, 18, 74, 75, 1, 1, '2-6', '6-4', '6-3', NULL, NULL),
+(913, 18, 74, 76, 1, 1, '6-1', '2-6', '6-4', NULL, NULL),
+(914, 18, 75, 76, 1, 1, '6-1', '2-6', '6-4', NULL, NULL),
+(915, 20, 54, 55, 0, 3, '6-2', '6-3', '0-0', NULL, NULL),
+(916, 20, 54, 56, 0, 3, '6-1', '5-7', '6-4', NULL, NULL),
+(917, 20, 54, 57, 0, 3, '6-4', '3-6', '6-3', NULL, NULL),
+(918, 20, 54, 58, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(919, 20, 54, 59, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(920, 20, 54, 60, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(921, 20, 54, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(922, 20, 55, 56, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(923, 20, 55, 57, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(924, 20, 55, 58, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(925, 20, 55, 59, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(926, 20, 55, 60, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(927, 20, 55, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(928, 20, 56, 57, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(929, 20, 56, 58, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(930, 20, 56, 59, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(931, 20, 56, 60, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(932, 20, 56, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(933, 20, 57, 58, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(934, 20, 57, 59, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(935, 20, 57, 60, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(936, 20, 57, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(937, 20, 58, 59, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(938, 20, 58, 60, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(939, 20, 58, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(940, 20, 59, 60, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(941, 20, 59, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(942, 20, 60, 61, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(943, 21, 62, 63, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(944, 21, 62, 64, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(945, 21, 62, 65, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(946, 21, 62, 66, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(947, 21, 62, 67, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(948, 21, 62, 68, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(949, 21, 62, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(950, 21, 63, 64, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(951, 21, 63, 65, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(952, 21, 63, 66, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(953, 21, 63, 67, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(954, 21, 63, 68, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(955, 21, 63, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(956, 21, 64, 65, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(957, 21, 64, 66, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(958, 21, 64, 67, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(959, 21, 64, 68, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(960, 21, 64, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(961, 21, 65, 66, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(962, 21, 65, 67, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(963, 21, 65, 68, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(964, 21, 65, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(965, 21, 66, 67, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(966, 21, 66, 68, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(967, 21, 66, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(968, 21, 67, 68, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(969, 21, 67, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL),
+(970, 21, 68, 69, 0, 3, '0-0', '0-0', '0-0', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ENFRENTAMIENTO_RONDA`
+--
+
+CREATE TABLE `ENFRENTAMIENTO_RONDA` (
+  `idEnfrentamientoRonda` int(10) NOT NULL,
+  `set1` varchar(3) DEFAULT NULL,
+  `set2` varchar(3) DEFAULT NULL,
+  `set3` varchar(3) DEFAULT NULL,
+  `idPareja1` int(10) NOT NULL,
+  `idPareja2` int(10) NOT NULL,
+  `horaPropuesta` time DEFAULT NULL,
+  `fechaPropuesta` date DEFAULT NULL,
+  `CategoriaidCategoria` int(10) NOT NULL,
+  `CategoriaidCampeonato` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -494,7 +515,7 @@ CREATE TABLE `PISTA` (
 --
 
 INSERT INTO `PISTA` (`idPista`, `restriccion`, `nombre`, `hora`, `fecha`) VALUES
-(0, 0, 'Court2', '17:00:00', '2018-11-22'),
+(0, 1, 'Court2', '17:00:00', '2018-11-22'),
 (1, 1, 'Court1', '09:00:00', '2018-11-22'),
 (2, 1, 'Court1', '10:30:00', '2018-11-22'),
 (3, 0, 'Court1', '12:00:00', '2018-11-22'),
@@ -509,7 +530,7 @@ INSERT INTO `PISTA` (`idPista`, `restriccion`, `nombre`, `hora`, `fecha`) VALUES
 (12, 0, 'Court2', '20:00:00', '2018-11-22'),
 (13, 0, 'Court2', '18:30:00', '2018-11-22'),
 (14, 0, 'Court3', '09:00:00', '2018-11-22'),
-(15, 0, 'Court3', '10:30:00', '2018-11-22'),
+(15, 1, 'Court3', '10:30:00', '2018-11-22'),
 (16, 0, 'Court3', '12:00:00', '2018-11-22'),
 (17, 0, 'Court3', '13:30:00', '2018-11-22'),
 (18, 0, 'Court3', '17:00:00', '2018-11-22'),
@@ -729,6 +750,26 @@ CREATE TABLE `PISTA_ENFRENTAMIENTO` (
   `PistaidPista` int(10) NOT NULL,
   `EnfrentamientoidEnfrentamiento` int(10) NOT NULL,
   `Pistanombre` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `PISTA_ENFRENTAMIENTO`
+--
+
+INSERT INTO `PISTA_ENFRENTAMIENTO` (`PistaidPista`, `EnfrentamientoidEnfrentamiento`, `Pistanombre`) VALUES
+(0, 887, 'Court2'),
+(15, 888, 'Court3');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `PISTA_ENFRENTAMIENTO_RONDA`
+--
+
+CREATE TABLE `PISTA_ENFRENTAMIENTO_RONDA` (
+  `PistaidPista` int(10) NOT NULL,
+  `Pistanombre` varchar(30) NOT NULL,
+  `Enfrentamiento_RondaidEnfrentamientoRonda` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1206,6 +1247,16 @@ ALTER TABLE `ENFRENTAMIENTO`
   ADD KEY `Participar2` (`idPareja2`);
 
 --
+-- Indices de la tabla `ENFRENTAMIENTO_RONDA`
+--
+ALTER TABLE `ENFRENTAMIENTO_RONDA`
+  ADD PRIMARY KEY (`idEnfrentamientoRonda`),
+  ADD KEY `CategoriaidCampeonato` (`CategoriaidCampeonato`),
+  ADD KEY `CategoriaidCategoria` (`CategoriaidCategoria`),
+  ADD KEY `ENFRENTAMIENTO_RONDA_ibfk_3` (`idPareja1`),
+  ADD KEY `ENFRENTAMIENTO_RONDA_ibfk_4` (`idPareja2`);
+
+--
 -- Indices de la tabla `ESCUELA_DEPORTIVA`
 --
 ALTER TABLE `ESCUELA_DEPORTIVA`
@@ -1259,6 +1310,12 @@ ALTER TABLE `PISTA_ENFRENTAMIENTO`
   ADD PRIMARY KEY (`PistaidPista`,`EnfrentamientoidEnfrentamiento`,`Pistanombre`),
   ADD KEY `FKPista_Enfr227256` (`EnfrentamientoidEnfrentamiento`),
   ADD KEY `FKPista_Enfr536426` (`PistaidPista`,`Pistanombre`);
+
+--
+-- Indices de la tabla `PISTA_ENFRENTAMIENTO_RONDA`
+--
+ALTER TABLE `PISTA_ENFRENTAMIENTO_RONDA`
+  ADD PRIMARY KEY (`PistaidPista`,`Pistanombre`,`Enfrentamiento_RondaidEnfrentamientoRonda`);
 
 --
 -- Indices de la tabla `PISTA_PARTIDO`
@@ -1317,6 +1374,12 @@ ALTER TABLE `CLASES`
 --
 ALTER TABLE `ENFRENTAMIENTO`
   MODIFY `idEnfrentamiento` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=971;
+
+--
+-- AUTO_INCREMENT de la tabla `ENFRENTAMIENTO_RONDA`
+--
+ALTER TABLE `ENFRENTAMIENTO_RONDA`
+  MODIFY `idEnfrentamientoRonda` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ESCUELA_DEPORTIVA`
@@ -1381,6 +1444,15 @@ ALTER TABLE `ENFRENTAMIENTO`
   ADD CONSTRAINT `Participar2` FOREIGN KEY (`idPareja2`) REFERENCES `PAREJA` (`idPareja`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `ENFRENTAMIENTO_RONDA`
+--
+ALTER TABLE `ENFRENTAMIENTO_RONDA`
+  ADD CONSTRAINT `ENFRENTAMIENTO_RONDA_ibfk_1` FOREIGN KEY (`CategoriaidCampeonato`) REFERENCES `CATEGORIA` (`idCampeonato`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ENFRENTAMIENTO_RONDA_ibfk_2` FOREIGN KEY (`CategoriaidCategoria`) REFERENCES `CATEGORIA` (`idCategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ENFRENTAMIENTO_RONDA_ibfk_3` FOREIGN KEY (`idPareja1`) REFERENCES `PAREJA` (`idPareja`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ENFRENTAMIENTO_RONDA_ibfk_4` FOREIGN KEY (`idPareja2`) REFERENCES `PAREJA` (`idPareja`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `GRUPO`
 --
 ALTER TABLE `GRUPO`
@@ -1412,6 +1484,12 @@ ALTER TABLE `PARTIDO`
 ALTER TABLE `PISTA_ENFRENTAMIENTO`
   ADD CONSTRAINT `FKPista_Enfr227256` FOREIGN KEY (`EnfrentamientoidEnfrentamiento`) REFERENCES `ENFRENTAMIENTO` (`idEnfrentamiento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FKPista_Enfr536426` FOREIGN KEY (`PistaidPista`,`Pistanombre`) REFERENCES `PISTA` (`idPista`, `nombre`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `PISTA_ENFRENTAMIENTO_RONDA`
+--
+ALTER TABLE `PISTA_ENFRENTAMIENTO_RONDA`
+  ADD CONSTRAINT `PISTA_ENFRENTAMIENTO_RONDA_ibfk_1` FOREIGN KEY (`PistaidPista`,`Pistanombre`) REFERENCES `PISTA` (`idPista`, `nombre`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `PISTA_PARTIDO`
