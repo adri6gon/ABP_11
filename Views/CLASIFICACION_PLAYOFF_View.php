@@ -19,21 +19,18 @@ class CLASIFICACION_PLAYOFF{
 <h2>Cruces del Grupo <?php echo "".$this->datos[($this->lista)[0]]."" ?> :</h2>
 
 				<?php
-				var_dump($this->datos);
-
-				var_dump($this->parejas);
-					if($this->admin){
+					//if($this->admin){
 				?>			
 				<table class="tablas"><tr><th>
-				<p>Generar grupos 
+				<p>Generar cruces 
 					<?php
 					echo '<a href="CLASIFICACION_Controller.php?action=PLAYOFF&'.($this->lista)[0].'='.$this->datos[$j][($this->lista)[0]].'&'.($this->lista)[3].'='.$this->datos[$j][($this->lista)[3]].'"><img src="../Views/images/playoff.png" width="30" size"30" title="Generar" alt="Generar"></a>';
 					?>	
 					</p></th></tr>
 			</table>
 						<?php
-					}
-					echo "IF, si generados cuadro, si no boton";
+					//}
+					echo "------------------IF, si generados cuadro, si no boton";
 						?>
 
 				<table>
@@ -42,17 +39,28 @@ class CLASIFICACION_PLAYOFF{
 
 						echo "<th>Cuartos</th>";
 
-						for($i=0;$i<4;$i++){
-							echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+						for($i=0;$i<8;$i++){
+							//echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+							echo "<tr><td> <b>".$this->parejas[$i][1]."-".$this->parejas[$i][2]."</b>  [".$this->parejas[$i][3]."]  "." vs <b>".$this->parejas[$i+1][1]."-".$this->parejas[$i+1][2]."</b>  [".$this->parejas[$i][3]."]  "."</td></tr>";
+							$i++;
 						}
 						echo "<th>Semifinales</th>";
-						for($i=0;$i<2;$i++){
-							echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+						for($i=0;$i<4;$i++){
+							//echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+							echo "<tr><td> <b>".$this->parejas[$i][1]."-".$this->parejas[$i][2]."</b>  [".$this->parejas[$i][3]."]  "." vs <b>".$this->parejas[$i+1][1]."-".$this->parejas[$i+1][2]."</b>  [".$this->parejas[$i][3]."]  "."</td></tr>";
+							$i++;
 						}
 						echo "<th>Final</th>";
-						echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+						for($i=0;$i<2;$i++){
+							//echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+							echo "<tr><td> <b>".$this->parejas[$i][1]."-".$this->parejas[$i][2]."</b>  [".$this->parejas[$i][3]."]  "." vs <b>".$this->parejas[$i+1][1]."-".$this->parejas[$i+1][2]."</b>  [".$this->parejas[$i][3]."]  "."</td></tr>";
+							$i++;
+						}
 						echo "<th>Ganador</th>";
-						echo "<tr><td>Pareja1</tr>";
+						//echo "<tr><td>Pareja1</tr>";
+						//echo "<tr><td>Pareja1 -/-/- vs Pareja2 -/-/- </td></tr>";
+							echo "<tr><td> <b>".$this->parejas[$i][1]."-".$this->parejas[$i][2]."</b>"."</td></tr>";
+							$i++;
 
 						?>
 					

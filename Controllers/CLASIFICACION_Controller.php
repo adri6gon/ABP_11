@@ -133,7 +133,17 @@ if (!isset($_REQUEST['action'])){
 			$parejas8 = array_slice($parejas8, 0, 1);
 
 			$aux= array_merge($parejas,$parejas2,$parejas3,$parejas4,$parejas5,$parejas6,$parejas7,$parejas8);
+		}else {
+			return false;	
 		}
+
+		shuffle($aux);
+		for($i=0; $i < 8; $i++){
+			$aux[$i][3] = "-/-/-"; 
+		}
+
+		//REALIZAR INSERTS DEL VECTOR AUX EN ENFRENTAMIENTOS CON LOS OCTAVOS
+
 
 
 		//Array indice: idPareja ->valor:puntos en este grupo(Funcionando)
