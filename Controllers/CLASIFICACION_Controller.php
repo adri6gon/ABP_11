@@ -16,7 +16,9 @@ include '../Views/CLASIFICACION_PLAYOFF_View.php';
 //include '../Views/ENFRENTAMIENTO_SEARCH_View.php';
 //include '../Views/ENFRENTAMIENTO_DELETE_View.php';
 //include '../Views/ENFRENTAMIENTO_RESULTADO_View.php';
-//include '../Views/ENFRENTAMIENTO_SHOWCURRENT_View.php';
+include '../Views/ENFRENTAMIENTO_SHOWCURRENT_View.php';
+include '../Views/PLAYOFF_SHOWCURRENT_View.php';
+include '../Views/PLAYOFF_RESULTADO_View.php';
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 
@@ -49,6 +51,7 @@ function get_data_form(){
 	return $ENFRENTAMIENTOS;
 }
 $lista = array('idEnfrentamiento', 'idGrupo','idPareja1', 'idPareja2', 'GrupoidCategoria','GrupoidCampeonato','set1','set2','set3');
+$listaP = array('idEnfrentamientoRonda','set1','set2','set3','idPareja1', 'idPareja2','horaPropuesta','fechaPropuesta' ,'CategoriaidCategoria','CategoriaidCampeonato');
 //$funcionalidad = "ENFRENTAMIENTOS";
 $alerta = "No tiene permisos para esta acción.";
 
@@ -77,11 +80,15 @@ if (!isset($_REQUEST['action'])){
 		new CLASIFICACION_GRUPO_SHOWALL($parejas,'../Controllers/CLASIFICACION_Controller.php?action=CRUCES&idGrupo='.$_REQUEST['idGrupo'].'&idCampeonato='.$_REQUEST['idCampeonato']);
 
 	}else if($_REQUEST['action']=='PLAYOFF'){
-		$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model('','','','',$_REQUEST['idCategoria'],'','','','');
+
+		$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model('','','','',$_REQUEST['idCategoria'],$_REQUEST['idCampeonato'],'','','');
 
 		$idgrupos = $ENFRENTAMIENTOS->getGrupos();
 
-		if(count($idgrupos)==2){
+		if(empty($idgrupos)){
+			
+		}
+		elseif(count($idgrupos)==2){
 			$parejas = getClas($idgrupos[0][0],$_REQUEST['idCampeonato']);
 			$parejas = array_slice($parejas, 0, 4);
 
@@ -133,21 +140,126 @@ if (!isset($_REQUEST['action'])){
 			$parejas8 = array_slice($parejas8, 0, 1);
 
 			$aux= array_merge($parejas,$parejas2,$parejas3,$parejas4,$parejas5,$parejas6,$parejas7,$parejas8);
+			shuffle($aux);
+
 		}else {
 			return false;	
 		}
 
-		shuffle($aux);
 		for($i=0; $i < 8; $i++){
 			$aux[$i][3] = "-/-/-"; 
 		}
+	if(comprobarRol('admin')){
+		$respuesta = $ENFRENTAMIENTOS->ADD_CUARTOS($aux);
 
-		//REALIZAR INSERTS DEL VECTOR AUX EN ENFRENTAMIENTOS CON LOS OCTAVOS
+	}
 
+		$cuartos = $ENFRENTAMIENTOS->getResultadosCuartos();
+
+		if(ganadorPlayoff($cuartos[0]) AND ganadorPlayoff($cuartos[1]) AND ganadorPlayoff($cuartos[2]) AND ganadorPlayoff($cuartos[3]) AND !ganadorPlayoff($semis[0]) AND !ganadorPlayoff($semis[1]) ){
+
+			$semis = $ENFRENTAMIENTOS->getResultadosSemis();
+
+			if(empty($semis)){
+
+				for($j=0;$j<4;$j++){
+					$gan = ganadorPlayoff($cuartos[$j]);
+					$pos = array_search($gan, array_column($aux, 'idPareja'));	
+					unset($aux[$pos]);
+					$aux = array_values($aux);
+				}
+
+				//INSERTAMOS LAS SEMIS y volvemos a consultar la tabla
+				if(comprobarRol('admin')){
+					shuffle($aux);
+					$respuesta = $ENFRENTAMIENTOS->ADD_SEMIS($aux);
+				}
+
+				$semis = $ENFRENTAMIENTOS->getResultadosSemis();
+			}
+			else if (ganadorPlayoff($semis[0]) AND ganadorPlayoff($semis[1])){
+
+				$final = $ENFRENTAMIENTOS->getResultadosFinal();
+
+				if(empty($final)){
+
+					for($j=0;$j<4;$j++){
+						$gan = ganadorPlayoff($cuartos[$j]);
+						$pos = array_search($gan, array_column($aux, 'idPareja'));	
+						unset($aux[$pos]);
+						$aux = array_values($aux);
+					}
+
+					for($j=0;$j<2;$j++){
+						$gan = ganadorPlayoff($semis[$j]);
+						$pos = array_search($gan, array_column($aux, 'idPareja'));	
+						unset($aux[$pos]);
+						$aux = array_values($aux);
+					}
+
+				//INSERTAMOS LAS FINALES y volvemos a consultar la tabla
+					if(comprobarRol('admin')){
+						$respuesta = $ENFRENTAMIENTOS->ADD_FINAL($aux);
+					}
+
+					$final = $ENFRENTAMIENTOS->getResultadosFinal();
+				}
+			}else{
+
+			}
+
+		}else{
+		}
+		
+		//$semis = $ENFRENTAMIENTOS->getResultadosSemis();
+		//$final = $ENFRENTAMIENTOS->getResultadosFinal();
+
+		//$respuesta = $ENFRENTAMIENTOS->ADD_CUARTOS($aux);
 
 
 		//Array indice: idPareja ->valor:puntos en este grupo(Funcionando)
-		new CLASIFICACION_PLAYOFF($idgrupos,$aux,'../Controllers/CATEGORIAS_Controller.php');
+		new CLASIFICACION_PLAYOFF($idgrupos,$aux,$cuartos,$semis,$final,'../Controllers/CATEGORIAS_Controller.php');
+	}else if($_REQUEST['action']=='SHOWCURRENT'){
+		if(comprobarRol('deportista')){
+                //nuevo modelo de ENFRENTAMIENTOs
+				$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'], '', '', '',$_REQUEST['idCategoria'],$_REQUEST['idCampeonato'],'','','');
+                //Recoge los datos de ENFRENTAMIENTOs
+				$valores = $ENFRENTAMIENTOS->RellenaDatosPlayoff();
+                //Nueva vista
+				$admin = false;
+				if(comprobarRol('admin')){
+					$admin = true;
+				}else{
+					$admin = false;
+				}
+				new PLAYOFF_SHOWCURRENT($valores,'../Controllers/CLASIFICACION_Controller.php?action=PLAYOFF&idCategoria='.$_REQUEST['idCategoria'].'&idCampeonato='.$_REQUEST['idCampeonato'].'',$listaP,$admin);
+			}else{//Si no tiene permisos
+				new MESSAGE($alerta,'../index.php');
+			}
+	}else if($_REQUEST['action']=='RESULTADO'){
+		if(comprobarRol('admin')){
+				if(!$_POST){//Si viene vacio  
+					//nuevo modelo de ENFRENTAMIENTOs
+					$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'], '', '', '','','','','','');
+					//Recoge los datos de ENFRENTAMIENTOs
+					$valores = $ENFRENTAMIENTOS->RellenaDatosPlayoff();
+
+					new RESULTADO_PLAYOFF($valores,'../Controllers/CATEGORIAS_Controller.php');
+				}
+				else{//Si no viene vaci
+                    //Recoges los datos con el dataform
+					$enfrentamiento = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'], '', '', '','','',$_REQUEST['set1'],$_REQUEST['set2'],$_REQUEST['set3']);
+					//var_dump($_REQUEST['grupos']);
+					//exit();
+                    //Haces el edit del modelo
+					//var_dump($enfrentamiento);
+					$respuesta = $enfrentamiento->RESULTADO_PLAYOFF();
+					new MESSAGE($respuesta,'./CATEGORIAS_Controller.php');
+				}				
+			}else{//Si no tiene permisos
+				new MESSAGE($alerta,'../index.php');
+			}
+
 	}
 
 
@@ -168,6 +280,24 @@ if (!isset($_REQUEST['action'])){
 			}
 		}
 	}
+
+		function ganadorPlayoff($partido){
+		$set1 = $partido[7];
+		$set2 = $partido[8];
+		$set3 = $partido[9];
+		$ganador = $partido[11];
+		if($set1=="0-0"){
+			return false;
+		}else{
+			$sum =  ganadorSet($set1)+ganadorSet($set2)+ganadorSet($set3);
+			if($sum<=2){
+				return $partido[11];
+			}else{
+				return $partido[10];
+			}
+		}
+	}
+
 	function ganadorSet($set){
 		$arr1 = str_split($set);
 		if($arr1[0]>$arr1[2]){
