@@ -94,6 +94,7 @@ Switch ($_REQUEST['action']){
 				new MESSAGE($alerta,'../Controllers/GRUPOS_Controller.php');
 			}
 				break;
+
 		case 'GENERAR':
 				if(comprobarRol('admin')){
                     	//Recoge los datos con getdataform

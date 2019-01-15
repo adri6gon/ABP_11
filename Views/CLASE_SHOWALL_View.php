@@ -17,7 +17,11 @@ class CLASE_SHOWALL {
 <div style="overflow-x:auto;">
 				<h2><?php if(!$this->search){ echo 'Tabla ShowAll de CLASE';}else{echo 'Tabla Busqueda de CLASE';} ?>:</h2>
 					<div id="anhadir-borrar" style="text-align: center;">
+<<<<<<< HEAD
 						<?php
+=======
+						<?
+>>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 							if(comprobarRol('admin')){
 								echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ADD"><img src="../Views/images/añadir.png"></a>&nbsp';
 							}
@@ -51,6 +55,7 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 								if(comprobarRol('admin')){
 									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=EDIT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/editar.png"></a>&nbsp 
 											<a href="'.$_SERVER['PHP_SELF'].'?action=DELETE&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/borrar.png"></a>';
+<<<<<<< HEAD
 									echo '<a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR_ADMIN&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png">';
 									
 								}else{
@@ -58,6 +63,11 @@ El primer for recorre la lista con los valores de las tuplas de la BD y en el se
 								}
 										 
 								echo  '<a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
+=======
+								}
+										  echo '<a href="'.$_SERVER['PHP_SELF'].'?action=INSCRIBIR&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/Inscribirse.png"> 
+										  <a href="'.$_SERVER['PHP_SELF'].'?action=SHOWCURRENT&idClase='.$this->datos[$j]['idClase'].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
+>>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 								
 							}
 							?>

@@ -27,6 +27,17 @@
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('deportista')){
 						echo '<li><a href="./ENFRENTAMIENTOS_Controller.php">ENFRENTAMIENTOS</a></li>';
+<<<<<<< HEAD
+=======
+					}	
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('admin')){
+						echo '<li><a href="./ESCUELAS_Controller.php">ESCUELAS</a></li>';
+					}
+					//Si tiene los permisos mostramos el enlace
+					if(comprobarRol('deportista')){
+						echo '<li><a href="./CLASES_Controller.php">CLASES</a></li>';
+>>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 					}
 					//Si tiene los permisos mostramos el enlace
 					if(comprobarRol('deportista')){

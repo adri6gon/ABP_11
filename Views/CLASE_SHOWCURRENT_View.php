@@ -29,6 +29,7 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 									echo "<th>".($this->lista)[$j]."</th><td>".$this->datos[($this->lista)[$j]]."</td>";
 								echo "<tr>";
 							}
+<<<<<<< HEAD
 
 							
 					?>
@@ -37,6 +38,10 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 				if(comprobarRol('admin') || comprobarRol('entrenador'))
 					echo '<a href="'.$_SERVER['PHP_SELF'].'?action=ASISTENCIA&idClase='.$this->datos['idClase'].'">Control de asistencia</a>';
 				?>
+=======
+					?>
+				</table>
+>>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>
 <?php		
 	include 'Footer.php';
