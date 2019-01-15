@@ -170,7 +170,7 @@ if (!isset($_REQUEST['action'])){
 					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
 					$horaActual = $ENFRENTAMIENTO->getHoraFecha();
 					//Vista form para hora y fecha
-					new HORA_ENFRENTAMIENTO('../ENFRENTAMIENTOS_Controller.php?action=SHOWCURRENT&idEnfrentamiento='.$_REQUEST['idEnfrentamiento'],$_REQUEST['idEnfrentamiento']);
+					new HORA_ENFRENTAMIENTO('../Controllers/ENFRENTAMIENTOS_Controller.php?action=SHOWCURRENT&idEnfrentamiento='.$_REQUEST['idEnfrentamiento'],$_REQUEST['idEnfrentamiento']);
 				}else{
 					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
 					$hora = $_REQUEST['hora'];
