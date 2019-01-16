@@ -133,7 +133,7 @@ Switch ($_REQUEST['action']){
 
 		default: //Default entra el showall
         //Si no teine permisos
-			if(comprobarRol($_REQUEST['action'])){
+			if(comprobarRol('admin')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
                     $PARTIDOS = new PARTIDOS_Model('','', '', '','','');	

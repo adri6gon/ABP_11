@@ -223,7 +223,6 @@ function inscribirse($login){
 		return "El usuario ya esta inscrito en esta clase";
 	}
 }
-<<<<<<< HEAD
 function getAsistencia(){
 	$sql = "SELECT `Usuariologin`, `asistencia` FROM `USUARIO_CLASES` WHERE `idClase` = '".$this->idClase."'";
 	$result = $this->mysqli->query($sql);  
@@ -251,8 +250,6 @@ function setAsistencia($usuario){
 		}
 }
 
-=======
->>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 }
 
 

@@ -2,9 +2,10 @@
 
 class HORA_ENFRENTAMIENTO {
 
-	function __construct($volver,$enfrentamiento){
+	function __construct($volver,$enfrentamiento,$ronda){
 		$this->volver=$volver;
 		$this->enfrentamiento = $enfrentamiento;
+		$this->ronda = $ronda;
 		$this->render();
 	}
 
@@ -13,7 +14,7 @@ class HORA_ENFRENTAMIENTO {
 ?>
 <h2 style="color:white;">Introducir hora y fecha:</h2>
 				<div style="overflow-x:auto;color:white;">
-					<form name="fechaHora" id="fechaHora" action="./ENFRENTAMIENTOS_Controller.php?action=PROPONER-HORA" method="POST" enctype="multipart/form-data">
+					<form name="fechaHora" id="fechaHora" <?php echo  'action="./ENFRENTAMIENTOS_Controller.php?action='.$this->ronda.'"' ?> method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="idEnfrentamiento" id="idEnfrentamiento" value="<? echo $this->enfrentamiento; ?>">
 						 <table>
 							<tr>

@@ -140,11 +140,13 @@ if (!isset($_REQUEST['action'])){
 				//exit();
                 //Llama al showall del modelo
 				$datos = $ENFRENTAMIENTOS->getMisEnfrentamientos($_SESSION['login']);
+				$enfrentamientosRonda = $ENFRENTAMIENTOS->getMisEnfrentamientosRonda($_SESSION['login']);
 				//var_dump($datos);
 				//exit();
 				$lista3 = array('idEnfrentamiento','login1', 'login2','P2login1','P2login2', 'genero','nivel', 'nombre','set1', 'set2','set3');
+				$lista4 = array('idEnfrentamientoRonda','login1', 'login2','P2login1','P2login2', 'genero','nivel','set1', 'set2','set3');
                 //Nueva vista
-				new MIS_ENFRENTAMIENTO_SHOWALL($lista3, $datos, '../ENFRENTAMIENTOS_Controller.php');
+				new MIS_ENFRENTAMIENTO_SHOWALL($lista3, $datos, '../ENFRENTAMIENTOS_Controller.php',$enfrentamientosRonda,$lista4);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}
@@ -159,7 +161,7 @@ if (!isset($_REQUEST['action'])){
 		case 'CANCELAR-HORA':
 			if(comprobarRol('deportista')){
 					$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'], '', '', '','','','','','');
-					$result = $ENFRENTAMIENTOS->cancelPropuesta();
+					$result = $ENFRENTAMIENTOS->cancelPropuestaRonda();
 					new MESSAGE($result,'../index.php');
 			}
 		break;
@@ -170,7 +172,7 @@ if (!isset($_REQUEST['action'])){
 					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
 					$horaActual = $ENFRENTAMIENTO->getHoraFecha();
 					//Vista form para hora y fecha
-					new HORA_ENFRENTAMIENTO('../Controllers/ENFRENTAMIENTOS_Controller.php?action=SHOWCURRENT&idEnfrentamiento='.$_REQUEST['idEnfrentamiento'],$_REQUEST['idEnfrentamiento']);
+					new HORA_ENFRENTAMIENTO('../Controllers/ENFRENTAMIENTOS_Controller.php?action=SHOWCURRENT&idEnfrentamiento='.$_REQUEST['idEnfrentamiento'],$_REQUEST['idEnfrentamiento'],'PROPONER-HORA');
 				}else{
 					$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
 					$hora = $_REQUEST['hora'];
@@ -182,6 +184,41 @@ if (!isset($_REQUEST['action'])){
 					new MESSAGE($result,'../index.php');
 				}
 			}
+		break;
+		case 'ACEPTAR-HORA-RONDA':
+			if(comprobarRol('deportista')){
+				$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'], '', '', '','','','','','');
+				$result = $ENFRENTAMIENTOS->aceptarPropuestaRonda();
+				new MESSAGE($result,'../index.php');
+			}
+		break;
+		case 'CANCELAR-HORA-RONDA':
+			if(comprobarRol('deportista')){
+					$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'], '', '', '','','','','','');
+					$result = $ENFRENTAMIENTOS->cancelPropuestaRonda();
+					new MESSAGE($result,'../index.php');
+			}
+		break;
+		case 'PROPONER-HORA-RONDA':
+		if(comprobarRol('deportista')){
+			if (!$_POST){//Si viene vacio
+				//Nuevo modelo vacio
+				$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'],'', '', '', '','','','','');
+				$horaActual = $ENFRENTAMIENTO->getHoraFechaEnfRonda();
+				$datos = $ENFRENTAMIENTO->RellenaDatosPlayOff();
+				//Vista form para hora y fecha
+				new HORA_ENFRENTAMIENTO('../Controllers/CLASIFICACION_Controller.php?action=PLAYOFF&idCategoria='.$datos['CategoriaidCategoria'].'&idCampeonato='.$datos['CategoriaidCampeonato'].'',$_REQUEST['idEnfrentamientoRonda'],'PROPONER-HORA-RONDA');
+			}else{
+				$ENFRENTAMIENTO = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'],'', '', '', '','','','','');
+				$hora = $_REQUEST['hora'];
+				$fecha = $_REQUEST['fecha'];
+				if($ENFRENTAMIENTO->comprobarPista($hora,$fecha)){
+					$result = $ENFRENTAMIENTO->insertHoraFechaEnfRonda($hora,$fecha);
+				}else
+					$result = "No hay pistas disponibles en esa hora/fecha";
+				new MESSAGE($result,'../index.php');
+			}
+		}
 		break;
 		default: //Default entra el showall
         //Si no tiene permisos

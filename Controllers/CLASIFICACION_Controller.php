@@ -225,6 +225,9 @@ if (!isset($_REQUEST['action'])){
 				$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamientoRonda'], '', '', '',$_REQUEST['idCategoria'],$_REQUEST['idCampeonato'],'','','');
                 //Recoge los datos de ENFRENTAMIENTOs
 				$valores = $ENFRENTAMIENTOS->RellenaDatosPlayoff();
+				$hora = $ENFRENTAMIENTOS->getHoraEnfRonda();
+				$fecha = $ENFRENTAMIENTOS->getFechaEnfRonda();
+				$asigned = $ENFRENTAMIENTOS->isAsignedRonda();
                 //Nueva vista
 				$admin = false;
 				if(comprobarRol('admin')){
@@ -232,7 +235,7 @@ if (!isset($_REQUEST['action'])){
 				}else{
 					$admin = false;
 				}
-				new PLAYOFF_SHOWCURRENT($valores,'../Controllers/CLASIFICACION_Controller.php?action=PLAYOFF&idCategoria='.$_REQUEST['idCategoria'].'&idCampeonato='.$_REQUEST['idCampeonato'].'',$listaP,$admin);
+				new PLAYOFF_SHOWCURRENT($valores,'../Controllers/CLASIFICACION_Controller.php?action=PLAYOFF&idCategoria='.$_REQUEST['idCategoria'].'&idCampeonato='.$_REQUEST['idCampeonato'].'',$listaP,$admin,$hora,$fecha,$asigned);
 			}else{//Si no tiene permisos
 				new MESSAGE($alerta,'../index.php');
 			}

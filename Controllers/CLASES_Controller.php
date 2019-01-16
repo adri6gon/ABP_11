@@ -19,10 +19,7 @@ include '../Views/CLASE_DELETE_View.php';
 include '../Views/CLASE_EDIT_View.php';
 include '../Views/CLASE_INSCRIBIRSE_View.php';
 include '../Views/CLASE_SHOWCURRENT_View.php';
-<<<<<<< HEAD
 include '../Views/CLASES_ASISTENCIA_View.php';
-=======
->>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 include '../Views/MESSAGE_View.php';
 include '../Functions/ACL.php';
 
@@ -199,7 +196,6 @@ Switch ($_REQUEST['action']){
 			}
 				break;
 		case 'INSCRIBIR':
-<<<<<<< HEAD
 				if($_GET){
 					$idClase = $_REQUEST['idClase'];
 					$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
@@ -221,27 +217,16 @@ Switch ($_REQUEST['action']){
 				break;
 		case 'INSCRIBIR_ADMIN':
 				if(!$_POST){
-=======
-				if(!$_GET){	
->>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 					$CLASES = new CLASES_Model('',$_REQUEST['idClase'], '', '', '','','','');
 					//Recoge los datos de usuarios
 					$valores = $CLASES->RellenaDatos();
 					$tope = $CLASES->isFull();
 					$admin = false;
-<<<<<<< HEAD
 					if(comprobarRol('admin')){
 						$admin = true;
 					}
 					new INSCRIBIRSE_CLASE('../Controllers/CLASES_Controller.php',$lista,$valores,$admin,$tope);
 			    }else{
-=======
-				if(comprobarRol('admin')){
-					$admin = true;
-				}
-					new INSCRIBIRSE_CLASE('../Controllers/CLASES_Controller.php',$lista,$valores,$admin,$tope);
-				}else{
->>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 					$idClase = $_REQUEST['idClase'];
 					if(isset($_POST['login'])){
 						$login = $_POST['login'];
@@ -252,7 +237,6 @@ Switch ($_REQUEST['action']){
 					$respuesta = $CLASES->inscribirse($login);
 					new MESSAGE($respuesta,'../Controllers/CLASES_Controller.php');
 				}
-<<<<<<< HEAD
 				break;	
 
 		case 'ASISTENCIA':
@@ -283,8 +267,6 @@ Switch ($_REQUEST['action']){
 				}
 				new MESSAGE($resp,'../Controllers/CLASES_Controller.php');
 			}
-=======
->>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
 				break;
 		default: //Default entra el showall
         //Si no teine permisos

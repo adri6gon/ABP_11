@@ -2,11 +2,14 @@
 
 class PLAYOFF_SHOWCURRENT {
 
-	function __construct($array,$volver,$lista, $admin){
+	function __construct($array,$volver,$lista, $admin,$hora,$fecha,$asignado){
 		$this->datos = $array;
 		$this->volver = $volver;
 		$this->lista = $lista;
 		$this->admin = $admin;
+		$this->hora = $hora;
+		$this->fecha = $fecha;
+		$this->asignado = $asignado;
 		$this->render();
 	}
 
@@ -35,16 +38,24 @@ $arg es un string auxiliar para enviar el nombre de los atributos del array auxi
 									}
 								echo "<tr>";
 							}
+							echo "</tr>";
 							if($this->admin){
 								//Insertar resultado del enfrentamiento
 								echo '<a href="./CLASIFICACION_Controller.php?action=RESULTADO&'.($this->lista)[0].'='.$this->datos["idEnfrentamientoRonda"].'">Insertar resultado</a>';
-							}
-							/*if($this->lista2!=''){
-								for($i=0;$i<count($this->lista2);$i++){
-									$num = (string)$i+1;
-									echo "<tr><th>".$this->arg.$num."</th><td>".($this->lista2)[$i]."</td><tr>";
+							}else{
+								//Hacer mas actions en el Controlador para que proponga hora en la enfrentamiento-ronda
+								if(!$this->hora && !$this->fecha){
+									//var_dump($this->hora,$this->fecha);
+									//exit();
+									echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=PROPONER-HORA-RONDA&'.($this->lista)[0].'='.$this->datos["idEnfrentamientoRonda"].'"><img src="../Views/images/fijar-hora.png" title="Fijar hora" alt="Fijar hora"></a>';
+								}elseif(!$this->asignado){
+									//Aceptar
+									echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=ACEPTAR-HORA-RONDA&'.($this->lista)[0].'='.$this->datos["idEnfrentamientoRonda"].'">Aceptar hora</a>';
+									//Rechazar
+									echo '<a href="./ENFRENTAMIENTOS_Controller.php?action=CANCELAR-HORA-RONDA&'.($this->lista)[0].'='.$this->datos["idEnfrentamientoRonda"].'"><img src="../Views/images/cancel-hour.png" title="Cancelar hora" alt="Cancelar hora"></a>';
+							
 								}
-							}*/
+							}
 					?>
 				</table>
 				<p><a href="<?php echo $this->volver?>"><img src="../Views/images/atras.png" title="Atrás" alt="Atrás"></a></p>

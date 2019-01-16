@@ -164,13 +164,7 @@ function RESERVE($login)
 	$result = $this->mysqli->query($sql);
 	$resultado = $this->mysqli->query($sql2);
     // si el numero de filas es igual a 0 hacemos la reserva--> Pista libre
-<<<<<<< HEAD
     if (!$this->isReserved() && $resultado->num_rows<5)
-=======
-
-    if (!$this->isReserved() && $resultado->num_rows<5)
-
->>>>>>> 63b4eef9a1c381100041054b447ebb6bab970865
     {
 		$sqlIns = "INSERT INTO `PISTA_USUARIO`(`PistaidPista`, `Usuariologin`, `Pistanombre`) VALUES ('$this->idPista','$login','$this->nombre')";
 		// si hay un problema con la query se envia un mensaje de error en la modificacion
@@ -191,17 +185,6 @@ function RESERVE($login)
 	}else{
 		return 'Pista ocupada o limite alcanzado.';
 
-	}
-}
-function isReserved(){
-	$sql = "SELECT * FROM PISTA_USUARIO WHERE (idPista = '$this->idPista' & Pistanombre = '$this->nombre')";
-	$result = $this->mysqli->query($sql);
-	if ($result==null)
-    {
-		return false;
-	}
-	else{
-		return true;
 	}
 }
 function isReserved(){

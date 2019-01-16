@@ -18,7 +18,7 @@ class CLASIFICACION_PLAYOFF{
 		
 ?>
 
-<h2>Cruces del Grupo <?php echo "".$this->datos[($this->lista)[0]]."" ?> :</h2>
+<h2>Cruces de la Categoria:</h2>
 
 
 				<table>
