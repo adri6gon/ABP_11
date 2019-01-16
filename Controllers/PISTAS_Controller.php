@@ -228,7 +228,7 @@ if (!isset($_REQUEST['action'])){
 			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
-					$PISTAS = new PISTAS_Model('','', '', '', '2019-01-16');
+					$PISTAS = new PISTAS_Model('','', '', '', '2019-01-17');
 				}
 				else{//Recoge los datos
 					$PISTAS = get_data_form();

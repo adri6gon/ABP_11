@@ -161,7 +161,7 @@ if (!isset($_REQUEST['action'])){
 		case 'CANCELAR-HORA':
 			if(comprobarRol('deportista')){
 					$ENFRENTAMIENTOS = new ENFRENTAMIENTOS_Model($_REQUEST['idEnfrentamiento'], '', '', '','','','','','');
-					$result = $ENFRENTAMIENTOS->cancelPropuestaRonda();
+					$result = $ENFRENTAMIENTOS->cancelPropuesta();
 					new MESSAGE($result,'../index.php');
 			}
 		break;
