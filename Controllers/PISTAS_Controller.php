@@ -124,7 +124,7 @@ if (!isset($_REQUEST['action'])){
 					
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])-86400);
-					if(!($siguiente < date("Y-m-d",strtotime('2018-11-22')))){
+					if(!($siguiente < date("Y-m-d",strtotime('2019-01-16')))){
 						$PISTAS = new PISTAS_Model('','', '', '', $siguiente);
 						$datos = $PISTAS->_SHOWALL();
 						//var_dump($PISTAS);
@@ -149,7 +149,7 @@ if (!isset($_REQUEST['action'])){
 				if (!$_POST){//Si viene vacio
                     //Sumamos un dia al recibido
 					$siguiente=date("Y-m-d",strtotime($_REQUEST['fecha'])+86400);
-					if(!($siguiente > date("Y-m-d",strtotime('2018-11-29')))){
+					if(!($siguiente > date("Y-m-d",strtotime('2019-01-29')))){
 						$PISTAS = new PISTAS_Model('','', '', '', $siguiente);
 						$datos = $PISTAS->_SHOWALL();
 						//var_dump($PISTAS);
@@ -228,7 +228,7 @@ if (!isset($_REQUEST['action'])){
 			if(comprobarRol('deportista')){
 				if (!$_POST){//Si viene vacio
                     //Nuevo modelo vacio
-					$PISTAS = new PISTAS_Model('','', '', '', '2018-11-22');
+					$PISTAS = new PISTAS_Model('','', '', '', '2019-01-16');
 				}
 				else{//Recoge los datos
 					$PISTAS = get_data_form();

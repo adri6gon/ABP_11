@@ -36,7 +36,7 @@ class MIS_ENFRENTAMIENTO_SHOWALL {
 					</table>
 					<br>
 					<br>
-					<h2><?php  echo 'Mis Enfrentamientos en rondas posteriores(NO GRUPOS)'; ?>:</h2>
+					<h2><?php  if($this->enfRonda!=null){ echo 'Mis Enfrentamientos en rondas posteriores(NO GRUPOS)'; ?>:</h2>
 					<table class="tablas separador">
 						<tr>
 						<?php
@@ -54,6 +54,7 @@ class MIS_ENFRENTAMIENTO_SHOWALL {
 							echo '<td><a href="CLASIFICACION_Controller.php?action=SHOWCURRENT&idEnfrentamientoRonda='.$this->enfRonda[$j][($this->lista2)[0]].'&idCategoria='.$this->enfRonda[$j]['idCategoria'].'&idCampeonato='.$this->enfRonda[$j]['idCampeonato'].'"><img src="../Views/images/busqueda2.png"></a></td></tr>';
 							
 						}
+					}
 							?>
 						
 					</table>
